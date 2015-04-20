@@ -1,0 +1,12 @@
+
+{CatName:'Dairy Product', soldItems: 267},
+{CatName:'Bakery Product', soldItems:130},
+{CatName:'Can Food',soldItems:180},
+{CatName:'Cold Bevarage', soldItems:328},
+{CatName:'Bulk', soldItems:47},
+{CatName:'Soup', soldItems:98},
+{CatName:'Cosmetics', soldItems:76},
+{CatName:'Fruits', soldItems:228},
+{CatName:'Confectionarie', soldItems:192},
+{CatName:'Valentine Goodies', soldItems:28},
+];

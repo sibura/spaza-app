@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang=eng>
+<head>
+
+<meta charset="UTF-8"/>
+<style>
+@import url('http://fonts.googleapis.com/css?family=Acme');
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  outline: none;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+html { overflow-y: scroll; }
+body { 
+  background: url('http://www.sabc.co.za/wps/wcm/connect/2a165b004bb8141eaa1bbb4e20b1a252/Spaza(P).jpg?MOD=AJPERES&CACHEID=2a165b004bb8141eaa1bbb4e20b1a252'); 
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 62.5%; 
+  line-height: 1; 
+  color: #535353;
+  margin: 30px 0;
+  background-size: cover;
+}
+
+br { display: block; line-height: 2.2em; } 
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+ol, ul { list-style: none; }
+
+input, textarea { 
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: none; 
+}
+
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+strong { font-weight: bold; } 
+
+table { border-collapse: collapse; border-spacing: 0; }
+img { border: 0; max-width: 100%; }
+
+
+h1 { 
+  font-family: 'Acme', 'Trebuchet MS', Arial, sans-serif;
+  font-size: 3.2em;
+  line-height: 1.7em;
+}
+
+p {
+  font-size: 1.4em;
+  line-height: 1.45em;
+  margin-bottom: 15px;
+}
+
+a { color: #6d8ec5; }
+a:hover { color: #8ca6d1; }
+
+
+/* page structure */
+#w {
+  display: block;
+  width: 800px;
+  background: #fff;
+  margin: 0 auto;
+  padding: 8px 15px;
+  opacity: 0.8;
+}
+
+#sidebar {
+  display: block; 
+  float: left;
+  width: 150px;
+  margin-right: 20px;
+}
+
+#maincontent {
+  display: block;
+  float: left;
+  width: 552px;
+}
+
+.container {
+  display: block;
+  width: 100%;
+  height: 375px;
+}
+
+
+
+/* vertical navigation */
+#vertical-nav {
+  display: block;
+  overflow: hidden;
+  height: 170px;
+  background: #dbe4ee;
+  border: 1px solid #ccc;
+  -webkit-box-shadow: inset 1px -8px 8px -9px rgba(0,0,0,0.7);
+  -moz-box-shadow: inset 1px -8px 8px -9px rgba(0,0,0,0.7);
+  box-shadow: inset 1px -8px 8px -9px rgba(0,0,0,0.7);
+  -webkit-transition: height 0.4s linear;
+  -moz-transition: height 0.4s linear;
+  transition: height: 0.4s linear;
+}
+#vertical-nav:hover {
+  height: 280px;
+}
+
+#vertical-nav ul { list-style: none; }
+
+#vertical-nav ul li { display: block; font-size: 1.2em; font-weight: bold; }
+
+#vertical-nav ul li a { 
+  text-decoration: none;
+  color: #4f5e70;
+  display: block; 
+  padding: 8px 5px; 
+}
+#vertical-nav ul li a:hover {
+  background: #fff;
+}
+
+
+/* horizontal navigation */
+#horizontal-nav {
+  display: block;
+  overflow: hidden;
+  height: 38px;
+  border: 1px solid #cdcdcd;
+  -webkit-transition: height 0.2s linear;
+  -moz-transition: height 0.2s linear;
+  transition: height: 0.2s linear; 
+}
+#horizontal-nav:hover {
+  height: 65px;
+}
+
+#horizontal-nav ul { list-style: none; }
+#horizontal-nav ul li { display: block; float: left; width: 110px; }
+
+#horizontal-nav ul li a { 
+  display: block;
+  width: 100%;
+  padding-top: 2px;
+  padding-bottom: 10px;
+  font-weight: bold;
+  font-size: 1.2em;
+  text-align: center;
+  text-decoration: none;
+  color: #5c789a;
+  border-top: 3px solid #c1cddc;
+}
+#horizontal-nav ul li a:hover {
+  border-top-color: #96bae6;
+  background: #f3f6f9;
+}
+
+#horizontal-nav ul li a .navicon { display: block; width: 100%; text-align: center; margin-bottom: 4px; }	
+
+#linear-nav {
+  display: block;
+  overflow: hidden;
+  height: 170px;
+  background: #dbe4ee;
+  border: 1px solid #ccc;
+  -webkit-box-shadow: inset 1px -8px 8px -9px rgba(0,0,0,0.7);
+  -moz-box-shadow: inset 1px -8px 8px -9px rgba(0,0,0,0.7);
+  box-shadow: inset 1px -8px 8px -9px rgba(0,0,0,0.7);
+  -webkit-transition: height 0.4s linear;
+  -moz-transition: height 0.4s linear;
+  transition: height: 0.4s linear;
+}
+ 
+#linear-nav:hover {
+  height: 300px;
+}
+
+#footer {
+  display: block; 
+  float: right;
+  width: 400px;
+  margin-left: -20px;
+  margin-top: -310px;
+  
+}
+h2 {
+  text-align: center;
+  color: #369;
+  font-size: 1.4em;
+  font-weight: bold;
+  font-height: 100%;
+
+}
+.images {
+	padding: 20px 60px;
+}
+
+</style>
+</head>
+
+<body>
+<div id="w">
+    <h1>Nelisa's Spaza Shop Menu</h1>
+   
+    
+    <div class="container clearfix">
+      <div id="sidebar">
+        <div id="vertical-nav">
+          <ul>
+            
+            <li><a href="#">Most popular product</a></li>
+            <li><a href="#">Least popular product</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">Most popular category</a></li>
+            <li><a href="#">Least popular category</a></li>
+            <li><a href="#">Marketing</a></li>
+            <li><a href="#">Suppliers</a></li>
+          </ul>
+        </div><!-- @end #vertical-nav -->
+      </div><!-- @end #sidebar -->  
+
+
+      <div id="maincontent">
+        <div id="horizontal-nav">
+          <ul class="clearfix">
+            <li><a href="#"><span class="navicon"><img src="http://i.imgur.com/4KRidiQ.png"></span>Home</a></li>
+            <li><a href="#"><span class="navicon"><img src="http://i.imgur.com/4QjU5eU.png"></span>Products</a></li>
+            <li><a href="#"><span class="navicon"><img src="http://i.imgur.com/m97xFk9.jpg"></span>Purchases</a></li>
+            <li><a href="#"><span class="navicon"><img src="http://i.imgur.com/APBzehE.jpg"></span>Sales History</a></li>
+            <li><a href="#"><span class="navicon"><img src="http://i.imgur.com/8aU2qsN.png"></span>Contact</a></li>
+          </ul>
+        </div>
+      </div><!-- @end #maincontent -->
+    </div><!-- @end .container -->
+    <div class="footer">
+      <div id="footer">
+        <div id="linear-nav">
+          <h2>Staff</h2>
+          <div class="images">
+         <img src="/home/coder/Desktop/Projects/codeX_ReleaseOneNarrative/images/PersonaNelisa.png"/>
+         <img src="/home/coder/Desktop/Projects/codeX_ReleaseOneNarrative/images/PersonaXolani.png"/>
+             </div>
+        </div>
+      </div>
+  
+
+  </div><!-- @end #w -->
+
+  <script type="text/javascript">
+ $(function(){
+  $('#vertical-nav a, #horizontal-nav a').on('click', function(e){
+    // stop anchor links from loading
+    e.preventDefault();
+  });
+
+
+});
+
+  </script>
+</body>
+<script id="entry-template" type="text/x-handlebars-template">
+  <div class="entry">
+    <h1>{{title}}</h1>
+    <div class="body">
+      {{body}}
+    </div>
+  </div>
+</script>
+
+
+</body>
+</html>
