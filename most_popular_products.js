@@ -10,7 +10,7 @@ module.exports =function(){
 		//console.log("file details : " + linesInfile);
 
 		var rows = linesInfile.split('\n');
-		//console.log(rows.length);
+		console.log(rows.length);
 
 		var listOfProduct = [];
 
@@ -22,10 +22,12 @@ module.exports =function(){
 				var columns = row.split(';');
 				var currentItem = columns[2];
 				var numberSold = Number(columns[3]);
+				var earnings = Number(columns[4]);
 
 				var salesObj = {
 					itemName: currentItem,
-					soldItem: numberSold
+					soldItem: numberSold,
+					SalesPrice: earnings
 				};
 
 				listOfProduct.push(salesObj);
@@ -38,22 +40,21 @@ module.exports =function(){
 
 
 	this.groupItems = function(listOfProduct){
-		var itemMap = {};
-
+	    	var itemMap = {};
 		listOfProduct.forEach(function(product){
-
 			var currentItem = product.itemName;
 			var numberSold = product.soldItem;
+			var earnings = product.SalesPrice;
 
 			if(itemMap[currentItem]=== undefined){
 				itemMap[currentItem]=0;
 			}
 
-			itemMap[currentItem]=itemMap[currentItem]+ Number(numberSold);
+			itemMap[currentItem] =itemMap[currentItem]+ Number(numberSold) + Number(earnings);
 
 		});
 		return itemMap;
-		//console.log("this is itemmap" +itemMap);
+		//console.log("this is itemmap" + itemMap);
 	}; 
 
 	this.mostpopularproducts= function(itemMap){
@@ -89,82 +90,85 @@ module.exports =function(){
 		return leastPopularProdct;
 	}
 
-	this.groupCateg = function(products) {
-		var CatMap = {};
-		//console.log(JSON.stringify(products)+"\n")
-		products.forEach(function(product) {
-			var CatItem = products.CatName;
-			//console.log('catitem: '+CatItem);
-			var numberSold = products.soldItems;
-			//console.log('numberSold');
+	this.groupCateg = function(listOfProduct) {
+       	
+       	var categoryProductMapping = {};
+        var categoryMap = {
+			'Milk':'Dairy Product',
+			'Imasi':'Dairy Product', 
+			'Bread':'Bakery Product', 
+			'Gold Dish Vegetable Curry Can': 'Can Food', 
+			'Fanta 500ml':'cold Beverages', 
+			'Coke 500ml':'cold Beverages', 
+			'Cream Soda 500ml':'cold Beverages', 
+			'Iwisa Pap 5kg':'Bulk', 
+			'Top Class Soy Mince': 'Can Food', 
+			'Shampoo 1 litre':'cosmetics', 
+			'Soap Bar':'Cosmetics', 
+			'Bananas - loose': 'fruits',
+			'Apples - loose':'fruits', 
+			'Mixed Sweets 5s':'Confectionarie', 
+			'Heart Chocolates':'Valentine Goodies', 
+			'Rose (plastic)': 'Valentine Goodies',
+			'Valentine Cards':'Valentine Goodies'
+		};
 
-			if(CatMap[CatItem] === undefined){
-				CatMap[CatItem] = 0;
+		listOfProduct.forEach(function(product){
+			var currentItem = product.itemName;
+			var numberSold = product.soldItem;
+			var currentCategory = categoryMap[currentItem]
+
+			// categoryProductMapping
+
+			//categoryMap
+
+			if(categoryProductMapping[currentCategory]=== undefined){
+				categoryProductMapping[currentCategory]=0;
 			}
-			
-			CatMap[CatItem] = CatMap[CatItem] + Number(numberSold);
+
+		categoryProductMapping[currentCategory]=categoryProductMapping[currentCategory] + Number(numberSold);
 
 		});
-		return CatMap;
+
+		return categoryProductMapping;
 
 	};
 
 	this.mostPopularCtg = function(CatMap){
 		var mostPopularCategory = {};
-			var max = 0;
-			for(var Cat in CatMap) { console.log("*" + Cat);
-				var value = CatMap[Cat];
-				if(value > max) {
-					max = value.soldItems;
-					mostPopularCategory = {
-						name : value.CatName,
-						amt  : value.soldItems
-					}
+		var max = 0;
+		for(var Cat in CatMap) { 			
+		var value = CatMap[Cat];
+		    if(value > max) {
+			max = CatMap[Cat];
+			mostPopularCategory = {
+				name : Cat,
+				amt  : max
+			}
 			
-				};
-			 
-			};
+		};
+
+	};
 			//console.log(mostPopularCategory);
 			return mostPopularCategory;
 
 		};
-         
-         
 
-         this.leastPopularCtg = function(CatMap){
-         	var leastPopularCategory = {};
-         	var min = 0;
-         	for(var Cat in CatMap) {
-         		var value = CatMap[Cat];
-         		if(CatMap[Cat] + min) {
-         			min = CatMap[Cat];
-         			leastPopularCategory = {
-         				name : Cat,
-         				amt  : min
-         			}
-         		};
-         	};
-         	return leastPopularCategory;
-         };
-     };
 
-/*
-var Products = require('./most_popular_products');
-  var products = new Products();
-  var productList = products.productNames('./Nelisa Sales History.csv');
 
-  var groupedProducts = products.groupItems(productList);
-  var mostPopular = products.mostpopularproducts(groupedProducts);
-  var leastPopular = products.leastpopularproducts(groupedProducts);
-
- var groupCategory = products.groupCateg(productList);
- console.log("**" + JSON.stringify(groupCategory));
- var mostPopularCateg = products.mostPopularCtg(groupCategory);
- var leastpopularCategory = products.leastPopularCtg(groupCategory);
-
-console.log("most popular... : " + mostPopular.name);
-console.log("least popular... : " + leastPopular.name);
-
-console.log("most popular Categ... :1" + JSON.stringify(mostPopularCateg));
-console.log("least popular Category... :" + leastpopularCategory.name);
-*/
+		this.leastPopularCtg = function(CatMap){
+			var leastPopularCategory = {};
+			var min = 0;
+			for(var Cat in CatMap) {
+				var value = CatMap[Cat];
+				if(CatMap[Cat] + min) {
+					min = CatMap[Cat];
+					leastPopularCategory = {
+						name : Cat,
+						amt  : min
+					}
+				};
+			};
+			return leastPopularCategory;
+		};
+	};

@@ -23,89 +23,92 @@
   var mostPopular = products.mostpopularproducts(groupedProducts);
   var leastPopular = products.leastpopularproducts(groupedProducts);
 
-  console.log( "productList : " + JSON.stringify(productList));
+  var group = products.groupCateg(productList);
+  var mostPopularCateg = products.mostPopularCtg(group);
+  var leastpopularCateg = products.leastPopularCtg(group);
+
+  app.use(express.static('public'));
+
+  //console.log( "productList : " + JSON.stringify(productList));
+
+  //var group = products.groupCateg(productList);
+  //var mostPopularCateg = products.mostPopularCtg(group);
+  //var leastpopularCateg = products.leastPopularCtg(group);
 
   var groupCategory = products.groupCateg(productList);
-  console.log("groupCategory : " + JSON.stringify( groupCategory));
+  console.log("groupCategory : " + JSON.stringify(groupCategory));
 
- var mostPopularCateg = products.mostPopularCtg(groupCategory);
- var leastpopularCategory = products.leastPopularCtg(groupCategory);
 
-console.log("most popular... : " + mostPopular.name);
-console.log("least popular... : " + leastPopular.name);
+  console.log("most popular... : " + JSON.stringify(mostPopular));
+  console.log("least popular... : " + JSON.stringify(leastPopular));
 
-console.log("most popular Categ... :1" + JSON.stringify(mostPopularCateg));
-console.log("least popular Category... :" + leastpopularCategory.name);
+  console.log("mostpopularCateg... :" + JSON.stringify(mostPopularCateg));
+  console.log("leastpopularCateg... :" + JSON.stringify(leastpopularCateg));
 
- app.get('/', function (req, res) {
-  res.render('home');
+  app.get('/', function (req, res) {
+    res.render('home',{cat:mostPopularCateg});
+ // res.render('home',{cat:leastPopularCateg});
 
 });
 
- app.get('/most_popular_products', function (req, res) {
+  app.use(express.static('public'));
 
-    //console.log("*** " + mostPopular.name);
+  app.get('/Category', function (req, res){
+    res.render('Category', {
+    groupCateg: groupCategory,
+  });
+ });
 
-    res.render('most_popular_products', {
-      mostpopular : mostPopular,
-      leastPopular: leastPopular,
-      mostPopularCtg: mostPopularCateg,
-      leastpopularCateg: leastpopularCategory, 
-
-    });
+  app.get('/most_popular_products', function (req, res) {
+  //console.log("*** " + mostPopular.name);
+  res.render('most_popular_products', {
+    mostPopularProdct: mostPopular,
 
   });
+});
 
- app.listen(3000);
+  app.get('/mostpopularCategory', function (req, res){
+   res.render('mostpopularCategory', {
+    mostPopularCtg:mostPopularCateg,
+  });
+ });
 
+  app.get('/least_popular_products', function (req, res){
+   res.render('least_popular_products', {
+    leastPopular: leastPopular,
+  });
+ });
+
+  app.get('/leastpopularCategory', function (req, res){
+   res.render('leastpopularCategory', {
+     leastPopularCtg: leastpopularCateg,
+   });
+ });
+
+  app.listen(3000);
+
+
+ /*app.get('/', function (req, res) {
+   res.send('Hello codeX!');
+ });
+ */
+ 
 /*
-  var fs = require('fs');
+ app.get('/hello', function (req, res) {
+   res.send('Hello sbu!');
+ });
 
-var products = require('./most_popular_products')
-var products = require('./least_popular_products')
-
-var products = new Products();
-
-var sortedList = products.productNames('Nelisa  Sales History.csv');
-
-var group = products.groupItems(sortedList);
-var mostPopular = products.mostpopularproducts(group);
-var leastPopular = products.leastpopularproducts(group);
-
-
-   var group = products.groupItems(sortedCategory);
-var mostPopularCateg = products.mostpopularCateg(group);
-var leastPopularCateg = products.leastpopularCateg(group);
-
-  console.log(leastPopular);
-  console.log(mostPopular);
-
-  console.log(mostPopularCateg);
-  console.log(leastpopularCateg);
-
-  
-   app.get('/', function (req, res) {
-     res.send('Hello codeX!');
-   });
-   app.use(express.static('public'));
-  
-   app.get('/hello', function (req, res) {
-     res.send('Hello sbu!');
-   });
-
-   app.get('/hells', function (req, res){
-    res.send('linkie');
-   });
-
+ app.get('/hells', function (req, res){
+  res.send('linkie');
+});
+ */
    //start the server
-   var server = app.listen(3000, function () {
-
+  // var server = app.listen(3000, function () {
+/*
      var host = server.address().address;
      var port = server.address().port;
-    // var handlebars = sever.address().compile;
+    var handlebars = sever.address().compile;
 
      console.log('Example app listening at  http://%s:%s', host, port);
-
-   });
- */
-//});
+     */
+  // });
