@@ -3,7 +3,7 @@ var assert = require("assert");
 var Products = require("../most_popular_products");
 
 describe("Find most popular products - ", function(){
-
+/*
 	it('should return a list of products objects', function(){
 
 		var products = new Products();
@@ -52,7 +52,7 @@ describe("Find most popular products - ", function(){
 	   assert.deepEqual(result, productsResults);
 
 	});
-});
+
 
 it('should return CatMap',function(){
 	var products = new Products();
@@ -87,3 +87,22 @@ it('should return the least popular category', function(){
 	 assert.deepEqual(result, categoryResults);
 
 	});
+*/
+
+
+it('should return the earnings per product', function(){
+	var products = new Products();
+	var shop = products.productNames('./Nelisa Sales History.csv');
+	
+	var earningsPerProductResults = products.earningsPerProduct(shop);
+	console.log(earningsPerProductResults);
+
+	//console.log('linkie' + result);
+    assert.equal(earningsPerProductResults ["Milk 1l"], 1420);
+    assert.equal(earningsPerProductResults ["Milk 1l"], 1420);
+    assert.equal(earningsPerProductResults ["Milk 1l"], 1420);
+
+});
+
+
+});
