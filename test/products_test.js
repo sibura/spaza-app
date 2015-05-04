@@ -3,7 +3,7 @@ var assert = require("assert");
 var Products = require("../most_popular_products");
 
 describe("Find most popular products - ", function(){
-/*
+
 	it('should return a list of products objects', function(){
 
 		var products = new Products();
@@ -46,7 +46,7 @@ describe("Find most popular products - ", function(){
 		var products = new Products();
 		var shop = products.productNames('./Nelisa Sales History.csv');
 
-		var result = {name:"Milk 1l", amt: 0};
+		var result = {name:"Rose (plastic)", amt: 14};
 		var groups = products.groupItems(shop);
 		var productsResults = products.leastpopularproducts(groups);
 	 // console.log(result);
@@ -59,7 +59,7 @@ it('should return CatMap',function(){
 	var products = new Products();
 	var shop = products.productNames('./Nelisa Sales History.csv');
 
-	var expectedMap = {"undefined": 142,"Dairy Product":125,"Bakery Product":130,"Can Food": 180,"cold Beverages": 328,"Bulk":47,"Soup":98,"cosmetics": 76,"fruits":228,"Confectionarie":172,"Valentine Goodies":48};
+	var expectedMap = {"Dairy Product":125,"Bakery Product":130,"Can Food": 180,"cold Beverages": 328,"Bulk":47,"Soup":98,"cosmetics": 76,"fruits":228,"Confectionaries":172,"Valentine Goodies":48};
 	var catMap = products.groupCateg(shop);
 	//console.log(expectedMap);
 	assert.deepEqual(expectedMap, catMap);
@@ -88,7 +88,7 @@ it('should return the least popular category', function(){
 	 assert.deepEqual(result, categoryResults);
 
 	});
-*/
+
 
 
 it('should return the earnings per product', function(){

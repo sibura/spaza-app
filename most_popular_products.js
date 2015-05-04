@@ -117,7 +117,7 @@ module.exports =function(){
 			'Soap Bar':'cosmetics', 
 			'Bananas - loose': 'fruits',
 			'Apples - loose':'fruits', 
-			'Mixed Sweets 5s':'Confectionarie', 
+			'Mixed Sweets 5s':'Confectionaries', 
 			'Heart Chocolates':'Valentine Goodies', 
 			'Rose (plastic)': 'Valentine Goodies',
 			'Valentine Cards':'Valentine Goodies'
@@ -181,7 +181,7 @@ module.exports =function(){
 		this.earningsPerProduct = function(listOfProduct){
 			var costPrice = {};
 
-			console.log(listOfProduct.forEach);
+			//console.log(listOfProduct.forEach);
 
 			listOfProduct.forEach(function(product){
 				var currentItem = product.itemName;
@@ -193,7 +193,7 @@ module.exports =function(){
 					costPrice[currentItem]=0;
 				}
 
-				costPrice[currentItem] =costPrice[currentItem]+ Number(numberSold) * Number(quantity) //+ Number(earnings);
+		costPrice[currentItem] =costPrice[currentItem]+ Number(numberSold) * Number(quantity) //+ Number(earnings);
 
 			});
 			return costPrice;
@@ -215,7 +215,7 @@ module.exports =function(){
 
      		});
      	return categCost;
-        console.log(categCost);
+        //console.log(categCost);
      };
      
 	};

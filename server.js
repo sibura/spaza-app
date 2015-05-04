@@ -12,8 +12,8 @@
 
    var fs = require('fs');
 
-  var products = require('./least_popular_products')
-  var sortedList = products.productNames('Nelisa  Sales History.csv');
+ // var products = require('./least_popular_products')
+  //var sortedList = products.productNames('Nelisa  Sales History.csv');
 
   var Products = require('./most_popular_products');
   var products = new Products();
@@ -26,10 +26,13 @@
   var group = products.groupCateg(productList);
   var mostPopularCateg = products.mostPopularCtg(group);
   var leastpopularCateg = products.leastPopularCtg(group);
+   
 
+
+  
   app.use(express.static('public'));
 
-  console.log( "productList : " + JSON.stringify(productList));
+  //console.log( "productList : " + JSON.stringify(productList));
   
   var group = products.groupCateg(productList);
   var mostPopularCateg = products.mostPopularCtg(group);
@@ -37,7 +40,6 @@
 
   var groupCategory = products.groupCateg(productList);
   console.log("groupCategory : " + JSON.stringify(groupCategory));
-
 
   console.log("most popular... : " + JSON.stringify(mostPopular));
   console.log("least popular... : " + JSON.stringify(leastPopular));
@@ -84,6 +86,7 @@
      leastPopularCtg: leastpopularCateg,
    });
  });
+  
   
 
     app.listen(3000);
