@@ -26,6 +26,7 @@ module.exports =function(){
 				var currentItem = columns[2];
 				var numberSold = Number(columns[3]);
 
+
 				var priceStr = columns[4];
 				priceStr = priceStr.replace(",", ".").replace("R", ""); 
 				var totalCost = Number(priceStr);
@@ -33,7 +34,8 @@ module.exports =function(){
 				var salesObj = {
 					itemName: currentItem,
 					soldItem: numberSold,
-				    totalCost: totalCost
+				    totalCost: totalCost,
+				   // totalCateg: totalCateg
 				};
 
 				listOfProduct.push(salesObj);
@@ -202,7 +204,25 @@ module.exports =function(){
 			return costPrice;
 			//console.log("this is CostPrice" + CostPrice);
 		};
+     this.earningsCategory = function(listOfProduct){
+     	var categCost = {};
 
+     	listOfProduct.forEach(function(product){
+     		var currentItem = product.itemName;
+     		var numberSold = product.soldItem;
+     		var quantity = product.totalCost;
+     		var quant = product.totalCateg;
+
+     		if(categCost[currentItem]=== undefined){
+     			categCost[currentItem]= 0;
+     		}
+     		categCost[currentItem]= categCost[currentItem]+ Number(numberSold)* Number(quant);
+
+     		});
+     	return categCost;
+        console.log(categCost);
+     };
+     
 	};
 
 	

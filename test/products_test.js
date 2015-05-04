@@ -103,6 +103,15 @@ it('should return the earnings per product', function(){
     assert.equal(earningsPerProductResults ["Milk 1l"], 1420);
 
 });
+ 
+ it('should return the earnings per category', function(){
+ 	var products = new Products();
+ 	var shop = products.productNames('./Nelisa Sales History.csv');
 
+ 	var earningCategoryResuts = products.earningsCategory(shop);
+ 	console.log(earningCategory);
+
+ 	assert.equal(earningCategoryResuts['Dairy Product']);
+ });
 
 });
