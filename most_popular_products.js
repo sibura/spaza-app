@@ -2,6 +2,27 @@ var fs = require('fs');
 
 module.exports =function(){
 
+	var categoryMap = {
+			'Milk':'Dairy Product',
+			'Imasi':'Dairy Product', 
+			'Bread':'Bakery Product',
+			'Chakalaka Can': 'Can Food', 
+			'Gold Dish Vegetable Curry Can': 'Can Food',
+			'Fanta 500ml':'cold Beverages', 
+			'Coke 500ml':'cold Beverages', 
+			'Cream Soda 500ml':'cold Beverages', 
+			'Iwisa Pap 5kg':'Bulk', 
+			'Top Class Soy Mince': 'Soup', 
+			'Shampoo 1 litre':'cosmetics', 
+			'Soap Bar':'cosmetics', 
+			'Bananas - loose': 'fruits',
+			'Apples - loose':'fruits', 
+			'Mixed Sweets 5s':'Confectionarie', 
+			'Heart Chocolates':'Valentine Goodies', 
+			'Rose (plastic)': 'Valentine Goodies',
+			'Valentine Cards':'Valentine Goodies'
+		};
+
 	this.productNames = function(filePath){	
 
 		var linesInfile = fs.readFileSync(filePath, 'utf8');
@@ -32,7 +53,7 @@ module.exports =function(){
 					itemName: currentItem,
 					soldItem: numberSold,
 				    totalCost: totalCost,
-				   // totalCateg: totalCateg
+				    //totalCateg: totalCateg
 				};
 
 				listOfProduct.push(salesObj);
@@ -102,26 +123,6 @@ module.exports =function(){
 	this.groupCateg = function(listOfProduct) {
 
 		var categoryProductMapping = {};
-		var categoryMap = {
-			'Milk':'Dairy Product',
-			'Imasi':'Dairy Product', 
-			'Bread':'Bakery Product',
-			'Chakalaka Can': 'Can Food', 
-			'Gold Dish Vegetable Curry Can': 'Can Food',
-			'Fanta 500ml':'cold Beverages', 
-			'Coke 500ml':'cold Beverages', 
-			'Cream Soda 500ml':'cold Beverages', 
-			'Iwisa Pap 5kg':'Bulk', 
-			'Top Class Soy Mince': 'Soup', 
-			'Shampoo 1 litre':'cosmetics', 
-			'Soap Bar':'cosmetics', 
-			'Bananas - loose': 'fruits',
-			'Apples - loose':'fruits', 
-			'Mixed Sweets 5s':'Confectionarie', 
-			'Heart Chocolates':'Valentine Goodies', 
-			'Rose (plastic)': 'Valentine Goodies',
-			'Valentine Cards':'Valentine Goodies'
-		};
 
 		listOfProduct.forEach(function(product){
 			var currentItem = product.itemName;
@@ -181,9 +182,10 @@ module.exports =function(){
 		this.earningsPerProduct = function(listOfProduct){
 			var costPrice = {};
 
-			console.log(listOfProduct.forEach);
+			//console.log(listOfProduct.forEach);
 
 			listOfProduct.forEach(function(product){
+
 				var currentItem = product.itemName;
 				var numberSold = product.soldItem;
 				var quantity = product.totalCost;
@@ -193,31 +195,36 @@ module.exports =function(){
 					costPrice[currentItem]=0;
 				}
 
-				costPrice[currentItem] =costPrice[currentItem]+ Number(numberSold) * Number(quantity) //+ Number(earnings);
+				costPrice[currentItem] = costPrice[currentItem]+ Number(numberSold) * Number(quantity) //+ Number(earnings);
 
 			});
 			return costPrice;
 			//console.log("this is CostPrice" + CostPrice);
 		};
-     this.earningsCategory = function(listOfProduct){
-     	var categCost = {};
 
-     	listOfProduct.forEach(function(product){
-     		var currentItem = product.itemName;
-     		var numberSold = product.soldItem;
-     		var quantity = product.totalCost;
-     		var quant = product.totalCateg;
+     this.earningsCategory = function(listOfProduct) {
+		var categCost = {};
 
-     		if(categCost[currentItem]=== undefined){
-     			categCost[currentItem]= 0;
-     		}
-     		categCost[currentItem]= categCost[currentItem]+ Number(numberSold)* Number(quant);
+		listOfProduct.forEach(function(product){
+			//console.log(product);
 
-     		});
-     	return categCost;
-        console.log(categCost);
-     };
-     
+			var currentItem = product.itemName;
+			var numberSold = product.soldItem;
+			var currentCategory = categoryMap[currentItem];
+			var quant = product.totalCost;
+
+			if(categCost[currentCategory]=== undefined){
+				categCost[currentCategory]=0;
+			}
+
+			categCost[currentCategory]=categCost[currentCategory] + Number(numberSold) * Number(quant);
+
+		});
+
+		return categCost;
+		//console.log(categCost);
+
+	};
 	};
 
 	
