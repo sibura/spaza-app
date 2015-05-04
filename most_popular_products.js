@@ -10,8 +10,11 @@ module.exports =function(){
 		console.log(rows.length);
 
 		var listOfProduct = [];
-
 		var lineNumber = 0;
+		
+		console.log("===========================");
+		console.log(rows.length);
+		console.log("===========================");
 
 		rows.forEach(function(row) {
 			if(lineNumber != 0){
@@ -19,35 +22,52 @@ module.exports =function(){
 				var columns = row.split(';');
 				var currentItem = columns[2];
 				var numberSold = Number(columns[3]);
-				var earnings = Number(columns[4]);
+
+				var priceStr = columns[4];
+				priceStr = priceStr.replace(",", ".").replace("R", ""); 
+				var totalCost = Number(priceStr);
 
 				var salesObj = {
 					itemName: currentItem,
 					soldItem: numberSold,
-					SalesPrice: earnings
+				    totalCost: totalCost
 				};
 
 				listOfProduct.push(salesObj);
 			}
 			lineNumber = lineNumber +1;
 		});
+		
+
+		console.log("===========================");
+		console.log(listOfProduct.length);
 
 		return listOfProduct;
 	}
 
-
 	this.groupItems = function(listOfProduct){
-	    	var itemMap = {};
+		var itemMap = {};
 		listOfProduct.forEach(function(product){
+<<<<<<< HEAD
 			var currentItem = product.itemName;
 			var numberSold = product.soldItem;
 			//var earnings = product.SalesPrice;
               
+=======
+			var currentItem = product.itemName,
+			 numberSold = product.soldItem
+
+
+>>>>>>> 2155082883191301624b19adc95652688bcb105d
 			if(itemMap[currentItem]=== undefined){
 				itemMap[currentItem]=0;
 			}
 
+<<<<<<< HEAD
 			//itemMap[currentItem] =itemMap[currentItem]+ Number(numberSold) + Number(earnings);
+=======
+			itemMap[currentItem] =itemMap[currentItem]+ Number(numberSold); //+ Number(earnings);
+>>>>>>> 2155082883191301624b19adc95652688bcb105d
 
 		});
 		return itemMap;
@@ -88,9 +108,9 @@ module.exports =function(){
 	}
 
 	this.groupCateg = function(listOfProduct) {
-       	
-       	var categoryProductMapping = {};
-        var categoryMap = {
+
+		var categoryProductMapping = {};
+		var categoryMap = {
 			'Milk':'Dairy Product',
 			'Imasi':'Dairy Product', 
 			'Bread':'Bakery Product',
@@ -120,7 +140,7 @@ module.exports =function(){
 				categoryProductMapping[currentCategory]=0;
 			}
 
-		categoryProductMapping[currentCategory]=categoryProductMapping[currentCategory] + Number(numberSold);
+			categoryProductMapping[currentCategory]=categoryProductMapping[currentCategory] + Number(numberSold);
 
 		});
 
@@ -132,17 +152,17 @@ module.exports =function(){
 		var mostPopularCategory = {};
 		var max = 0;
 		for(var Cat in CatMap) { 			
-		var value = CatMap[Cat];
-		    if(value > max) {
-			max = CatMap[Cat];
-			mostPopularCategory = {
-				name : Cat,
-				amt  : max
-			}
-			
-		};
+			var value = CatMap[Cat];
+			if(value > max) {
+				max = CatMap[Cat];
+				mostPopularCategory = {
+					name : Cat,
+					amt  : max
+				}
 
-	};
+			};
+
+		};
 			//console.log(mostPopularCategory);
 			return mostPopularCategory;
 
@@ -165,4 +185,30 @@ module.exports =function(){
 			};
 			return leastPopularCategory;
 		};
+
+		this.earningsPerProduct = function(listOfProduct){
+			var costPrice = {};
+
+			console.log(listOfProduct.forEach);
+
+			listOfProduct.forEach(function(product){
+				var currentItem = product.itemName;
+				var numberSold = product.soldItem;
+				var quantity = product.totalCost;
+				//console.log(quantity);
+
+				if(costPrice[currentItem]=== undefined){
+					costPrice[currentItem]=0;
+				}
+
+				costPrice[currentItem] =costPrice[currentItem]+ Number(numberSold) * Number(quantity) //+ Number(earnings);
+
+			});
+			return costPrice;
+			//console.log("this is CostPrice" + CostPrice);
+		};
+
 	};
+
+	
+

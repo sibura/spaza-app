@@ -31,10 +31,13 @@
 
   console.log( "productList : " + JSON.stringify(productList));
 
+<<<<<<< HEAD
   var group = products.groupCateg(productList);
   var mostPopularCateg = products.mostPopularCtg(group);
   var leastpopularCateg = products.leastPopularCtg(group);
 
+=======
+>>>>>>> 2155082883191301624b19adc95652688bcb105d
   var groupCategory = products.groupCateg(productList);
   console.log("groupCategory : " + JSON.stringify(groupCategory));
 
@@ -84,8 +87,9 @@
      leastPopularCtg: leastpopularCateg,
    });
  });
+  
 
-  app.listen(3000);
+    app.listen(3000);
 
 
  /*app.get('/', function (req, res) {
@@ -102,13 +106,14 @@
   res.send('linkie');
 });
  */
-   //start the server
-  // var server = app.listen(3000, function () {
-/*
+   /*/start the server
+  var server = app.listen(3000, function () {
+
      var host = server.address().address;
      var port = server.address().port;
     var handlebars = sever.address().compile;
 
      console.log('Example app listening at  http://%s:%s', host, port);
-     */
-  // });
+    
+  });
+ */
