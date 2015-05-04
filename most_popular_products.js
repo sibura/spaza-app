@@ -50,26 +50,16 @@ module.exports =function(){
 	this.groupItems = function(listOfProduct){
 		var itemMap = {};
 		listOfProduct.forEach(function(product){
-<<<<<<< HEAD
-			var currentItem = product.itemName;
-			var numberSold = product.soldItem;
-			//var earnings = product.SalesPrice;
-              
-=======
-			var currentItem = product.itemName,
-			 numberSold = product.soldItem
+		var currentItem = product.itemName;
+		var numberSold = product.soldItem;
+		//var earnings = product.SalesPrice;
+          
 
+		if(itemMap[currentItem]=== undefined){
+			itemMap[currentItem]=0;
+		}
 
->>>>>>> 2155082883191301624b19adc95652688bcb105d
-			if(itemMap[currentItem]=== undefined){
-				itemMap[currentItem]=0;
-			}
-
-<<<<<<< HEAD
-			//itemMap[currentItem] =itemMap[currentItem]+ Number(numberSold) + Number(earnings);
-=======
 			itemMap[currentItem] =itemMap[currentItem]+ Number(numberSold); //+ Number(earnings);
->>>>>>> 2155082883191301624b19adc95652688bcb105d
 
 		});
 		return itemMap;

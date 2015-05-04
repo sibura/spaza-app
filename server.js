@@ -30,14 +30,11 @@
   app.use(express.static('public'));
 
   console.log( "productList : " + JSON.stringify(productList));
-
-<<<<<<< HEAD
+  
   var group = products.groupCateg(productList);
   var mostPopularCateg = products.mostPopularCtg(group);
   var leastpopularCateg = products.leastPopularCtg(group);
 
-=======
->>>>>>> 2155082883191301624b19adc95652688bcb105d
   var groupCategory = products.groupCateg(productList);
   console.log("groupCategory : " + JSON.stringify(groupCategory));
 
