@@ -13,6 +13,8 @@
    var fs = require('fs');
 
  // var products = require('./least_popular_products')
+
+  //var products = require('./least_popular_products')
   //var sortedList = products.productNames('Nelisa  Sales History.csv');
 
   var Products = require('./most_popular_products');
@@ -33,7 +35,7 @@
   app.use(express.static('public'));
 
   //console.log( "productList : " + JSON.stringify(productList));
-  
+
   var group = products.groupCateg(productList);
   var mostPopularCateg = products.mostPopularCtg(group);
   var leastpopularCateg = products.leastPopularCtg(group);

@@ -46,7 +46,9 @@ describe("Find most popular products - ", function(){
 		var products = new Products();
 		var shop = products.productNames('./Nelisa Sales History.csv');
 
+
 		var result = {name:"Rose (plastic)", amt: 14};
+
 		var groups = products.groupItems(shop);
 		var productsResults = products.leastpopularproducts(groups);
 	 // console.log(result);
@@ -59,7 +61,7 @@ it('should return CatMap',function(){
 	var products = new Products();
 	var shop = products.productNames('./Nelisa Sales History.csv');
 
-	var expectedMap = {"Dairy Product":125,"Bakery Product":130,"Can Food": 180,"cold Beverages": 328,"Bulk":47,"Soup":98,"cosmetics": 76,"fruits":228,"Confectionaries":172,"Valentine Goodies":48};
+	var expectedMap = {"Dairy Product":267,"Bakery Product":130,"Can Food":180,"cold Beverages":328,"Bulk":47,"Soup":98,"cosmetics":76,"fruits":228,"Confectionarie":172,"Valentine Goodies":48}; 
 	var catMap = products.groupCateg(shop);
 	//console.log(expectedMap);
 	assert.deepEqual(expectedMap, catMap);
@@ -90,7 +92,6 @@ it('should return the least popular category', function(){
 	});
 
 
-
 it('should return the earnings per product', function(){
 	var products = new Products();
 	var shop = products.productNames('./Nelisa Sales History.csv');
@@ -100,19 +101,19 @@ it('should return the earnings per product', function(){
 
 	//console.log('linkie' + result);
     assert.equal(earningsPerProductResults ["Milk 1l"], 1420);
-    assert.equal(earningsPerProductResults ["Milk 1l"], 1420);
-    assert.equal(earningsPerProductResults ["Milk 1l"], 1420);
+    assert.equal(earningsPerProductResults ["Imasi"], 3125);
+    assert.equal(earningsPerProductResults ["Bread"], 1560);
 
 });
  
  it('should return the earnings per category', function(){
  	var products = new Products();
  	var shop = products.productNames('./Nelisa Sales History.csv');
-
+  //console.log("***")
  	var earningCategoryResuts = products.earningsCategory(shop);
- 	console.log(earningCategory);
+ 	console.log(earningCategoryResuts);
 
- 	assert.equal(earningCategoryResuts['Dairy Product']);
+ 	assert.equal(earningCategoryResuts ['Dairy Product'], 4545);
  });
 
 });
