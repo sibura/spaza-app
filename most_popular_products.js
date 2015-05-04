@@ -4,11 +4,8 @@ module.exports =function(){
 
 	this.productNames = function(filePath){	
 
-		//console.log("...");
-
 		var linesInfile = fs.readFileSync(filePath, 'utf8');
-		//console.log("file details : " + linesInfile);
-
+		
 		var rows = linesInfile.split('\n');
 		console.log(rows.length);
 
@@ -53,15 +50,26 @@ module.exports =function(){
 	this.groupItems = function(listOfProduct){
 		var itemMap = {};
 		listOfProduct.forEach(function(product){
+<<<<<<< HEAD
+			var currentItem = product.itemName;
+			var numberSold = product.soldItem;
+			//var earnings = product.SalesPrice;
+              
+=======
 			var currentItem = product.itemName,
 			 numberSold = product.soldItem
 
 
+>>>>>>> 2155082883191301624b19adc95652688bcb105d
 			if(itemMap[currentItem]=== undefined){
 				itemMap[currentItem]=0;
 			}
 
+<<<<<<< HEAD
+			//itemMap[currentItem] =itemMap[currentItem]+ Number(numberSold) + Number(earnings);
+=======
 			itemMap[currentItem] =itemMap[currentItem]+ Number(numberSold); //+ Number(earnings);
+>>>>>>> 2155082883191301624b19adc95652688bcb105d
 
 		});
 		return itemMap;
@@ -107,15 +115,16 @@ module.exports =function(){
 		var categoryMap = {
 			'Milk':'Dairy Product',
 			'Imasi':'Dairy Product', 
-			'Bread':'Bakery Product', 
-			'Gold Dish Vegetable Curry Can': 'Can Food', 
+			'Bread':'Bakery Product',
+			'Chakalaka Can': 'Can Food', 
+			'Gold Dish Vegetable Curry Can': 'Can Food',
 			'Fanta 500ml':'cold Beverages', 
 			'Coke 500ml':'cold Beverages', 
 			'Cream Soda 500ml':'cold Beverages', 
 			'Iwisa Pap 5kg':'Bulk', 
-			'Top Class Soy Mince': 'Can Food', 
+			'Top Class Soy Mince': 'Soup', 
 			'Shampoo 1 litre':'cosmetics', 
-			'Soap Bar':'Cosmetics', 
+			'Soap Bar':'cosmetics', 
 			'Bananas - loose': 'fruits',
 			'Apples - loose':'fruits', 
 			'Mixed Sweets 5s':'Confectionarie', 
@@ -128,10 +137,6 @@ module.exports =function(){
 			var currentItem = product.itemName;
 			var numberSold = product.soldItem;
 			var currentCategory = categoryMap[currentItem]
-
-			// categoryProductMapping
-
-			//categoryMap
 
 			if(categoryProductMapping[currentCategory]=== undefined){
 				categoryProductMapping[currentCategory]=0;
