@@ -23,8 +23,8 @@ describe("Find most popular products - ", function(){
 		var groups = products.groupItems(shop);
 		var productMap = products.groupItems(groups);
 		
-		console.log(expectedMap);
-		//assert.deepEqual(expectedMap, productMap);
+		//console.log(expectedMap);
+		assert.deepEqual(expectedMap, productMap);
 	});
 
 	it('should return the most popular products', function(){
@@ -36,8 +36,8 @@ describe("Find most popular products - ", function(){
 	//console.log(productsResults.length);
 	var groups = products.groupItems(shop);
 	var productsResults = products.mostpopularproducts(groups);
-	console.log(result)
-	//assert.deepEqual(result, productsResults);
+	//console.log(result)
+	assert.deepEqual(result, productsResults);
 	
 });
 
@@ -49,8 +49,8 @@ describe("Find most popular products - ", function(){
 		var result = {name: 'Rose (plastic)', amt: 14};
 		var groups = products.groupItems(shop);
 		var productsResults = products.leastpopularproducts(groups);
-	  console.log(result);
-	  // assert.deepEqual(result, productsResults);
+	 // console.log(result);
+	   assert.deepEqual(result, productsResults);
 
 	});
 });
@@ -61,8 +61,8 @@ it('should return CatMap',function(){
 
 	var expectedMap = {"Dairy Product":267,"Bakery Product":130,"Can Food":180,"Cold Bevarage":328,"Bulk":47,"Soup":98,"Cosmetics":76,"Fruits":228,"Confectionarie":192,"Valentine Goodies":28};
 	var catMap = products.groupCateg(shop);
-	console.log(expectedMap);
-	//assert.deepEqual(expectedMap, catMap);
+	//console.log(expectedMap);
+	assert.deepEqual(expectedMap, catMap);
 });
 
 it('should return the most popular category', function(){
@@ -72,8 +72,8 @@ it('should return the most popular category', function(){
 	var result = {name:'Cold Beverages', amt:328};
 	var groups = products.groupCateg(shop);
 	var categoryResults = products.mostPopularCtg(groups);
-	  console.log(groups);
-	  //assert.deepEqual(result, categoryResults);
+	  //console.log(groups);
+	  assert.deepEqual(result, categoryResults);
 
 	});
 
@@ -84,7 +84,7 @@ it('should return the least popular category', function(){
 	var result = {name:'Valentine Goodies', amt:28};
 	var groups = products.groupCateg(shop);
 	var categoryResults = products.leastPopularCtg(groups);
-	 console.log(result);
-	 //assert.deepEqual(result, categoryResults);
+	 //console.log(result);
+	 assert.deepEqual(result, categoryResults);
 
 	});

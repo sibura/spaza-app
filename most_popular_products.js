@@ -4,11 +4,8 @@ module.exports =function(){
 
 	this.productNames = function(filePath){	
 
-		//console.log("...");
-
 		var linesInfile = fs.readFileSync(filePath, 'utf8');
-		//console.log("file details : " + linesInfile);
-
+		
 		var rows = linesInfile.split('\n');
 		console.log(rows.length);
 
@@ -44,13 +41,13 @@ module.exports =function(){
 		listOfProduct.forEach(function(product){
 			var currentItem = product.itemName;
 			var numberSold = product.soldItem;
-			var earnings = product.SalesPrice;
-
+			//var earnings = product.SalesPrice;
+              
 			if(itemMap[currentItem]=== undefined){
 				itemMap[currentItem]=0;
 			}
 
-			itemMap[currentItem] =itemMap[currentItem]+ Number(numberSold) + Number(earnings);
+			//itemMap[currentItem] =itemMap[currentItem]+ Number(numberSold) + Number(earnings);
 
 		});
 		return itemMap;
@@ -117,10 +114,6 @@ module.exports =function(){
 			var currentItem = product.itemName;
 			var numberSold = product.soldItem;
 			var currentCategory = categoryMap[currentItem]
-
-			// categoryProductMapping
-
-			//categoryMap
 
 			if(categoryProductMapping[currentCategory]=== undefined){
 				categoryProductMapping[currentCategory]=0;
