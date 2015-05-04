@@ -1,8 +1,8 @@
- /*var express = require('express');
-   var app = express();
-   */
-   var express = require('express');
-   var exphbs  = require('express-handlebars');
+ var express = require('express');
+ var app = express();
+
+ var express = require('express');
+ var exphbs  = require('express-handlebars');
 
    // create a route
    var app = express();
@@ -12,8 +12,8 @@
 
    var fs = require('fs');
 
-  //var products = require('./least_popular_products')
-  //var sortedList = products.productNames('Nelisa  Sales History.csv');
+  var products = require('./least_popular_products')
+  var sortedList = products.productNames('Nelisa  Sales History.csv');
 
   var Products = require('./most_popular_products');
   var products = new Products();
@@ -55,9 +55,9 @@
 
   app.get('/Category', function (req, res){
     res.render('Category', {
-    groupCateg: groupCategory,
+      groupCateg: groupCategory,
+    });
   });
- });
 
   app.get('/most_popular_products', function (req, res) {
   //console.log("*** " + mostPopular.name);
