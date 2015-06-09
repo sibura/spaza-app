@@ -116,4 +116,16 @@ it('should return the earnings per product', function(){
  	assert.equal(earningCategoryResuts ['Dairy Product'], 4545);
  });
 
+  it('should return the most profitable product', function(){
+ 	var products = new Products();
+ 	var shop = products.productNames('./Nelisa Sales History.csv');
+  //console.log("***")
+
+    var result = {name:'Imasi', amt:3125};
+ 	var mostProfitableproductResuts = products.mostProfitableproduct(shop);
+ 	console.log(mostProfitableproductResuts);
+
+ 	assert.deepEqual(mostProfitableproductResuts, result);
+ });
+
 });

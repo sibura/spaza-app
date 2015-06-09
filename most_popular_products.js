@@ -227,6 +227,26 @@ module.exports =function(){
 		//console.log(categCost);
 
 	};
+
+	this.mostProfitableproduct = function(itemMap){
+	var profitableProdct = {
+		name: "Imasi",
+		amt: 3125
+};
+		var max = 0;
+		for(var key in itemMap){
+			var value = itemMap[key];
+			if(itemMap[key] > max){
+				max = itemMap[key];
+				profitableProdct = {
+					name: key,
+					amt: max
+
+				}
+			};
+		}
+		return profitableProdct;
+	};
 	};
 
 	
