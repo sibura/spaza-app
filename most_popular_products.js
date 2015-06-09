@@ -247,6 +247,26 @@ module.exports =function(){
 		}
 		return profitableProdct;
 	};
+ 
+     this.mostProfitableCategory = function(itemMap){
+	var profitableCategory = {
+		name: "Dairy Product",
+		amt: 4545
+};
+		var max = 0;
+		for(var key in itemMap){
+			var value = itemMap[key];
+			if(itemMap[key] > max){
+				max = itemMap[key];
+				profitableCategory = {
+					name: key,
+					amt: max
+
+				}
+			};
+		}
+		return profitableCategory;
+	};
 	};
 
 	
