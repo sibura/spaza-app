@@ -28,6 +28,9 @@
   var group = products.groupCateg(productList);
   var mostPopularCateg = products.mostPopularCtg(group);
   var leastpopularCateg = products.leastPopularCtg(group);
+
+  var prodctEarnings = products.earningsPerProduct(productList);
+  var CategEarnings = products.earningsCategory(productList);
    
 
 
@@ -48,6 +51,9 @@
 
   console.log("mostpopularCateg... :" + JSON.stringify(mostPopularCateg));
   console.log("leastpopularCateg... :" + JSON.stringify(leastpopularCateg));
+
+  console.log("earnings Product..." + JSON.stringify(prodctEarnings));
+  console.log("earnings Category..." + JSON.stringify(CategEarnings));
 
   app.get('/', function (req, res) {
     res.render('home',{cat:mostPopularCateg});
@@ -88,34 +94,23 @@
      leastPopularCtg: leastpopularCateg,
    });
  });
-  
-  
-
-    app.listen(3000);
-
-
- /*app.get('/', function (req, res) {
-   res.send('Hello codeX!');
- });
- */
- 
-/*
- app.get('/hello', function (req, res) {
-   res.send('Hello sbu!');
+     app.get('/earnings_per_product', function (req, res){
+      
+      console.log(prodctEarnings);
+       
+      res.render('earnings_per_product', {
+        earningsPerProduct: prodctEarnings,
+      });
  });
 
- app.get('/hells', function (req, res){
-  res.send('linkie');
-});
- */
-   /*/start the server
-  var server = app.listen(3000, function () {
-
-     var host = server.address().address;
-     var port = server.address().port;
-    var handlebars = sever.address().compile;
-
-     console.log('Example app listening at  http://%s:%s', host, port);
+  app.get('/earnings_category', function (req, res){
     
-  });
- */
+   res.render('earnings_category', {
+     earningsCategory: CategEarnings,
+
+   });
+
+ });
+  
+  
+    app.listen(3000);

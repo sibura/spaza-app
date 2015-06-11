@@ -3,25 +3,25 @@ var fs = require('fs');
 module.exports =function(){
 
 	var categoryMap = {
-			'Milk 1l':'Dairy Product',
-			'Imasi':'Dairy Product', 
-			'Bread':'Bakery Product',
-			'Chakalaka Can': 'Can Food', 
-			'Gold Dish Vegetable Curry Can': 'Can Food',
-			'Fanta 500ml':'cold Beverages', 
-			'Coke 500ml':'cold Beverages', 
-			'Cream Soda 500ml':'cold Beverages', 
-			'Iwisa Pap 5kg':'Bulk', 
-			'Top Class Soy Mince': 'Soup', 
-			'Shampoo 1 litre':'cosmetics', 
-			'Soap Bar':'cosmetics', 
-			'Bananas - loose': 'fruits',
-			'Apples - loose':'fruits', 
-			'Mixed Sweets 5s':'Confectionarie', 
-			'Heart Chocolates':'Valentine Goodies', 
-			'Rose (plastic)': 'Valentine Goodies',
-			'Valentine Cards':'Valentine Goodies'
-		};
+		'Milk 1l':'Dairy Product',
+		'Imasi':'Dairy Product', 
+		'Bread':'Bakery Product',
+		'Chakalaka Can': 'Can Food', 
+		'Gold Dish Vegetable Curry Can': 'Can Food',
+		'Fanta 500ml':'cold Beverages', 
+		'Coke 500ml':'cold Beverages', 
+		'Cream Soda 500ml':'cold Beverages', 
+		'Iwisa Pap 5kg':'Bulk', 
+		'Top Class Soy Mince': 'Soup', 
+		'Shampoo 1 litre':'cosmetics', 
+		'Soap Bar':'cosmetics', 
+		'Bananas - loose': 'fruits',
+		'Apples - loose':'fruits', 
+		'Mixed Sweets 5s':'Confectionarie', 
+		'Heart Chocolates':'Valentine Goodies', 
+		'Rose (plastic)': 'Valentine Goodies',
+		'Valentine Cards':'Valentine Goodies'
+	};
 
 	this.productNames = function(filePath){	
 
@@ -33,9 +33,8 @@ module.exports =function(){
 		var listOfProduct = [];
 		var lineNumber = 0;
 		
-		console.log("===========================");
 		console.log(rows.length);
-		console.log("===========================");
+
 
 		rows.forEach(function(row) {
 			if(lineNumber != 0){
@@ -48,12 +47,14 @@ module.exports =function(){
 				var priceStr = columns[4];
 				priceStr = priceStr.replace(",", ".").replace("R", ""); 
 				var totalCost = Number(priceStr);
+				var profitable = Number;
 
 				var salesObj = {
 					itemName: currentItem,
 					soldItem: numberSold,
-				    totalCost: totalCost,
-				    //totalCateg: totalCateg
+					totalCost: totalCost,
+					profitable: profitable,
+
 				};
 
 				listOfProduct.push(salesObj);
@@ -62,7 +63,6 @@ module.exports =function(){
 		});
 		
 
-		console.log("===========================");
 		console.log(listOfProduct.length);
 
 		return listOfProduct;
@@ -71,10 +71,10 @@ module.exports =function(){
 	this.groupItems = function(listOfProduct){
 		var itemMap = {};
 		listOfProduct.forEach(function(product){
-		var currentItem = product.itemName;
-		var numberSold = product.soldItem;
+			var currentItem = product.itemName;
+			var numberSold = product.soldItem;
 		//var earnings = product.SalesPrice;
-          
+
 
 		if(itemMap[currentItem]=== undefined){
 			itemMap[currentItem]=0;
@@ -121,7 +121,7 @@ module.exports =function(){
 	}
 
 	this.groupCateg = function(listOfProduct) {
- 
+
 		var categoryProductMapping = {};
 
 		listOfProduct.forEach(function(product){
@@ -181,10 +181,18 @@ module.exports =function(){
 
 		this.earningsPerProduct = function(listOfProduct){
 			var costPrice = {};
+			var max = 0;
 
 			//console.log(listOfProduct.forEach);
 
 			listOfProduct.forEach(function(product){
+				if(listOfProduct[product] < max){
+					max = listOfProduct[product];
+					costPrice = {
+						name : product,
+						quant : max
+					}
+				};
 
 				var currentItem = product.itemName;
 				var numberSold = product.soldItem;
@@ -195,15 +203,16 @@ module.exports =function(){
 					costPrice[currentItem]=0;
 				}
 
-		costPrice[currentItem] =costPrice[currentItem]+ Number(numberSold) * Number(quantity) //+ Number(earnings);
+		costPrice[currentItem] =costPrice[currentItem] + (Number(numberSold) * Number(quantity, 1)); //+ Number(earnings);
 		//costPrice[currentItem] = costPrice[currentItem]+ Number(numberSold) * Number(quantity) //+ Number(earnings);
 
 
-			});
+	});
 			return costPrice;
 			//console.log("this is CostPrice" + CostPrice);
 		};
-
+		
+		
      this.earningsCategory = function(listOfProduct) {
 		var categCost = {};
 
@@ -227,7 +236,82 @@ module.exports =function(){
 		//console.log(categCost);
 
 	};
+		this.mostProfitableProduct = function(listOfProduct){
+			var mostProfitable= {};
+			var max = 0;
+			for(var product in listOfProduct) {
+				var value = listOfProduct[product];
+				if(listOfProduct[product] * max) {
+					max = listOfProduct[product];
+					mostProfitable = {
+						name : product,
+						quant  : max
+					}
+				};
+			};
+
+			return mostProfitable;
+		};
+
 	};
 
-	
+	this.mostProfitableCategory = function(profitable){
+		var ProfitableCategory= {};
+		var max = 0;
+		for(var Cat in profitable) {
+			var value = profitable[Cat];
+			if(profitable[Cat] * max) {
+				max = profitable[Cat];
+				ProfitableCategory = {
+					name : Cat,
+					quant  : max
+				}
+			};
+		};
+		return ProfitableCategory;
+	};
+		/*
+		listOfProduct.forEach(function(product){
 
+				var currentItem = product.itemName;
+				var numberSold = product.soldItem;
+				var currentCategory = categoryMap[currentItem];
+				var quant = product.categCost;
+				var quantity = product.ProfitableCategory;
+
+
+				if(ProfitableCategory[currentCategory]=== undefined){
+					ProfitableCategory[currentCategory]=0;
+				};
+
+				ProfitableCategory[currentCategory] =ProfitableCategory[currentCategory] + (Number(numberSold) * Number(substr(quant, 1)) * Number(quantity));
+
+		return ProfitableCategory;
+	});
+	};*/
+
+
+
+	/*
+     this.mostProfitableCategory = function(listOfProduct) {
+		var ProfitableCategory = {};
+
+		listOfProduct.forEach(function(product){
+			//console.log(product);
+
+			var currentItem = product.itemName;
+			var numberSold = product.soldItem;
+			var currentCategory = categoryMap[currentItem];
+			var quant = product.totalCost;
+			var quantity = product.profitable;
+
+			if(ProfitableCategory[currentCategory]=== undefined){
+				ProfitableCategory[currentCategory]=0;
+			}
+
+			ProfitableCategory[currentCategory] =ProfitableCategory[currentCategory] + (Number(numberSold) * Number(quant+quantity));
+
+		});
+		return ProfitableCategory;
+	};
+*/

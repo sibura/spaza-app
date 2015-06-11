@@ -35,9 +35,10 @@ describe("Find most popular products - ", function(){
 		var result = {name:'Mixed Sweets 5s', amt:172};
 	//console.log(productsResults.length);
 	var groups = products.groupItems(shop);
-	var productsResults = products.mostpopularproducts(groups);
+	var mostPopproductsResults = products.mostpopularproducts(groups);
 	//console.log(result)
-	assert.deepEqual();
+		 assert.deepEqual(result, mostPopproductsResults);
+;
 	
 });
 
@@ -110,10 +111,32 @@ it('should return the earnings per product', function(){
  	var products = new Products();
  	var shop = products.productNames('./Nelisa Sales History.csv');
   //console.log("***")
- 	var earningCategoryResuts = products.earningsCategory(shop);
- 	console.log(earningCategoryResuts);
+ 	var earningCategoryResults = products.earningsCategory(shop);
+ 	console.log(earningCategoryResults);
 
- 	assert.equal(earningCategoryResuts ['Dairy Product'], 4545);
+ 	assert.equal(earningCategoryResults['Dairy Product'], 4545);
  });
 
+ it('should return the most profitable product', function(){
+ 	var products = new Products();
+ 	var shop = products.productNames('./Nelisa Sales History.csv');
+
+    var result = {name:'Imasi', quant: 3125};
+    var groups = products.groupItems(shop)
+ 	var profitableProductResults = products.mostProfitableProduct(groups);
+ 	 console.log(result);
+ 	 assert.deeEqual();
+ });
+
+ it('should return most profitable category', function(){
+ 	var products = new Products();
+ 	var shop = products.productNames('./Nelisa Sales History.csv');
+
+ 	var result = {name:'Dairy Product', quant: 4545};
+ 	var groups = products.groupCateg(shop);
+ 	var mostCategory = products.mostProfitableCategory(groups);
+ 	console.log(result);
+ 	assert.deeEqual(mostCategory);
+ 	
+ });
 });
