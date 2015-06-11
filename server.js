@@ -20,6 +20,7 @@
   var Products = require('./most_popular_products');
   var products = new Products();
   var productList = products.productNames('./Nelisa Sales History.csv');
+  
 
   var groupedProducts = products.groupItems(productList);
   var mostPopular = products.mostpopularproducts(groupedProducts);
@@ -32,7 +33,8 @@
   var prodctEarnings = products.earningsPerProduct(productList);
   var CategEarnings = products.earningsCategory(productList);
    
-
+  //var ProfitableProduct = products.mostProfitableProduct(productList);
+  //var ProfitableCategory = products.mostProfitableCategory(productList);
 
   
   app.use(express.static('public'));
@@ -54,7 +56,9 @@
 
   console.log("earnings Product..." + JSON.stringify(prodctEarnings));
   console.log("earnings Category..." + JSON.stringify(CategEarnings));
-
+ 
+ // console.log("Profitable Product..." + JSON.stringify(ProfitableProduct));
+   // console.log("Profitable category..." + JSON.stringify(ProfitableCategory));
   app.get('/', function (req, res) {
     res.render('home',{cat:mostPopularCateg});
  // res.render('home',{cat:leastPopularCateg});
@@ -104,13 +108,31 @@
  });
 
   app.get('/earnings_category', function (req, res){
-    
    res.render('earnings_category', {
      earningsCategory: CategEarnings,
 
    });
+/*
+   app.get('/most_profitable_product', function (req, res){
+    var result = [];
+     for(var key in Profitable_product){
+      result.push({name: key, quant: Profitable_product[key]});
+      }
+   res.render('most_profitable_product', {
+   
+  mostProfitableProduct:ProfitableProduct,
+
+   });
+
+
+  app.get('/most_profitable_category', function (req, res){
+   res.render('most_profitable_category', {
+   mostProfitableCategory:ProfitableCategory,
+   });   
 
  });
   
-  
     app.listen(3000);
+});
+*/
+});

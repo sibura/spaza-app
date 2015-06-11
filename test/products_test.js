@@ -1,6 +1,7 @@
 var assert = require("assert");
 
 var Products = require("../most_popular_products");
+var Profit = require("../profitable");
 
 describe("Find most popular products - ", function(){
 
@@ -8,10 +9,17 @@ describe("Find most popular products - ", function(){
 
 		var products = new Products();
 		var shop = products.productNames('./Nelisa Sales History.csv');
+
 		//console.log(shop);
 		assert.equal(448, shop.length);
 		assert.equal("Imasi", shop[1].itemName);
+
+		/*var profit = new Profit();
+		var profitable = profit.productName('./NelisaPurchases.csv');
 		
+		assert.equal(3125, profitable.length);
+		assert.equal("Imasi", profitable[2].totalCost);
+		*/
 	});
 
 	it('should return product qty map', function(){
@@ -35,10 +43,9 @@ describe("Find most popular products - ", function(){
 		var result = {name:'Mixed Sweets 5s', amt:172};
 	//console.log(productsResults.length);
 	var groups = products.groupItems(shop);
-	var mostPopproductsResults = products.mostpopularproducts(groups);
+	var productsResults = products.mostpopularproducts(groups);
 	//console.log(result)
-		 assert.deepEqual(result, mostPopproductsResults);
-;
+	assert.deepEqual();
 	
 });
 
@@ -111,32 +118,31 @@ it('should return the earnings per product', function(){
  	var products = new Products();
  	var shop = products.productNames('./Nelisa Sales History.csv');
   //console.log("***")
- 	var earningCategoryResults = products.earningsCategory(shop);
- 	console.log(earningCategoryResults);
-
- 	assert.equal(earningCategoryResults['Dairy Product'], 4545);
+ 	var earningCategoryResuts = products.earningsCategory(shop);
+ 	console.log(earningCategoryResuts);
+ 	assert.equal(earningCategoryResuts ['Dairy Product'], 4545);
  });
 
- it('should return the most profitable product', function(){
+  it('should return the most profitable product', function(){
  	var products = new Products();
- 	var shop = products.productNames('./Nelisa Sales History.csv');
+ 	var shop = products.productNames('./NelisaPurchases.csv');
 
-    var result = {name:'Imasi', quant: 3125};
-    var groups = products.groupItems(shop)
- 	var profitableProductResults = products.mostProfitableProduct(groups);
- 	 console.log(result);
- 	 assert.deeEqual();
+
+    var result = {name:'Imasi', quant:3125};
+ 	var mostProfitableproductResuts = products.mostProfitableproduct(shop);
+ 	console.log("********"+mostProfitableproductResuts);
+
+ 	assert.deepEqual();
  });
 
- it('should return most profitable category', function(){
- 	var products = new Products();
- 	var shop = products.productNames('./Nelisa Sales History.csv');
+   it('should return the most profitable category', function(){
+    var products = new Products();
+ 	var shop = products.productNames('./NelisaPurchases.csv');
+  //console.log("***")
 
- 	var result = {name:'Dairy Product', quant: 4545};
- 	var groups = products.groupCateg(shop);
- 	var mostCategory = products.mostProfitableCategory(groups);
- 	console.log(result);
- 	assert.deeEqual(mostCategory);
- 	
+    var result = [{name:'Dairy Product', quant: 4545}];
+ 	var ProfitableCategory = products.mostProfitableCategory(shop);
+ 	//console.log(result);
+ 	assert.deepEqual(result);
  });
-});
+})

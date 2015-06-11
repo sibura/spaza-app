@@ -37,23 +37,27 @@ module.exports =function(){
 
 
 		rows.forEach(function(row) {
+
+			var product = row.split(';');
+
 			if(lineNumber != 0){
 
 				var columns = row.split(';');
 				var currentItem = columns[2];
 				var numberSold = Number(columns[3]);
+				//var profitable = Number(columns[5]);
 
 
 				var priceStr = columns[4];
 				priceStr = priceStr.replace(",", ".").replace("R", ""); 
 				var totalCost = Number(priceStr);
-				var profitable = Number;
+	
 
 				var salesObj = {
 					itemName: currentItem,
 					soldItem: numberSold,
 					totalCost: totalCost,
-					profitable: profitable,
+					//profitable: profitable,
 
 				};
 
@@ -197,13 +201,13 @@ module.exports =function(){
 				var currentItem = product.itemName;
 				var numberSold = product.soldItem;
 				var quantity = product.totalCost;
-				//console.log(quantity);
+				//console.log(quant);
 
 				if(costPrice[currentItem]=== undefined){
 					costPrice[currentItem]=0;
 				}
 
-		costPrice[currentItem] =costPrice[currentItem] + (Number(numberSold) * Number(quantity, 1)); //+ Number(earnings);
+		costPrice[currentItem] =costPrice[currentItem] + (Number(numberSold) * Number(quantity)); //+ Number(earnings);
 		//costPrice[currentItem] = costPrice[currentItem]+ Number(numberSold) * Number(quantity) //+ Number(earnings);
 
 
@@ -222,13 +226,13 @@ module.exports =function(){
 			var currentItem = product.itemName;
 			var numberSold = product.soldItem;
 			var currentCategory = categoryMap[currentItem];
-			var quant = product.totalCost;
+			var quantity = product.totalCost;
 
 			if(categCost[currentCategory]=== undefined){
 				categCost[currentCategory]=0;
 			}
 
-			categCost[currentCategory] =categCost[currentCategory] + (Number(numberSold) * Number(quant));
+			categCost[currentCategory] =categCost[currentCategory] + (Number(numberSold) * Number(quantity));
 
 		});
 
@@ -236,82 +240,42 @@ module.exports =function(){
 		//console.log(categCost);
 
 	};
-		this.mostProfitableProduct = function(listOfProduct){
-			var mostProfitable= {};
-			var max = 0;
-			for(var product in listOfProduct) {
-				var value = listOfProduct[product];
-				if(listOfProduct[product] * max) {
-					max = listOfProduct[product];
-					mostProfitable = {
-						name : product,
-						quant  : max
-					}
-				};
-			};
-
-			return mostProfitable;
-		};
-
-	};
-
-	this.mostProfitableCategory = function(profitable){
-		var ProfitableCategory= {};
+};
+	
+	
+this.mostProfitableproduct = function(listOfProduct){
+	var profitableProdct = {};
 		var max = 0;
-		for(var Cat in profitable) {
-			var value = profitable[Cat];
-			if(profitable[Cat] * max) {
-				max = profitable[Cat];
-				ProfitableCategory = {
-					name : Cat,
-					quant  : max
+		for(var key in listOfProduct){
+			var value = listOfProduct[key];
+			if(listOfProduct[key] * max){
+				max = listOfProduct[key];
+				profitableProdct = {
+					name: key,
+					quant: max
+
 				}
 			};
-		};
-		return ProfitableCategory;
+
+		}
+			return profitableProdct;
+		console.log(profitableProdct);
+ 
+ }
+     this.mostProfitableCategory = function(itemMap){
+	var profitableCategory = {};
+		var max = 0;
+		for(var key in itemMap){
+			var value = itemMap[key];
+			if(itemMap[key] > max){
+				max = itemMap[key];
+				profitableCategory = {
+					name: key,
+					quant: max
+
+				}
+			};
+		}
+		return profitableCategory;
+		console.log(profitableCategory);
 	};
-		/*
-		listOfProduct.forEach(function(product){
-
-				var currentItem = product.itemName;
-				var numberSold = product.soldItem;
-				var currentCategory = categoryMap[currentItem];
-				var quant = product.categCost;
-				var quantity = product.ProfitableCategory;
-
-
-				if(ProfitableCategory[currentCategory]=== undefined){
-					ProfitableCategory[currentCategory]=0;
-				};
-
-				ProfitableCategory[currentCategory] =ProfitableCategory[currentCategory] + (Number(numberSold) * Number(substr(quant, 1)) * Number(quantity));
-
-		return ProfitableCategory;
-	});
-	};*/
-
-
-
-	/*
-     this.mostProfitableCategory = function(listOfProduct) {
-		var ProfitableCategory = {};
-
-		listOfProduct.forEach(function(product){
-			//console.log(product);
-
-			var currentItem = product.itemName;
-			var numberSold = product.soldItem;
-			var currentCategory = categoryMap[currentItem];
-			var quant = product.totalCost;
-			var quantity = product.profitable;
-
-			if(ProfitableCategory[currentCategory]=== undefined){
-				ProfitableCategory[currentCategory]=0;
-			}
-
-			ProfitableCategory[currentCategory] =ProfitableCategory[currentCategory] + (Number(numberSold) * Number(quant+quantity));
-
-		});
-		return ProfitableCategory;
-	};
-*/
