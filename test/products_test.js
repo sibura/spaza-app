@@ -124,25 +124,24 @@ it('should return the earnings per product', function(){
  });
 
   it('should return the most profitable product', function(){
- 	var products = new Products();
- 	var shop = products.productNames('./NelisaPurchases.csv');
+ 	var profit = new Profit();
+ 	var shop = profit.productName('./NelisaPurchases.csv');
+  
+    var result = {name:'Imasi', quant: 3125};
+ 	var mostProfitableproduct = profit.mostProfitableproduct(shop);
+ 	//console.log(mostProfitableproduct);
 
-
-    var result = {name:'Imasi', quant:3125};
- 	var mostProfitableproductResuts = products.mostProfitableproduct(shop);
- 	console.log("********"+mostProfitableproductResuts);
-
- 	assert.deepEqual();
+ 	assert.deepEqual(mostProfitableproduct, result);
  });
 
    it('should return the most profitable category', function(){
-    var products = new Products();
- 	var shop = products.productNames('./NelisaPurchases.csv');
+ 	var profit = new Profit();
+ 	var shop = profit.productName('./NelisaPurchases.csv');
   //console.log("***")
 
-    var result = [{name:'Dairy Product', quant: 4545}];
- 	var ProfitableCategory = products.mostProfitableCategory(shop);
- 	//console.log(result);
- 	assert.deepEqual(result);
+    var result = {name:'Dairy Product', quant:4545};
+ 	var ProfitableCategory = profit.mostProfitableCategory(shop);
+ 	//console.log(ProfitableCategory, result);
+ 	assert.deepEqual(ProfitableCategory, result);
  });
-})
+});

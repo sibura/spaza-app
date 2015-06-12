@@ -1,4 +1,4 @@
-/*var fs = require('fs');
+var fs = require('fs');
 
 module.exports =function(){
 	this.productName = function(filePath){
@@ -17,13 +17,13 @@ module.exports =function(){
 			if(lineNumbers != 0){
 
 				var columns = row.split(';');
-				//var currentItem = columns[2];
+				var currentItem = columns[2];
 				var numberSold = Number(columns[3]);
 				var profitable = Number(columns[4]);
 				var cost = Number(columns[5]);
 
 
-				var priceStr = columns[5];
+				var priceStr = columns[4];
 				priceStr = priceStr.replace(",", ".").replace("R", ""); 
 				var cost = Number(priceStr);
 
@@ -31,8 +31,8 @@ module.exports =function(){
 				var salesObj = {
 					itemName: currentItem,
 					soldItem: numberSold,
-					cost: totalCost,
-					//profitable: profitable,
+					cost: quant,
+					profitable: profitable,
 
 				};
 				ProductList.push(salesObj);
@@ -49,26 +49,27 @@ module.exports =function(){
 	this.groupProducts = function(ProductList){
 		var itemsMap = {};
 		ProductList.forEach(function(profit){
-			var currentItem = product.itemName;
-			var numberSold = product.soldItem;
-			var cost = profit.totalcost;
+			var currentItem = profit.itemName;
+			var numberSold = profit.soldItem;
+			var quant = profit.totalcost;
 
 
 		if(itemsMap[currentItem]=== undefined){
 			itemsMap[currentItem]=0;
 		}
 
-			itemsMap[currentItem] =itemsMap[currentItem]+ Number(numberSold) * Number(cost);
+			itemsMap[currentItem] =itemsMap[currentItem]+ Number(numberSold) * Number(quant);
 
 		});
 		//return itemsMap;
 		console.log("this is itemsMap" + itemsMap);
 	};
 
+
 	this.mostProfitableProduct = function(itemsMap){
 		var mostProfitable= {};
 		var max = 0;
-		for(var key in itemsMap) {
+		for(var key in itemsMap ++) {
 			var value = itemsMap[key];
 			if(itemsMap[key] < max) {
 				max = itemsMap[key];
@@ -82,7 +83,7 @@ module.exports =function(){
 }
 
 
-	this.mostProfitableCategory = function(itemsMap){
+/*	this.mostProfitableCategory = function(itemsMap){
 		var ProfitableCategory= {};
 		var max = 0;
 		for(var key in itemsMap) {
@@ -96,7 +97,7 @@ module.exports =function(){
 			};
 		};
 		return ProfitableCategory;
-	};
+	};*/
 
 	  this.mostProfitableCategory = function(itemsMap){
 		var ProfitableCategory= {};
@@ -104,21 +105,21 @@ module.exports =function(){
 		itemsMap.forEach(function(product){
 			//console.log(product);
 
-			var currentItem = product.itemName;
-			var numberSold = product.soldItem;
+			var currentItem = profit.itemName;
+			var numberSold = profit.soldItem;
 			var currentCategory = categoryMap[currentItem];
-			var quant = Profit.totalCost;
+			var quant = profit.totalCost;
 
 			if(ProfitableCategory[currentCategory]=== undefined){
 				ProfitableCategory[currentCategory]=0;
 			}
 
-			ProfitableCategory[currentCategory] =ProfitableCategory[currentCategory] + (Number(numberSold) * Number(cost));
+			ProfitableCategory[currentCategory] =ProfitableCategory[currentCategory] + (Number(numberSold) * Number(quant));
 
 		});
 
-		//return ProfitableCategory;
+		return ProfitableCategory;
 		console.log(ProfitableCategory);
 
 	};
-}*/
+}

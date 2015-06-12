@@ -232,7 +232,7 @@ module.exports =function(){
 				categCost[currentCategory]=0;
 			}
 
-			categCost[currentCategory] =categCost[currentCategory] + (Number(numberSold) * Number(quantity));
+			categCost[currentCategory] = categCost[currentCategory] + (Number(numberSold) * Number(quantity));
 
 		});
 
@@ -248,7 +248,7 @@ this.mostProfitableproduct = function(listOfProduct){
 		var max = 0;
 		for(var key in listOfProduct){
 			var value = listOfProduct[key];
-			if(listOfProduct[key] * max){
+			if(listOfProduct[key] < max){
 				max = listOfProduct[key];
 				profitableProdct = {
 					name: key,
@@ -259,16 +259,19 @@ this.mostProfitableproduct = function(listOfProduct){
 
 		}
 			return profitableProdct;
-		console.log(profitableProdct);
+		//console.log(profitableProdct);
  
  }
-     this.mostProfitableCategory = function(itemMap){
-	var profitableCategory = {};
+
+ 
+/*
+     this.mostProfitableCategory = function(categCost){
+	var profitableCategory = {name:'Dairy Product', amt:4545};
 		var max = 0;
-		for(var key in itemMap){
-			var value = itemMap[key];
-			if(itemMap[key] > max){
-				max = itemMap[key];
+		for(var key in categCost){
+			var value = categCost[key];
+			if(categCost[key] * max){
+				max = categCost[key];
 				profitableCategory = {
 					name: key,
 					quant: max
@@ -277,5 +280,5 @@ this.mostProfitableproduct = function(listOfProduct){
 			};
 		}
 		return profitableCategory;
-		console.log(profitableCategory);
 	};
+*/

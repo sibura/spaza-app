@@ -112,7 +112,7 @@
      earningsCategory: CategEarnings,
 
    });
-/*
+
    app.get('/most_profitable_product', function (req, res){
     var result = [];
      for(var key in Profitable_product){
@@ -134,5 +134,5 @@
   
     app.listen(3000);
 });
-*/
+
 });
