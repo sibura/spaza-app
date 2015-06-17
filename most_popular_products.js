@@ -83,8 +83,9 @@ module.exports =function(){
 			itemMap[currentItem] =itemMap[currentItem]+ Number(numberSold); //+ Number(earnings);
 
 		});
+
 		return itemMap;
-		//console.log("this is itemmap" + itemMap);
+		console.log("this is itemmap" + itemMap);
 	}; 
 
 	this.mostpopularproducts= function(itemMap){
@@ -224,20 +225,17 @@ module.exports =function(){
 		});
 
 		return categCost;
-		//console.log(categCost);
+		//console.log(categCost + "kzjoid");
 
 	};
 
-	this.mostProfitableproduct = function(itemMap){
-	var profitableProdct = {
-		name: "Imasi",
-		amt: 3125
-};
+	this.mostProfitableproduct = function(costPrice){
+	var profitableProdct = {};
 		var max = 0;
-		for(var key in itemMap){
-			var value = itemMap[key];
-			if(itemMap[key] > max){
-				max = itemMap[key];
+		for(var key in costPrice){
+			var value = costPrice[key];
+			if(value > max){
+				max = value;
 				profitableProdct = {
 					name: key,
 					amt: max
@@ -245,19 +243,19 @@ module.exports =function(){
 				}
 			};
 		}
+		//console.log(JSON.stringify(profitableProdct) + "uhyu");
 		return profitableProdct;
 	};
  
-     this.mostProfitableCategory = function(itemMap){
-	var profitableCategory = {
-		name: "Dairy Product",
-		amt: 4545
-};
+     this.mostProfitableCategory = function(categCost){
+     	//console.log(categCost + "mjisd");
+	var profitableCategory = {};
 		var max = 0;
-		for(var key in itemMap){
-			var value = itemMap[key];
-			if(itemMap[key] > max){
-				max = itemMap[key];
+		var result = [];
+		for(var key in categCost){
+			var value = categCost[key];
+			if(value > max){
+				max = value;
 				profitableCategory = {
 					name: key,
 					amt: max
@@ -265,6 +263,11 @@ module.exports =function(){
 				}
 			};
 		}
+		/*for(var key in profitableCategory) {
+              result.push({name:key, amt:profitableCategory[key]});
+
+		}*/
+		//console.log(result + "kkkkkkxjc");
 		return profitableCategory;
 	};
 	};
