@@ -128,7 +128,7 @@ it('should return the earnings per product', function(){
  	var shop = profit.productName('./NelisaPurchases.csv');
   
     var result = {name:'Imasi', quant: 3125};
- 	var mostProfitableproduct = profit.mostProfitableproduct(shop);
+ 	var mostProfitableproduct = profit.mostProfitableProduct(shop);
  	//console.log(mostProfitableproduct);
 
  	assert.deepEqual(mostProfitableproduct, result);
@@ -142,6 +142,6 @@ it('should return the earnings per product', function(){
     var result = {name:'Dairy Product', quant:4545};
  	var ProfitableCategory = profit.mostProfitableCategory(shop);
  	//console.log(ProfitableCategory, result);
- 	assert.deepEqual(ProfitableCategory, result);
+ 	assert.deepEqual(result, ProfitableCategory);
  });
 });

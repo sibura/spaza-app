@@ -61,17 +61,17 @@ module.exports =function(){
 			itemsMap[currentItem] =itemsMap[currentItem]+ Number(numberSold) * Number(quant);
 
 		});
-		//return itemsMap;
-		console.log("this is itemsMap" + itemsMap);
+		return itemsMap;
+		//console.log("this is itemsMap" + itemsMap);
 	};
 
 
 	this.mostProfitableProduct = function(itemsMap){
 		var mostProfitable= {};
 		var max = 0;
-		for(var key in itemsMap ++) {
+		for(var key in itemsMap) {
 			var value = itemsMap[key];
-			if(itemsMap[key] < max) {
+			if(itemsMap[key] > max) {
 				max = itemsMap[key];
 				mostProfitable = {
 					name : key,
@@ -117,9 +117,13 @@ module.exports =function(){
 			ProfitableCategory[currentCategory] =ProfitableCategory[currentCategory] + (Number(numberSold) * Number(quant));
 
 		});
+		ProfitableCategory = {
+					name : currentCategory,
+					quant  : quant
+				}
 
 		return ProfitableCategory;
-		console.log(ProfitableCategory);
+		//console.log(ProfitableCategory);
 
 	};
 }

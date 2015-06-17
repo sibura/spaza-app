@@ -123,7 +123,7 @@
   mostProfitableProduct:ProfitableProduct,
 
    });
-
+});
 
   app.get('/most_profitable_category', function (req, res){
    res.render('most_profitable_category', {
@@ -135,4 +135,4 @@
     app.listen(3000);
 });
 
-});
+
