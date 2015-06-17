@@ -1,4 +1,4 @@
-var fs = require('fs');
+/*var fs = require('fs');
 
 module.exports =function(){
 	this.productName = function(filePath){
@@ -31,7 +31,7 @@ module.exports =function(){
 				var salesObj = {
 					itemName: currentItem,
 					soldItem: numberSold,
-					cost: quant,
+					//cost: quant,
 					profitable: profitable,
 
 				};
@@ -49,6 +49,7 @@ module.exports =function(){
 	this.groupProducts = function(ProductList){
 		var itemsMap = {};
 		ProductList.forEach(function(profit){
+			//var column = profit.split(';')
 			var currentItem = profit.itemName;
 			var numberSold = profit.soldItem;
 			var quant = profit.totalcost;
@@ -66,7 +67,7 @@ module.exports =function(){
 	};
 
 
-	this.mostProfitableProduct = function(itemsMap){
+	/*this.mostProfitableProduct = function(itemsMap){
 		var mostProfitable= {};
 		var max = 0;
 		for(var key in itemsMap) {
@@ -77,13 +78,16 @@ module.exports =function(){
 					name : key,
 					quant  : max
 				}
+
 			};
+
 		};
+  
 		return mostProfitable;
+	}
 }
-
-
-/*	this.mostProfitableCategory = function(itemsMap){
+/*
+	this.mostProfitableCategory = function(itemsMap){
 		var ProfitableCategory= {};
 		var max = 0;
 		for(var key in itemsMap) {
@@ -97,33 +101,9 @@ module.exports =function(){
 			};
 		};
 		return ProfitableCategory;
-	};*/
-
-	  this.mostProfitableCategory = function(itemsMap){
-		var ProfitableCategory= {};
-
-		itemsMap.forEach(function(product){
-			//console.log(product);
-
-			var currentItem = profit.itemName;
-			var numberSold = profit.soldItem;
-			var currentCategory = categoryMap[currentItem];
-			var quant = profit.totalCost;
-
-			if(ProfitableCategory[currentCategory]=== undefined){
-				ProfitableCategory[currentCategory]=0;
-			}
-
-			ProfitableCategory[currentCategory] =ProfitableCategory[currentCategory] + (Number(numberSold) * Number(quant));
-
-		});
-		ProfitableCategory = {
-					name : currentCategory,
-					quant  : quant
-				}
-
-		return ProfitableCategory;
-		//console.log(ProfitableCategory);
-
 	};
-}
+
+	/*this.purchases = function(){
+		var profits = {};
+
+	}*/

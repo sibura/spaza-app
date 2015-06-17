@@ -1,5 +1,5 @@
- var express = require('express');
- var app = express();
+ //var express = require('express');
+ //var app = express()
 
  var express = require('express');
  var exphbs  = require('express-handlebars');
@@ -112,6 +112,7 @@
      earningsCategory: CategEarnings,
 
    });
+ });
 
    app.get('/most_profitable_product', function (req, res){
     var result = [];
@@ -119,8 +120,7 @@
       result.push({name: key, quant: Profitable_product[key]});
       }
    res.render('most_profitable_product', {
-   
-  mostProfitableProduct:ProfitableProduct,
+   mostProfitableProduct:ProfitableProduct,
 
    });
 });
@@ -131,8 +131,5 @@
    });   
 
  });
-  
+
     app.listen(3000);
-});
-
-

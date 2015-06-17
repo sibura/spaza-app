@@ -190,7 +190,8 @@ module.exports =function(){
 			//console.log(listOfProduct.forEach);
 
 			listOfProduct.forEach(function(product){
-				if(listOfProduct[product] < max){
+				
+				if(listOfProduct[product] > max){
 					max = listOfProduct[product];
 					costPrice = {
 						name : product,
@@ -240,38 +241,34 @@ module.exports =function(){
 		//console.log(categCost);
 
 	};
-};
-	
-	
-this.mostProfitableproduct = function(listOfProduct){
-	var profitableProdct = {};
-		var max = 0;
-		for(var key in listOfProduct){
-			var value = listOfProduct[key];
-			if(listOfProduct[key] < max){
-				max = listOfProduct[key];
-				profitableProdct = {
-					name: key,
-					quant: max
 
-				}
-			};
+	this.mostProfitableproduct = function(costPrice){
+		var profitableProdct = {};
+			var max = 0;
+			for(var key in costPrice){
+				var value = costPrice[key];
+				if(value > max){
+					max = value;
+					profitableProdct = {
+						name: key,
+						quant: max
 
-		}
-			return profitableProdct;
+					}
+				};
+
+			}
+				return profitableProdct;
 		//console.log(profitableProdct);
  
  }
 
- 
-/*
-     this.mostProfitableCategory = function(categCost){
-	var profitableCategory = {name:'Dairy Product', amt:4545};
+    this.mostProfitableCategory = function(categCost){
+	var profitableCategory = {};
 		var max = 0;
 		for(var key in categCost){
 			var value = categCost[key];
-			if(categCost[key] * max){
-				max = categCost[key];
+			if(value > max){
+				max = value;
 				profitableCategory = {
 					name: key,
 					quant: max
@@ -280,5 +277,5 @@ this.mostProfitableproduct = function(listOfProduct){
 			};
 		}
 		return profitableCategory;
-	};
-*/
+}
+}
