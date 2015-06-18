@@ -33,8 +33,11 @@
   var prodctEarnings = products.earningsPerProduct(productList);
   var CategEarnings = products.earningsCategory(productList);
    
-  var ProfitableProduct = products.mostProfitableproduct(productList);
-  var ProfitableCategory = products.mostProfitableCategory(productList);
+  var profitables = products.earningsPerProduct(productList);
+  var ProfitableProduct = products.mostProfitableproduct(profitables);
+  
+  var earningsCategoryResults = products.earningsCategory(productList);
+  var ProfitableCategory = products.mostProfitableCategory(earningsCategoryResults);
 
   
   app.use(express.static('public'));
@@ -100,9 +103,6 @@
    });
  });
      app.get('/earnings_per_product', function (req, res){
-      
-      console.log(prodctEarnings);
-       
       res.render('earnings_per_product', {
         earningsPerProduct: prodctEarnings,
       });
@@ -115,23 +115,19 @@
    });
  });
 
- /*  app.get('/most_profitable_product', function (req, res){
-  var result = [];
-     for(var key in Profitable_product){
-      result.push();
-      }
+   app.get('/most_profitable_product', function (req, res){
    res.render('most_profitable_product', {
-   mostProfitableproduct:ProfitableProduct,
+   mostProfitableproduct: ProfitableProduct,
 
    });
-});*/
+});
 
 
   app.get('/most_profitable_category', function (req, res){
    res.render('most_profitable_category', {
-   mostProfitableCategory:ProfitableCategory,
+   mostProfitableCategory: ProfitableCategory,
    });   
 
  });
 
-    app.listen(5000);
+    app.listen(5858);

@@ -1,7 +1,6 @@
 var assert = require("assert");
 
 var Products = require("../most_popular_products");
-var Profit = require("../profitable");
 
 describe("Find most popular products - ", function(){
 
@@ -13,13 +12,6 @@ describe("Find most popular products - ", function(){
 		//console.log(shop);
 		assert.equal(448, shop.length);
 		assert.equal("Imasi", shop[1].itemName);
-
-		/*var profit = new Profit();
-		var profitable = profit.productName('./NelisaPurchases.csv');
-		
-		assert.equal(3125, profitable.length);
-		assert.equal("Imasi", profitable[2].totalCost);
-		*/
 	});
 
 	it('should return product qty map', function(){
@@ -56,7 +48,6 @@ describe("Find most popular products - ", function(){
 
 
 		var result = {name:"Rose (plastic)", amt: 14};
-
 		var groups = products.groupItems(shop);
 		var productsResults = products.leastpopularproducts(groups);
 	 // console.log(result);
@@ -119,27 +110,26 @@ it('should return the earnings per product', function(){
  	var shop = products.productNames('./Nelisa Sales History.csv');
   //console.log("***")
  	var earningCategoryResuts = products.earningsCategory(shop);
- 	console.log(earningCategoryResuts);
+ 	//console.log(earningCategoryResuts);
  	assert.equal(earningCategoryResuts ['Dairy Product'], 4545);
  });
 
   it('should return the most profitable product', function(){
- 	 	var products = new Products();
+ 	 var products = new Products();
  	var shop = products.productNames('./Nelisa Sales History.csv');
- 	var earningsPerProductResults = products.earningsPerProduct(shop);
+ 	var r1 = products.earningsPerProduct(shop);
 
-  
-    var result = {name:'Imasi', quant:3125};
- 	var mostProfitableproduct = products.mostProfitableproduct(earningsPerProductResults);
- 	console.log(mostProfitableproduct);
- 	assert.deepEqual(mostProfitableproduct, result);
+ 	var mostProfitableproductResults = products.mostProfitableproduct(r1);
+ 	var result = {name:'Imasi', quant:3125};
+ 	console.log(mostProfitableproductResults);
+ 	assert.deepEqual(mostProfitableproductResults, result);
  });
 
    it('should return the most profitable category', function(){
  	var products = new Products();
  	var shop = products.productNames('./Nelisa Sales History.csv');
- 	var earningCategoryResuts = products.earningsCategory(shop)
 
+ 	var earningCategoryResuts = products.earningsCategory(shop)
     var result = {name:'Dairy Product', quant:4545};
  	var ProfitableCategory = products.mostProfitableCategory(earningCategoryResuts);
  	console.log(ProfitableCategory, result);

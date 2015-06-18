@@ -51,7 +51,7 @@ module.exports =function(){
 				var priceStr = columns[4];
 				priceStr = priceStr.replace(",", ".").replace("R", ""); 
 				var totalCost = Number(priceStr);
-	
+
 
 				var salesObj = {
 					itemName: currentItem,
@@ -218,10 +218,19 @@ module.exports =function(){
 		};
 		
 		
-     this.earningsCategory = function(listOfProduct) {
-		var categCost = {};
+		this.earningsCategory = function(listOfProduct) {
+			var categCost = {};
+			var max = 0;
+			for(var key in categCost){
+				var value = categCost[key];
+				console.log(value);
+				categCost.push({
+					name: key,
+					amt: value
+				});
+			}
 
-		listOfProduct.forEach(function(product){
+			listOfProduct.forEach(function(product){
 			//console.log(product);
 
 			var currentItem = product.itemName;
@@ -237,33 +246,33 @@ module.exports =function(){
 
 		});
 
-		return categCost;
+			return categCost;
 		//console.log(categCost);
 
 	};
 
+
 	this.mostProfitableproduct = function(costPrice){
-		var profitableProdct = {};
-			var max = 0;
-			for(var key in costPrice){
-				var value = costPrice[key];
-				if(value > max){
-					max = value;
-					profitableProdct = {
-						name: key,
-						quant: max
+		var profitableProdct = [];
+		var max = 0;
+		for(var key in costPrice){
+			var value = costPrice[key];
+			if(value > max){
+				max = value;
+				profitableProdct = {
+					name: key,
+					quant: max
 
-					}
-				};
-
-			}
-				return profitableProdct;
+				}
+			};
+		}
+		return profitableProdct;
 		//console.log(profitableProdct);
- 
- }
 
-    this.mostProfitableCategory = function(categCost){
-	var profitableCategory = {};
+	}
+
+	this.mostProfitableCategory = function(categCost){
+		var profitableCategory = [];
 		var max = 0;
 		for(var key in categCost){
 			var value = categCost[key];
@@ -277,5 +286,5 @@ module.exports =function(){
 			};
 		}
 		return profitableCategory;
-}
-}
+	};
+};
