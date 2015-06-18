@@ -72,8 +72,8 @@ module.exports =function(){
 		var max = 0;
 		for(var key in itemsMap) {
 			var value = itemsMap[key];
-			if(itemsMap[key] > max) {
-				max = itemsMap[key];
+			if(value > max) {
+				max = value;
 				mostProfitable = {
 					name : key,
 					quant  : max
@@ -92,8 +92,8 @@ module.exports =function(){
 		var max = 0;
 		for(var key in itemsMap) {
 			var value = itemsMap[key];
-			if(itemsMap[key] < max) {
-				max = itemsMap[key];
+			if(value < max) {
+				max = value;
 				ProfitableCategory = {
 					name : key,
 					quant  : max
