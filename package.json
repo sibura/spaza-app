@@ -1,15 +1,26 @@
 {
   "name": "spaza-app",
   "version": "0.0.0",
-  "description": "",
+  "description": "ERROR: No README data found!",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "express": "~4.12.3",
+    "express": "~4.12.4",
     "express-handlebars": "~2.0.1"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sibura/spaza-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sibura/spaza-app/issues"
   }
 }

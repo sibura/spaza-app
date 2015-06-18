@@ -271,6 +271,3 @@ module.exports =function(){
 		return profitableCategory;
 	};
 	};
-
-	
-

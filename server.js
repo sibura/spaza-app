@@ -1,6 +1,5 @@
- var express = require('express');
- var app = express()
-
+ //var express = require('express');
+ //var app = express()
  var express = require('express');
  var exphbs  = require('express-handlebars');
 
@@ -12,27 +11,41 @@
 
    var fs = require('fs');
 
- // var products = require('./least_popular_products')
+   //var products = require('./most_popular_products')
 
-  //var products = require('./least_popular_products')
-  //var sortedList = products.productNames('Nelisa  Sales History.csv');
+   //var products = require('./least_popular_products')
+   //var sortedList = products.productNames('Nelisa  Sales History.csv');
 
-  var Products = require('./most_popular_products');
-  var products = new Products();
-  var productList = products.productNames('./Nelisa Sales History.csv');
+   var Products = require('./most_popular_products');
+   var products = new Products();
+   var productList = products.productNames('./Nelisa Sales History.csv');
 
-  var groupedProducts = products.groupItems(productList);
-  var mostPopular = products.mostpopularproducts(groupedProducts);
-  var leastPopular = products.leastpopularproducts(groupedProducts);
+   var groupedProducts = products.groupItems(productList);
+   var mostPopular = products.mostpopularproducts(groupedProducts);
+   var leastPopular = products.leastpopularproducts(groupedProducts);
 
-  var group = products.groupCateg(productList);
-  var mostPopularCateg = products.mostPopularCtg(group);
-  var leastpopularCateg = products.leastPopularCtg(group);
+   var group = products.groupCateg(productList);
+   var mostPopularCateg = products.mostPopularCtg(group);
+   var leastpopularCateg = products.leastPopularCtg(group);
    
+   var prodctEarnings = products.earningsPerProduct(productList);
+   var CategEarnings = products.earningsCategory(productList);
+
+   
+  var earningsPerProduct = products.earningsPerProduct(productList);
+  var mostProfitableproductResuts = products.mostProfitableproduct(earningsPerProduct);
+console.log("Profitable Product" + JSON.stringify(mostProfitableproductResuts));
 
 
-  
-  app.use(express.static('public'));
+
+
+   //Displays most profitable category
+  var earningCategoryResuts = products.earningsCategory(productList);
+  var ProfitableCategory = products.mostProfitableCategory(earningCategoryResuts)
+    
+  console.log("Profitable Category"+JSON.stringify(ProfitableCategory))
+
+   app.use(express.static('public'));
 
   //console.log( "productList : " + JSON.stringify(productList));
 
@@ -48,6 +61,13 @@
 
   console.log("mostpopularCateg... :" + JSON.stringify(mostPopularCateg));
   console.log("leastpopularCateg... :" + JSON.stringify(leastpopularCateg));
+
+  console.log("earnings Product..." + JSON.stringify(prodctEarnings));
+  console.log("earnings Category..." + JSON.stringify(CategEarnings));
+
+  //console.log("Profitable Product..." + JSON.stringify(profitableProduct));
+  //console.log("Profitable Category..." + JSON.stringify(ProfitableCategory));
+
 
   app.get('/', function (req, res) {
     res.render('home',{cat:mostPopularCateg});
@@ -88,10 +108,31 @@
      leastPopularCtg: leastpopularCateg,
    });
  });
+   app.get('/most_profitable_product', function (req, res){
+   res.render('most_profitable_product', {
+     mostProfitableproduct: mostProfitableproductResuts,
+   });
+ });
+
+    app.get('/most_profitable_category', function (req, res){
+   res.render('most_profitable_category', {
+     mostProfitableCategory: ProfitableCategory,
+   });
+ });
+     app.get('/earnings_per_category', function (req, res){
+   res.render('earnings_per_category', {
+     earningsCategory: CategEarnings,
+   });
+ });
+      app.get('/earnings_per_product', function (req, res){
+   res.render('earnings_per_product', {
+     earningsPerProduct: earningsPerProduct,
+   });
+ });
   
   
 
-    app.listen(3000);
+  app.listen(3000);
 
 
  /*app.get('/', function (req, res) {
