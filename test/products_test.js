@@ -126,7 +126,7 @@ it('should return the earnings per product', function(){
     
     var mostProfitableproductResuts = products.mostProfitableproduct(r1);
     var result = {name:'Imasi', amt:3125};
- 	console.log(mostProfitableproductResuts);
+ 	//console.log(mostProfitableproductResuts);
  	assert.deepEqual(mostProfitableproductResuts, result);
  });
 
@@ -138,7 +138,7 @@ it('should return the earnings per product', function(){
  	var ProfitableCategory = products.mostProfitableCategory(earningCategoryResuts)
     var result = {name:'Dairy Product', amt:4545};
  	
- 	console.log(ProfitableCategory);
+ 	//console.log(ProfitableCategory);
  	assert.deepEqual(ProfitableCategory, result);
  });
 

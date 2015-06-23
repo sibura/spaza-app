@@ -3,25 +3,25 @@ var fs = require('fs');
 module.exports =function(){
 
 	var categoryMap = {
-			'Milk 1l':'Dairy Product',
-			'Imasi':'Dairy Product', 
-			'Bread':'Bakery Product',
-			'Chakalaka Can': 'Can Food', 
-			'Gold Dish Vegetable Curry Can': 'Can Food',
-			'Fanta 500ml':'cold Beverages', 
-			'Coke 500ml':'cold Beverages', 
-			'Cream Soda 500ml':'cold Beverages', 
-			'Iwisa Pap 5kg':'Bulk', 
-			'Top Class Soy Mince': 'Soup', 
-			'Shampoo 1 litre':'cosmetics', 
-			'Soap Bar':'cosmetics', 
-			'Bananas - loose': 'fruits',
-			'Apples - loose':'fruits', 
-			'Mixed Sweets 5s':'Confectionarie', 
-			'Heart Chocolates':'Valentine Goodies', 
-			'Rose (plastic)': 'Valentine Goodies',
-			'Valentine Cards':'Valentine Goodies'
-		};
+		'Milk 1l':'Dairy Product',
+		'Imasi':'Dairy Product', 
+		'Bread':'Bakery Product',
+		'Chakalaka Can': 'Can Food', 
+		'Gold Dish Vegetable Curry Can': 'Can Food',
+		'Fanta 500ml':'cold Beverages', 
+		'Coke 500ml':'cold Beverages', 
+		'Cream Soda 500ml':'cold Beverages', 
+		'Iwisa Pap 5kg':'Bulk', 
+		'Top Class Soy Mince': 'Soup', 
+		'Shampoo 1 litre':'cosmetics', 
+		'Soap Bar':'cosmetics', 
+		'Bananas - loose': 'fruits',
+		'Apples - loose':'fruits', 
+		'Mixed Sweets 5s':'Confectionarie', 
+		'Heart Chocolates':'Valentine Goodies', 
+		'Rose (plastic)': 'Valentine Goodies',
+		'Valentine Cards':'Valentine Goodies'
+	};
 
 	this.productNames = function(filePath){	
 
@@ -52,7 +52,7 @@ module.exports =function(){
 				var salesObj = {
 					itemName: currentItem,
 					soldItem: numberSold,
-				    totalCost: totalCost,
+					totalCost: totalCost,
 				    //totalCateg: totalCateg
 				};
 
@@ -71,10 +71,10 @@ module.exports =function(){
 	this.groupItems = function(listOfProduct){
 		var itemMap = {};
 		listOfProduct.forEach(function(product){
-		var currentItem = product.itemName;
-		var numberSold = product.soldItem;
+			var currentItem = product.itemName;
+			var numberSold = product.soldItem;
 		//var earnings = product.SalesPrice;
-          
+
 
 		if(itemMap[currentItem]=== undefined){
 			itemMap[currentItem]=0;
@@ -122,7 +122,7 @@ module.exports =function(){
 	}
 
 	this.groupCateg = function(listOfProduct) {
- 
+
 		var categoryProductMapping = {};
 
 		listOfProduct.forEach(function(product){
@@ -197,18 +197,17 @@ module.exports =function(){
 				}
 
 		costPrice[currentItem] =costPrice[currentItem]+ Number(numberSold) * Number(quantity) //+ Number(earnings);
+		
 		//costPrice[currentItem] = costPrice[currentItem]+ Number(numberSold) * Number(quantity) //+ Number(earnings);
-
-
-			});
+	});
 			return costPrice;
 			//console.log("this is CostPrice" + CostPrice);
 		};
 
-     this.earningsCategory = function(listOfProduct) {
-		var categCost = {};
+		this.earningsCategory = function(listOfProduct) {
+			var categCost = {};
 
-		listOfProduct.forEach(function(product){
+			listOfProduct.forEach(function(product){
 			//console.log(product);
 
 			var currentItem = product.itemName;
@@ -224,13 +223,20 @@ module.exports =function(){
 
 		});
 
-		return categCost;
-		//console.log(categCost + "kzjoid");
+			return categCost;
+		var categoryMapList = [];
+		for(var key in categCost) {
+			var value = categCost[key];
+			categoryMapList.push({
+				name: key,
+				amt: value
+			})
+		}
 
 	};
 
 	this.mostProfitableproduct = function(costPrice){
-	var profitableProdct = {};
+		var profitableProdct = {};
 		var max = 0;
 		for(var key in costPrice){
 			var value = costPrice[key];
@@ -246,28 +252,28 @@ module.exports =function(){
 		//console.log(JSON.stringify(profitableProdct) + "uhyu");
 		return profitableProdct;
 	};
- 
-     this.mostProfitableCategory = function(categCost){
-     	//console.log(categCost + "mjisd");
-	var profitableCategory = {};
-		var max = 0;
-		var result = [];
-		for(var key in categCost){
-			var value = categCost[key];
-			if(value > max){
-				max = value;
-				profitableCategory = {
-					name: key,
-					amt: max
 
-				}
-			};
-		}
+	this.mostProfitableCategory = function(categCost){
+     	//console.log(categCost + "mjisd");
+     	var profitableCategory = {};
+     	var max = 0;
+     	var result = [];
+     	for(var key in categCost){
+     		var value = categCost[key];
+     		if(value > max){
+     			max = value;
+     			profitableCategory = {
+     				name: key,
+     				amt: max
+
+     			}
+     		};
+     	}
 		/*for(var key in profitableCategory) {
               result.push({name:key, amt:profitableCategory[key]});
 
-		}*/
+          }*/
 		//console.log(result + "kkkkkkxjc");
 		return profitableCategory;
 	};
-	};
+};
