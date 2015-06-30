@@ -9,3 +9,8 @@ INSERT INTO categories (category_name) VALUES ("Bulk");
 INSERT INTO categories (category_name) VALUES ("Fruits");
 INSERT INTO categories (category_name) VALUES ("Cold Beverages");
 
+INSERT INTO suppliers (shop) VALUES ("Makro");
+INSERT INTO suppliers (shop) VALUES ("Epping Market");
+INSERT INTO suppliers (shop) VALUES ("HomeMade");
+INSERT INTO suppliers (shop) VALUES ("China Town");
+INSERT INTO suppliers (shop) VALUES ("Joe Spaza Shop");
