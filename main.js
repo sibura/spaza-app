@@ -1,12 +1,12 @@
  var fs = require('fs');
 
 var products = require('./most_popular_products')
-var products = require('./least_popular_products')
+//var products = require('./least_popular_products')
 
 
-var products = new Products();
+var products = new products();
 
-var sortedList = products.productNames('Nelisa	Sales History.csv');
+var sortedList = products.productNames('Nelisa Sales History.csv');
 var sortedearnings = products.productNames('NelisaPurchases.csv');
 
 var group = products.groupItems(sortedList);

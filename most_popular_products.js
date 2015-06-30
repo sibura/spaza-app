@@ -33,27 +33,36 @@ module.exports =function(){
 		var listOfProduct = [];
 		var lineNumber = 0;
 		
-		console.log("===========================");
 		console.log(rows.length);
-		console.log("===========================");
+
 
 		rows.forEach(function(row) {
+
+			var product = row.split(';');
+
 			if(lineNumber != 0){
 
 				var columns = row.split(';');
 				var currentItem = columns[2];
 				var numberSold = Number(columns[3]);
+				//var profitable = Number(columns[5]);
 
 
 				var priceStr = columns[4];
 				priceStr = priceStr.replace(",", ".").replace("R", ""); 
 				var totalCost = Number(priceStr);
 
+
 				var salesObj = {
 					itemName: currentItem,
 					soldItem: numberSold,
 					totalCost: totalCost,
+<<<<<<< HEAD
 				    //totalCateg: totalCateg
+=======
+					//profitable: profitable,
+
+>>>>>>> 65cd34ec4086e20e8d5e286ee543d9787ff0faa8
 				};
 
 				listOfProduct.push(salesObj);
@@ -62,7 +71,6 @@ module.exports =function(){
 		});
 		
 
-		console.log("===========================");
 		console.log(listOfProduct.length);
 
 		return listOfProduct;
@@ -182,48 +190,81 @@ module.exports =function(){
 
 		this.earningsPerProduct = function(listOfProduct){
 			var costPrice = {};
+			var max = 0;
 
 			//console.log(listOfProduct.forEach);
 
 			listOfProduct.forEach(function(product){
+				
+				if(listOfProduct[product] > max){
+					max = listOfProduct[product];
+					costPrice = {
+						name : product,
+						quant : max
+					}
+				};
 
 				var currentItem = product.itemName;
 				var numberSold = product.soldItem;
 				var quantity = product.totalCost;
-				//console.log(quantity);
+				//console.log(quant);
 
 				if(costPrice[currentItem]=== undefined){
 					costPrice[currentItem]=0;
 				}
 
+<<<<<<< HEAD
 		costPrice[currentItem] =costPrice[currentItem]+ Number(numberSold) * Number(quantity) //+ Number(earnings);
 		
 		//costPrice[currentItem] = costPrice[currentItem]+ Number(numberSold) * Number(quantity) //+ Number(earnings);
+=======
+		costPrice[currentItem] =costPrice[currentItem] + (Number(numberSold) * Number(quantity)); //+ Number(earnings);
+		//costPrice[currentItem] = costPrice[currentItem]+ Number(numberSold) * Number(quantity) //+ Number(earnings);
+
+
+>>>>>>> 65cd34ec4086e20e8d5e286ee543d9787ff0faa8
 	});
 			return costPrice;
 			//console.log("this is CostPrice" + CostPrice);
 		};
+		
+		
+		this.earningsCategory = function(listOfProduct) {
+			var categCost = {};
+			var max = 0;
+			for(var key in categCost){
+				var value = categCost[key];
+				console.log(value);
+				categCost.push({
+					name: key,
+					amt: value
+				});
+			}
 
+<<<<<<< HEAD
 		this.earningsCategory = function(listOfProduct) {
 			var categCost = {};
 
+=======
+>>>>>>> 65cd34ec4086e20e8d5e286ee543d9787ff0faa8
 			listOfProduct.forEach(function(product){
 			//console.log(product);
 
 			var currentItem = product.itemName;
 			var numberSold = product.soldItem;
 			var currentCategory = categoryMap[currentItem];
-			var quant = product.totalCost;
+			var quantity = product.totalCost;
 
 			if(categCost[currentCategory]=== undefined){
 				categCost[currentCategory]=0;
 			}
 
-			categCost[currentCategory] =categCost[currentCategory] + (Number(numberSold) * Number(quant));
+			categCost[currentCategory] = categCost[currentCategory] + (Number(numberSold) * Number(quantity));
 
 		});
 
 			return categCost;
+<<<<<<< HEAD
 		var categoryMapList = [];
 		for(var key in categCost) {
 			var value = categCost[key];
@@ -237,6 +278,15 @@ module.exports =function(){
 
 	this.mostProfitableproduct = function(costPrice){
 		var profitableProdct = {};
+=======
+		//console.log(categCost);
+
+	};
+
+
+	this.mostProfitableproduct = function(costPrice){
+		var profitableProdct = [];
+>>>>>>> 65cd34ec4086e20e8d5e286ee543d9787ff0faa8
 		var max = 0;
 		for(var key in costPrice){
 			var value = costPrice[key];
@@ -244,14 +294,31 @@ module.exports =function(){
 				max = value;
 				profitableProdct = {
 					name: key,
-					amt: max
+					quant: max
 
 				}
 			};
 		}
 		//console.log(JSON.stringify(profitableProdct) + "uhyu");
 		return profitableProdct;
+<<<<<<< HEAD
 	};
+=======
+		//console.log(profitableProdct);
+
+	}
+
+	this.mostProfitableCategory = function(categCost){
+		var profitableCategory = [];
+		var max = 0;
+		for(var key in categCost){
+			var value = categCost[key];
+			if(value > max){
+				max = value;
+				profitableCategory = {
+					name: key,
+					quant: max
+>>>>>>> 65cd34ec4086e20e8d5e286ee543d9787ff0faa8
 
 	this.mostProfitableCategory = function(categCost){
      	//console.log(categCost + "mjisd");
