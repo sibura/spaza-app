@@ -35,9 +35,17 @@ INSERT INTO products (category_Id, product_name) values (7, 'Heart Chocolates'),
 INSERT INTO products (category_Id, product_name) values (7, 'Rose (plastic)'),
 INSERT INTO products (category_Id, product_name) values (7, 'Valentine Cards');
 
-/*INSERT INTO suppliers (shop) VALUES ("Makro");
+INSERT INTO suppliers (shop) VALUES ("Makro");
 INSERT INTO suppliers (shop) VALUES ("Epping Market");
 INSERT INTO suppliers (shop) VALUES ("HomeMade");
 INSERT INTO suppliers (shop) VALUES ("China Town");
 INSERT INTO suppliers (shop) VALUES ("Joe Spaza Shop");
-*/
+
+
+/*INSERT INTO sales (product_Id, sales_price, no_sold) values (1, 10.00, ),
+INSERT INTO sales (product_Id, sales_price, no_sold) values (),
+INSERT INTO sales (product_Id, sales_price, no_sold) values (),
+INSERT INTO sales (product_Id, sales_price, no_sold) values (),
+INSERT INTO sales (product_Id, sales_price, no_sold) values (),
+INSERT INTO sales (product_Id, sales_price, no_sold) values (),*/
+

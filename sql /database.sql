@@ -1,7 +1,7 @@
 CREATE TABLE suppliers
 (
     Id int NOT NULL auto_increment primary key,
-	Name VARCHAR(255) NOT NULL
+	shop VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE categories 
@@ -18,7 +18,7 @@ CREATE TABLE products
 	FOREIGN KEY (category_Id) REFERENCES categories(Id)
 );
 
-/*CREATE TABLE purchases
+CREATE TABLE purchases
 (
    Id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
    product_Id int NOT NULL,
@@ -32,7 +32,8 @@ CREATE TABLE sales
 (
   Id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   product_Id int NOT NULL,
+  date text,
   sale_price int,
   no_sold int,
   FOREIGN KEY (product_Id) REFERENCES products(Id)
-);*/
+);
