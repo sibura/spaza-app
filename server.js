@@ -6,6 +6,7 @@
 	bodyParser = require('body-parser'),
     myConnection = require('express-myconnection');
 var sqlfunctions = require('./routes/SqlFunctions');
+var sqlcategory = require('./routes/sqlcategory');
 
 	var dbOptions = {
 	     host: 'localhost',
@@ -65,6 +66,7 @@ var sqlfunctions = require('./routes/SqlFunctions');
 
 
 	app.get('/showProd', sqlfunctions.showProducts);
+  app.get('/showCat', sqlcategory.showCategorys);
 
    //Displays most profitable category
   var earningCategoryResuts = products.earningsCategory(productList);
