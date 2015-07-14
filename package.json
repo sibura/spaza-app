@@ -11,7 +11,10 @@
   "license": "BSD-2-Clause",
   "dependencies": {
     "express": "~4.12.4",
-    "express-handlebars": "~2.0.1"
+    "express-handlebars": "~2.0.1",
+    "mysql": "~2.8.0",
+    "express-myconnection": "~1.0.4",
+    "body-parser": "~1.13.2"
   },
   "directories": {
     "test": "test"

@@ -1,0 +1,7 @@
+{{#product}}
+        <tr>
+                <td>{{Id}}</td>
+                <td>{{Category_Id}}</td>
+                <td>{{product_name}}</td>
+        </tr>
+{{/product}}
