@@ -1,4 +1,4 @@
-select sum(no_sold) as totalqty, product_name
+select product_name, sum(no_sold) as totalqty
 from sales
 inner join products
 on sales.product_Id=products.Id

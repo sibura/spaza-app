@@ -57,12 +57,7 @@ module.exports =function(){
 					itemName: currentItem,
 					soldItem: numberSold,
 					totalCost: totalCost,
-<<<<<<< HEAD
-				    //totalCateg: totalCateg
-=======
-					//profitable: profitable,
 
->>>>>>> 65cd34ec4086e20e8d5e286ee543d9787ff0faa8
 				};
 
 				listOfProduct.push(salesObj);
@@ -212,24 +207,16 @@ module.exports =function(){
 				if(costPrice[currentItem]=== undefined){
 					costPrice[currentItem]=0;
 				}
-
-<<<<<<< HEAD
-		costPrice[currentItem] =costPrice[currentItem]+ Number(numberSold) * Number(quantity) //+ Number(earnings);
-		
-		//costPrice[currentItem] = costPrice[currentItem]+ Number(numberSold) * Number(quantity) //+ Number(earnings);
-=======
 		costPrice[currentItem] =costPrice[currentItem] + (Number(numberSold) * Number(quantity)); //+ Number(earnings);
 		//costPrice[currentItem] = costPrice[currentItem]+ Number(numberSold) * Number(quantity) //+ Number(earnings);
 
-
->>>>>>> 65cd34ec4086e20e8d5e286ee543d9787ff0faa8
 	});
 			return costPrice;
 			//console.log("this is CostPrice" + CostPrice);
 		};
 		
 		
-		this.earningsCategory = function(listOfProduct) {
+		/*this.earningsCategory = function(listOfProduct) {
 			var categCost = {};
 			var max = 0;
 			for(var key in categCost){
@@ -240,13 +227,11 @@ module.exports =function(){
 					amt: value
 				});
 			}
+*/
 
-<<<<<<< HEAD
 		this.earningsCategory = function(listOfProduct) {
 			var categCost = {};
 
-=======
->>>>>>> 65cd34ec4086e20e8d5e286ee543d9787ff0faa8
 			listOfProduct.forEach(function(product){
 			//console.log(product);
 
@@ -264,52 +249,39 @@ module.exports =function(){
 		});
 
 			return categCost;
-<<<<<<< HEAD
-		var categoryMapList = [];
-		for(var key in categCost) {
-			var value = categCost[key];
-			categoryMapList.push({
-				name: key,
-				amt: value
-			})
-		}
-
-	};
-
-	this.mostProfitableproduct = function(costPrice){
-		var profitableProdct = {};
-=======
-		//console.log(categCost);
-
-	};
-
-
-	this.mostProfitableproduct = function(costPrice){
-		var profitableProdct = [];
->>>>>>> 65cd34ec4086e20e8d5e286ee543d9787ff0faa8
-		var max = 0;
-		for(var key in costPrice){
-			var value = costPrice[key];
-			if(value > max){
-				max = value;
-				profitableProdct = {
+			
+			var categoryMapList = [];
+			for(var key in categCost) {
+				var value = categCost[key];
+				categoryMapList.push({
 					name: key,
-					quant: max
+					amt: value
+				})
+			}
 
-				}
-			};
-		}
+		};
+
+		this.mostProfitableproduct = function(costPrice){
+			var profitableProdct = {};
+			var max = 0;
+			for(var key in costPrice){
+				var value = costPrice[key];
+				if(value > max){
+					max = value;
+					profitableProdct = {
+						name: key,
+						quant: max
+
+					}
+				};
+			}
 		//console.log(JSON.stringify(profitableProdct) + "uhyu");
 		return profitableProdct;
-<<<<<<< HEAD
-	};
-=======
 		//console.log(profitableProdct);
 
 	}
-
 	this.mostProfitableCategory = function(categCost){
-		var profitableCategory = [];
+		var profitableCategory = {};
 		var max = 0;
 		for(var key in categCost){
 			var value = categCost[key];
@@ -318,29 +290,9 @@ module.exports =function(){
 				profitableCategory = {
 					name: key,
 					quant: max
->>>>>>> 65cd34ec4086e20e8d5e286ee543d9787ff0faa8
-
-	this.mostProfitableCategory = function(categCost){
-     	//console.log(categCost + "mjisd");
-     	var profitableCategory = {};
-     	var max = 0;
-     	var result = [];
-     	for(var key in categCost){
-     		var value = categCost[key];
-     		if(value > max){
-     			max = value;
-     			profitableCategory = {
-     				name: key,
-     				amt: max
-
-     			}
-     		};
-     	}
-		/*for(var key in profitableCategory) {
-              result.push({name:key, amt:profitableCategory[key]});
-
-          }*/
-		//console.log(result + "kkkkkkxjc");
+				}
+			}
+		}
 		return profitableCategory;
-	};
+	}
 };
