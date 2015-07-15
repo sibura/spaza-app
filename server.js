@@ -7,6 +7,7 @@
     myConnection = require('express-myconnection');
 var sqlfunctions = require('./routes/SqlFunctions');
 var sqlcategory = require('./routes/sqlcategory');
+var mostPopul = require('./routes/mostPoP');
 
 	var dbOptions = {
 	     host: 'localhost',
@@ -67,6 +68,7 @@ var sqlcategory = require('./routes/sqlcategory');
 
 	app.get('/showProd', sqlfunctions.showProducts);
   app.get('/showCat', sqlcategory.showCategorys);
+  app.get('/showMost', mostPopul.mostProds);
 
    //Displays most profitable category
   var earningCategoryResuts = products.earningsCategory(productList);
