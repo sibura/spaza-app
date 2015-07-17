@@ -4,4 +4,4 @@ inner join products
 on sales.product_Id=products.Id
 group by product_name
 order by sum(no_sold) DESC
-LIMIT 0, 1
+LIMIT 0, 1;

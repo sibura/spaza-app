@@ -7,7 +7,12 @@
     myConnection = require('express-myconnection');
 var sqlfunctions = require('./routes/SqlFunctions');
 var sqlcategory = require('./routes/sqlcategory');
+var sqlsupp = require('./routes/suppliers');
+var sqlsales = require('./routes/sales');
+var ListOfProdz = require('./routes/groupProducts');
+var ListOfCat = require('./routes/listOfCateg');
 var mostPopul = require('./routes/mostPoP');
+var MostPoPCat = require('./routes/most_popCateg');
 
 	var dbOptions = {
 	     host: 'localhost',
@@ -68,7 +73,12 @@ var mostPopul = require('./routes/mostPoP');
 
 	app.get('/showProd', sqlfunctions.showProducts);
   app.get('/showCat', sqlcategory.showCategorys);
+  app.get('/showSuppl', sqlsupp.showSuppliers);
+  app.get('/showSale', sqlsales.showSales);
+  app.get('/showProdlist', ListOfProdz.showProdsgroup);
+  app.get('/ListOfCateg', ListOfCat.showcategList);
   app.get('/showMost', mostPopul.mostProds);
+  app.get('/showpopCat', MostPoPCat.mostCat);
 
    //Displays most profitable category
   var earningCategoryResuts = products.earningsCategory(productList);
@@ -109,6 +119,9 @@ var mostPopul = require('./routes/mostPoP');
 });
 
   app.use(express.static('public'));
+ 
+    app.get('/showProdlist', ListOfProdz.showProdsgroup);
+
 
   app.get('/Category', function (req, res){
     res.render('Category', {

@@ -1,0 +1,18 @@
+<table class="table">
+	<tr>
+                <th>Sales-Id</th>
+                <th>Product-Id</th>
+                <th>Date</th>
+                <th>Sales-price</th>
+                <th>No-Sold</th>
+        </tr>
+{{#sales}}
+        <tr>
+        		<td>{{Id}}</td>
+        		<td>{{product_Id}}</td> 
+        		<td>{{date}}</td> 
+        		<td>{{no_sold}}</td> 
+                <td>{{sale_price}}</td>  
+        </tr>
+{{/sales}}
+</table>
