@@ -71,7 +71,14 @@ var MostPoPCat = require('./routes/most_popCateg');
   var ProfitableCategory = products.mostProfitableCategory(earningsCategoryResults);
 
 
-	app.get('/showProd', sqlfunctions.showProducts);
+	app.get('/products', sqlfunctions.showProducts);
+  app.get('/products/edit/:Id', sqlfunctions.get);
+  app.post('/products/update/:Id', sqlfunctions.update);
+  app.post('/products/add', sqlfunctions.add);
+  //this should be a post but this is only an illustration of CRUD - not on good practices
+  app.get('/products/delete/:Id', sqlfunctions.delete);
+
+
   app.get('/showCat', sqlcategory.showCategorys);
   app.get('/showSuppl', sqlsupp.showSuppliers);
   app.get('/showSale', sqlsales.showSales);

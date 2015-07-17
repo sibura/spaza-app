@@ -1,3 +1,4 @@
+<div id="add-products">
 <table class="table">
 	<tr>
                 <th>Product ID</th>
@@ -9,6 +10,14 @@
                 <td>{{Id}}</td>
                 <td>{{Category_Id}}</td>
                 <td>{{product_name}}</td>
+                <td><button><a href="/products/edit/{{Id}}">Edit</a></button></td>
+                <td><button><a href="products">Delete</a></button></td>
         </tr>
 {{/product}}
 </table>
+        <h1>Add a product</h1>
+        <form action="/products/add" method="POST">
+                product_name: <input type="text" name="product_name">     
+                <input type="submit">
+        </form>
+</div>
