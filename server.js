@@ -17,7 +17,7 @@ var MostPoPCat = require('./routes/most_popCateg');
 	var dbOptions = {
 	     host: 'localhost',
 	      user: 'root',
-	      password: 'coder123',
+	      password: 'nwabisamilisantmasiko',
 	      port: 3306,
 	      database: 'SpazaApp'
 	};
@@ -70,6 +70,7 @@ var MostPoPCat = require('./routes/most_popCateg');
   var earningsCategoryResults = products.earningsCategory(productList);
   var ProfitableCategory = products.mostProfitableCategory(earningsCategoryResults);
 
+  app.get('/products', sqlfunctions.showProducts);
 
 	app.get('/showProd', sqlfunctions.showProducts);
   app.get('/showCat', sqlcategory.showCategorys);
@@ -79,6 +80,12 @@ var MostPoPCat = require('./routes/most_popCateg');
   app.get('/ListOfCateg', ListOfCat.showcategList);
   app.get('/showMost', mostPopul.mostProds);
   app.get('/showpopCat', MostPoPCat.mostCat);
+
+  app.post('/add_product', function(req, res){
+ var formData = req.body;
+ console.log(formData.product_name);
+ res.render('product', {product_name :  formData.product_name});
+});
 
    //Displays most profitable category
   var earningCategoryResuts = products.earningsCategory(productList);

@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <title>Nelisa's Spaza Shop - Start Bootstrap Theme</title>
 
     <!-- Bootstrap Core CSS -->
@@ -36,18 +37,18 @@
         <div class="address-bar">E216 Phakamani Road E-Section Khayelitsha 7784</div>
 
         <!-- Navigation -->
-        <nav class="navbar navbar-fixed-top navbar-default" role="navigation">
-            <div class="container-fluid">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse"  type="button" aria-expanded="true">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#demo">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
                     <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-                    <a class="navbar-brand" href="index.html">Nelisa Spaza Shop</a>
+                    <a class="navbar-brand" href="main.handlebars">Nelisa Spaza Shop</a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -57,7 +58,7 @@
                         </li>
 
                         <li>
-                            <a href="showProd">Products</a>
+                            <a href="showProd" target="/blank">Products</a>
                         </li>
                         
                         <li>
@@ -78,7 +79,6 @@
             <!-- /.container -->
         </nav>
         {{{body}}}
-
         <div class="container">
 
             <div class="row">
@@ -107,11 +107,10 @@
 
                 <!-- Script to Activate the Carousel -->
                 <script>
-                $('.carousel').carousel({
+                    $('.carousel').carousel({
         interval: 5000 //changes the speed
     })
                 </script>
-
-            </body>
+    </body>
 
             </html>
