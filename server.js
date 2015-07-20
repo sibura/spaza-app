@@ -80,7 +80,15 @@ var MostPoPCat = require('./routes/most_popCateg');
 
 
   app.get('/showCat', sqlcategory.showCategorys);
+
   app.get('/showSuppl', sqlsupp.showSuppliers);
+  app.get('/showSuppl/edit/:Id', sqlsupp.get);
+  app.post('/showSuppl/update/:Id', sqlsupp.update);
+  app.post('/showSuppl/add', sqlsupp.add);
+  //this should be a post but this is only an illustration of CRUD - not on good practices
+  app.get('/showSuppl/delete/:Id', sqlsupp.delete);
+
+
   app.get('/showSale', sqlsales.showSales);
   app.get('/showProdlist', ListOfProdz.showProdsgroup);
   app.get('/ListOfCateg', ListOfCat.showcategList);
