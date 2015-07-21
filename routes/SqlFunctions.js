@@ -1,4 +1,4 @@
-  exports.add = function(req, res, next){
+ exports.showProducts = function(req, res, next){
   		req.getConnection(function(error, connection){
   			if(error){
   				return next(error);
@@ -6,30 +6,19 @@
 
 			connection.query('SELECT * FROM products', [], function(error, results) {
 			    if (error) return next(error);
+			connection.query('SELECT * FROM categories', [], function(error, results1) {
+                 if (error) return next(error);
+
 				console.log(results);
 			    res.render( 'productList', {
-				product : results
+				product : results,
+				categories: results1
 			    });
 			});
+		    });
   		});
   }
-
-  exports.showProducts = function(req, res, next){
-  		req.getConnection(function(error, connection){
-  			if(error){
-  				return next(error);
-  			}
-
-			connection.query('SELECT * FROM products', [], function(error, results) {
-			    if (error) return next(error);
-				console.log(results);
-			    res.render( 'productList', {
-				product : results
-			    });
-			});
-  		});
-  }
-
+  
   exports.add = function (req, res, next) {
 	req.getConnection(function(err, connection){
 		if (err){ 
@@ -39,6 +28,7 @@
 		var input = JSON.parse(JSON.stringify(req.body));
 		var data = {
             		product_name : input.product_name,
+            		Category_Id : input.Category_Id
         	};
 		connection.query('insert into products set ?', data, function(err, results) {
         		if (err)
