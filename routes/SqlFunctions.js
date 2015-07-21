@@ -9,7 +9,7 @@
 			connection.query('SELECT * FROM categories', [], function(error, results1) {
                  if (error) return next(error);
 
-				console.log(results);
+				//console.log(results);
 			    res.render( 'productList', {
 				product : results,
 				categories: results1

@@ -5,6 +5,20 @@
 		<th>Category ID</th>
                 <th>Product Name</th>
         </tr>
+        <div class="container-fluid">
+  <div class="btn-group pull-right" >
+  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+      Menu
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu">
+      <li><a href="showMost">Most Popular Product</a></li>
+      <li><a href="#">Least Popular Product</a></li>
+      <li><a href="#">Earnings Per Product</a></li>
+     <li><a href="#">Most Profitable Product</a></li>
+
+  </div>
+</div>
 {{#product}}
         <tr>
                 <td>{{Id}}</td>

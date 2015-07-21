@@ -74,13 +74,22 @@ var MostPoPCat = require('./routes/most_popCateg');
 
 	app.get('/products', sqlfunctions.showProducts);
   app.get('/products/edit/:Id', sqlfunctions.get);
-  app.post('/products/update/:Id', sqlfunctions.update);
+  app.post('/products/edit/:Id', sqlfunctions.update);
   app.post('/products/add', sqlfunctions.add);
   //this should be a post but this is only an illustration of CRUD - not on good practices
   app.get('/products/delete/:Id', sqlfunctions.delete);
 
 
+
   app.get('/showCat', sqlcategory.showCategorys);
+
+  //app.get('/showCat', sqlcategory.showSuppliers);
+  app.get('/showCat/edit/:Id', sqlcategory.get);
+  app.post('/showCat/update/:Id', sqlcategory.update);
+  app.post('/showCat/add', sqlcategory.add);
+  //this should be a post but this is only an illustration of CRUD - not on good practices
+  app.get('/showCat/delete/:Id', sqlcategory.delete);
+
 
   app.get('/showSuppl', sqlsupp.showSuppliers);
   app.get('/showSuppl/edit/:Id', sqlsupp.get);
@@ -98,7 +107,7 @@ var MostPoPCat = require('./routes/most_popCateg');
 
   app.post('/add_product', function(req, res){
  var formData = req.body;
- console.log(formData.product_name);
+ //console.log(formData.product_name);
  res.render('product', {product_name :  formData.product_name});
 });
    app.use(express.static('public'));
