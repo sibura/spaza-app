@@ -55,7 +55,7 @@ var MostPoPCat = require('./routes/most_popCateg');
    
   var earningsPerProduct = products.earningsPerProduct(productList);
   var mostProfitableproductResuts = products.mostProfitableproduct(earningsPerProduct);
-  console.log("Profitable Product" + JSON.stringify(mostProfitableproductResuts));
+  // console.log("Profitable Product" + JSON.stringify(mostProfitableproductResuts));
 
   var group = products.groupCateg(productList);
   var mostPopularCateg = products.mostPopularCtg(group);
@@ -69,7 +69,8 @@ var MostPoPCat = require('./routes/most_popCateg');
   
   var earningsCategoryResults = products.earningsCategory(productList);
   var ProfitableCategory = products.mostProfitableCategory(earningsCategoryResults);
-
+  
+  //products
   app.get('/products', sqlfunctions.showProducts);
 
 	app.get('/products', sqlfunctions.showProducts);
@@ -78,27 +79,34 @@ var MostPoPCat = require('./routes/most_popCateg');
   app.post('/products/add', sqlfunctions.add);
   //this should be a post but this is only an illustration of CRUD - not on good practices
   app.get('/products/delete/:Id', sqlfunctions.delete);
-
-
+  
+  //categories
+  app.get('/CatList', sqlcategory.showCategorys);
 
   app.get('/showCat', sqlcategory.showCategorys);
-
   //app.get('/showCat', sqlcategory.showSuppliers);
   app.get('/showCat/edit/:Id', sqlcategory.get);
+  app.post('/showCat/edit/:Id', sqlcategory.update);
   app.post('/showCat/update/:Id', sqlcategory.update);
   app.post('/showCat/add', sqlcategory.add);
   //this should be a post but this is only an illustration of CRUD - not on good practices
   app.get('/showCat/delete/:Id', sqlcategory.delete);
 
 
+
+ //suppiers
+  app.get('/supplist', sqlsupp.showSuppliers);
+
   app.get('/showSuppl', sqlsupp.showSuppliers);
   app.get('/showSuppl/edit/:Id', sqlsupp.get);
+  app.post('showSuppl/edit/:Id', sqlsupp.update)
   app.post('/showSuppl/update/:Id', sqlsupp.update);
   app.post('/showSuppl/add', sqlsupp.add);
+
   //this should be a post but this is only an illustration of CRUD - not on good practices
   app.get('/showSuppl/delete/:Id', sqlsupp.delete);
 
-
+  //hnjhougilo
   app.get('/showSale', sqlsales.showSales);
   app.get('/showProdlist', ListOfProdz.showProdsgroup);
   app.get('/ListOfCateg', ListOfCat.showcategList);
