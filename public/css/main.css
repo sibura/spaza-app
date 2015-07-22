@@ -65,6 +65,11 @@
   a { color: #6d8ec5; }
   a:hover { color: #8ca6d1; }
 
+   #wpadminbar ul#wp-admin-bar-root-default>li {
+    margin-right:0;
+    color: red;
+    text-decoration: none;
+   }
 
     #w {
     display: block;

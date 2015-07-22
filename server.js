@@ -6,13 +6,15 @@
 	bodyParser = require('body-parser'),
     myConnection = require('express-myconnection');
 var sqlfunctions = require('./routes/SqlFunctions');
-var sqlcategory = require('./routes/sqlcategory');
+var sqlCategorys = require('./routes/sqlcategory');
 var sqlsupp = require('./routes/suppliers');
 var sqlsales = require('./routes/sales');
 var ListOfProdz = require('./routes/groupProducts');
 var ListOfCat = require('./routes/listOfCateg');
 var mostPopul = require('./routes/mostPoP');
 var MostPoPCat = require('./routes/most_popCateg');
+var ProdsEarns = require('./routes/earningsPerProd');
+var ProfitProduct = require('./routes/Profitables');
 
 	var dbOptions = {
 	     host: 'localhost',
@@ -31,46 +33,6 @@ var MostPoPCat = require('./routes/most_popCateg');
    app.use(bodyParser.json());
    var fs = require('fs');
 
-   //var products = require('./most_popular_products')
-
-   //var products = require('./least_popular_products')
-   //var sortedList = products.productNames('Nelisa  Sales History.csv');
-
-   var Products = require('./most_popular_products');
-   var products = new Products();
-   var productList = products.productNames('./Nelisa Sales History.csv');
-
-   var groupedProducts = products.groupItems(productList);
-   var mostPopular = products.mostpopularproducts(groupedProducts);
-   var leastPopular = products.leastpopularproducts(groupedProducts);
-
-
-   var group = products.groupCateg(productList);
-   var mostPopularCateg = products.mostPopularCtg(group);
-   var leastpopularCateg = products.leastPopularCtg(group);
-   
-   var prodctEarnings = products.earningsPerProduct(productList);
-   var CategEarnings = products.earningsCategory(productList);
-
-   
-  var earningsPerProduct = products.earningsPerProduct(productList);
-  var mostProfitableproductResuts = products.mostProfitableproduct(earningsPerProduct);
-  console.log("Profitable Product" + JSON.stringify(mostProfitableproductResuts));
-
-  var group = products.groupCateg(productList);
-  var mostPopularCateg = products.mostPopularCtg(group);
-  var leastpopularCateg = products.leastPopularCtg(group);
-
-  var prodctEarnings = products.earningsPerProduct(productList);
-  var CategEarnings = products.earningsCategory(productList);
-   
-  var profitables = products.earningsPerProduct(productList);
-  var ProfitableProduct = products.mostProfitableproduct(profitables);
-  
-  var earningsCategoryResults = products.earningsCategory(productList);
-  var ProfitableCategory = products.mostProfitableCategory(earningsCategoryResults);
-
-
 	app.get('/products', sqlfunctions.showProducts);
   app.get('/products/edit/:Id', sqlfunctions.get);
   app.post('/products/update/:Id', sqlfunctions.update);
@@ -78,120 +40,65 @@ var MostPoPCat = require('./routes/most_popCateg');
   //this should be a post but this is only an illustration of CRUD - not on good practices
   app.get('/products/delete/:Id', sqlfunctions.delete);
 
+//Categories Edit Add Delete
 
-  app.get('/showCat', sqlcategory.showCategorys);
-
-  app.get('/showSuppl', sqlsupp.showSuppliers);
-  app.get('/showSuppl/edit/:Id', sqlsupp.get);
-  app.post('/showSuppl/update/:Id', sqlsupp.update);
-  app.post('/showSuppl/add', sqlsupp.add);
+  app.get('/category', sqlCategorys.showCategorys);
+  app.get('/category/edit/:Id', sqlCategorys.get);
+  app.post('/category/update/:Id', sqlCategorys.update);
+  app.post('/category/add', sqlCategorys.add);
   //this should be a post but this is only an illustration of CRUD - not on good practices
-  app.get('/showSuppl/delete/:Id', sqlsupp.delete);
+  app.get('/category/delete/:Id', sqlCategorys.delete);
+
+ //Add Edit UPDATE Delete suppliers
+   app.get('/Supply', sqlsupp.showSuppliers);
+  app.get('/Supply/edit/:Id', sqlsupp.get);
+  app.post('/Supply/update/:Id', sqlsupp.update);
+  app.post('/Supply/add', sqlsupp.add);
+  //this should be a post but this is only an illustration of CRUD - not on good practices
+  app.get('/Supply/delete/:Id', sqlsupp.delete);
 
 
-  app.get('/showSale', sqlsales.showSales);
+  //Add Delete Edit UPDATE  >>>app.get('/Sale', sqlsales.showSales);<<<<--
+ app.get('/Sale', sqlsales.showSales);
+  app.get('/Sale/edit/:Id', sqlsales.get);
+  app.post('/Sale/update/:Id', sqlsales.update);
+  app.post('/Sale/add', sqlsales.add);
+  //this should be a post but this is only an illustration of CRUD - not on good practices
+  app.get('/Sale/delete/:Id', sqlsales.delete);
+
   app.get('/showProdlist', ListOfProdz.showProdsgroup);
   app.get('/ListOfCateg', ListOfCat.showcategList);
   app.get('/showMost', mostPopul.mostProds);
   app.get('/showpopCat', MostPoPCat.mostCat);
 
+
+  //EarningsProd Product/Categorys Add Edit Delete****
+  app.get('/EarningsProd', ProdsEarns.EarnProduct);
+  app.get('/EarningsProd/edit/:Id', ProdsEarns.get);
+  app.post('/EarningsProd/update/:Id', ProdsEarns.update);
+  app.post('/EarningsProd/add', ProdsEarns.add);
+  //this should be a post but this is only an illustration of CRUD - not on good practices
+  app.get('/EarningsProd/delete/:Id', ProdsEarns.delete);
+
+//Profitables Product/Categorys Add Edit Delete****
+  app.get('/Profitables', ProfitProduct.MostProfits);
+  app.get('/Profitables/edit/:Id', ProfitProduct.get);
+  app.post('/Profitables/update/:Id', ProfitProduct.update);
+  app.post('/Profitables/add', ProfitProduct.add);
+  //this should be a post but this is only an illustration of CRUD - not on good practices
+  app.get('/Profitables/delete/:Id', ProfitProduct.delete);
    //Displays most profitable category
-  var earningCategoryResuts = products.earningsCategory(productList);
-  var ProfitableCategory = products.mostProfitableCategory(earningCategoryResuts)
-    
-  console.log("Profitable Category"+JSON.stringify(ProfitableCategory))
+
 
    app.use(express.static('public'));
 
-  //console.log( "productList : " + JSON.stringify(productList));
-
-  var group = products.groupCateg(productList);
-  var mostPopularCateg = products.mostPopularCtg(group);
-  var leastpopularCateg = products.leastPopularCtg(group);
-
-  var groupCategory = products.groupCateg(productList);
-  console.log("groupCategory : " + JSON.stringify(groupCategory));
-
-  console.log("most popular... : " + JSON.stringify(mostPopular));
-  console.log("least popular... : " + JSON.stringify(leastPopular));
-
-  console.log("mostpopularCateg... :" + JSON.stringify(mostPopularCateg));
-  console.log("leastpopularCateg... :" + JSON.stringify(leastpopularCateg));
-
-  console.log("earnings Product..." + JSON.stringify(prodctEarnings));
-  console.log("earnings Category..." + JSON.stringify(CategEarnings));
-
-
-  //console.log("Profitable Product..." + JSON.stringify(profitableProduct));
-  //console.log("Profitable Category..." + JSON.stringify(ProfitableCategory));
-  console.log("Profitable Product..." + JSON.stringify(ProfitableProduct));
-  console.log("Profitable category..." + JSON.stringify(ProfitableCategory));
-
   app.get('/', function (req, res) {
-    res.render('home',{cat:mostPopularCateg});
- // res.render('home',{cat:leastPopularCateg});
+  res.render('home')
 
 });
 
   app.use(express.static('public'));
  
-    app.get('/showProdlist', ListOfProdz.showProdsgroup);
-
-
-  app.get('/Category', function (req, res){
-    res.render('Category', {
-      groupCateg: groupCategory,
-    });
-  });
-
-  app.get('/most_popular_products', function (req, res) {
-  //console.log("*** " + mostPopular.name);
-  res.render('most_popular_products', {
-    mostPopularProdct: mostPopular,
-
-  });
-});
-
-  app.get('/mostpopularCategory', function (req, res){
-   res.render('mostpopularCategory', {
-    mostPopularCtg:mostPopularCateg,
-  });
- });
-
-  app.get('/least_popular_products', function (req, res){
-   res.render('least_popular_products', {
-    leastPopular: leastPopular,
-  });
- });
-
-  app.get('/leastpopularCategory', function (req, res){
-   res.render('leastpopularCategory', {
-     leastPopularCtg: leastpopularCateg,
-   });
- });
-
-   app.get('/most_profitable_product', function (req, res){
-   res.render('most_profitable_product', {
-     mostProfitableproduct: mostProfitableproductResuts,
-   });
- });
-
-    app.get('/most_profitable_category', function (req, res){
-   res.render('most_profitable_category', {
-     mostProfitableCategory: ProfitableCategory,
-   });
- });
-     app.get('/earnings_per_category', function (req, res){
-   res.render('earnings_per_category', {
-     earningsCategory: CategEarnings,
-   });
- });
-      app.get('/earnings_per_product', function (req, res){
-   res.render('earnings_per_product', {
-     earningsPerProduct: earningsPerProduct,
-   });
- });
-  
-  
+//    app.get('/showProdlist', ListOfProdz.showProdsgroup);
 
   app.listen(3000);

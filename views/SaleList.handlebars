@@ -1,3 +1,9 @@
+<h1>add sales</h1>
+    <form action="/Sale/add" method="POST">
+                Description: <input type="text" name="description">
+                <input type="submit">
+        </form>
+        </div>
 <table class="table">
 	<tr>
                 <th>Sales-Id</th>
@@ -5,6 +11,7 @@
                 <th>Date</th>
                 <th>Sales-price</th>
                 <th>No-Sold</th>
+
         </tr>
 {{#sales}}
         <tr>
@@ -13,6 +20,8 @@
         		<td>{{date}}</td> 
         		<td>{{no_sold}}</td> 
                 <td>{{sale_price}}</td>  
+                <td><button><a href="/Sale/edit/{{Id}}">Edit</a></button></td>
+                <td><button><a href="/Sale/delete/{{Id}}">Delete</a></button></td>
         </tr>
 {{/sales}}
 </table>

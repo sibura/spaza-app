@@ -1,3 +1,7 @@
+<h1>Add a supplier</h1>
+        <form action="/Supply/add" method="POST">
+                Description: <input type="text" name="description"><input type="submit">
+        </form>
 <table class="table">
 	<tr>
                 <th>supplier-Id</th>
@@ -8,14 +12,9 @@
         <tr>
         		<td>{{Id}}</td>
         		<td>{{shop}}</td> 
-        <td><button><a href="/showSuppl/edit/{{Id}}">Edit</a></button></td>
-                <td><button><a href="showSuppl">Delete</a></button></td>
+        <td><button><a href="/Supply/edit/{{Id}}">Edit</a></button></td>
+                <td><button><a href="/Supply/delete/{{Id}}">Delete</a></button></td>
         </tr>
 {{/supplier}}
 </table>
-        <h1>Add a supplier</h1>
-        <form action="/showSuppl/add" method="POST">
-                shop: <input type="text" name="shop">     
-                <input type="submit">
-        </form>
 </div>

@@ -8,7 +8,7 @@ exports.mostProds = function(req, res, next){
 			if (error) return next(error);
 			console.log(results);
 			res.render( 'mostPoPlar', {
-				PopularProd : results
+				PopularProd : results,
 			});
 		});
 	});

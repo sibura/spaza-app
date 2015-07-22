@@ -1,39 +1,36 @@
-  exports.showProducts = function(req, res, next){
-  		req.getConnection(function(error, connection){
+exports.MostProfits = function(req, res, next){
+ 	req.getConnection(function(error, connection){
   			if(error){
   				return next(error);
   			}
-
-			connection.query('SELECT * FROM products', [], function(error, results) {
+			connection.query('SELECT stock_item, sales_price, cost FROM sales_csv INNER JOIN stock_purchases_csv ON stock_item = stock_purchases_csv.item GROUP BY stock_item, sales_price, cost LIMIT 0 , 30', [], function(error, results) {
 			    if (error) return next(error);
-			connection.query('SELECT * FROM categories', [], function(error, results1) {
-				if (error) return next(error);
-				console.log(results1);
-			    res.render( 'productList', {
-				product : results,
-				categories : results1
-			    });
-			});
-		    })
-  		});
-  }
+			    console.log(results);
+			    res.render( 'ProfitsProduct', {
+				MostProft : results,
+		    });
 
-  exports.add = function (req, res, next) {
+  		});
+
+    });  
+  }
+    exports.add = function (req, res, next) {
 	req.getConnection(function(err, connection){
 		if (err){ 
 			return next(err);
 		}
 		
-		var input = JSON.parse(JSON.stringify(req.body));
-		var data = {
-            		product_name : input.product_name,
-            		Category_Id : input.Category_Id
-        	};
+			var input = JSON.parse(JSON.stringify(req.body));
+			var data = {
+	            		stock_item : input.stock_item,	
+	            		sale_price : input.sale_price,
+	            		cost : input.cost	
+	            }
 		connection.query('insert into products set ?', data, function(err, results) {
         		if (err)
               			console.log("Error inserting : %s ",err );
          
-          		res.redirect('/products');
+          		res.redirect('/Profitables');
       		});
 	});
 };
@@ -41,7 +38,7 @@
 exports.get = function(req, res, next){
 	var Id = req.params.Id;
 	req.getConnection(function(err, connection){
-		connection.query('SELECT * FROM products WHERE Id = ?', [Id], function(err,rows){
+		connection.query('SELECT stock_item, sales_price, cost FROM sales_csv WHERE Id = ?', [Id], function(err,rows){
 			if(err){
     				console.log("Error Selecting : %s ",err );
 			}
@@ -59,7 +56,7 @@ exports.update = function(req, res, next){
     			if (err){
               			console.log("Error Updating : %s ",err );
     			}
-          		res.redirect('/products');
+          		res.redirect('/Profitables');
     		});
     		
     });
@@ -68,11 +65,11 @@ exports.update = function(req, res, next){
 exports.delete = function(req, res, next){
 	var Id = req.params.Id;
 	req.getConnection(function(err, connection){
-		connection.query('DELETE FROM products WHERE Id = ?', [Id], function(err,rows){
+		connection.query('DELETE FROM sales_csv WHERE Id = ?', [Id], function(err,rows){
 			if(err){
     				console.log("Error Selecting : %s ",err );
 			}
-			res.redirect('/products');
+			res.redirect('/Profitables');
 		});
 	});
 };

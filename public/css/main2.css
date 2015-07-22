@@ -188,8 +188,12 @@ footer p {
 tr {
     font-size: 30px;
     color: white;
+    width: 10px;
+    margin-right: -80px;
 }
 td {
     font-size: 15px;
     font-weight: bold;
+    width: 10px;
+    margin-right: -80px;
 }

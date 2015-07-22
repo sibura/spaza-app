@@ -1,14 +1,22 @@
-<table class="table">
+<div id="add-category">
+ <table class="table">
 	<tr>
+        <th>Category Name</th>
 		<th>Category ID</th>
-                <th>Category Name</th>
         </tr>
 {{#category}}
         <tr>
-                <td>{{Id}}</td>
                 <td>{{category_name}}</td>
-                <td><button><a href="/showCat/edit/{{Id}}">Edit</a></button></td>
-                <td><button><a href="product">Delete</a></button></td>
+                <td>{{Id}}</td>
+                
+                <td><button><a href="/category/edit/{{Id}}">Edit</a></button></td>
+                <td><button><a href="/category/delete/{{Id}}">Delete</a></button></td>
         </tr>
 {{/category}}
 </table>
+      <h1>Add a category</h1>
+        <form action="/category/add" method="POST">
+                Description: <input type="text" name="description"><input type="submit">
+        </form>
+
+</div>
