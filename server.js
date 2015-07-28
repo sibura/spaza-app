@@ -95,11 +95,12 @@ var MostPoPCat = require('./routes/most_popCateg');
 
 
  //suppiers
-  app.get('/supplist', sqlsupp.showSuppliers);
+  app.get('/Supplist', sqlsupp.showSuppliers);
 
   app.get('/showSuppl', sqlsupp.showSuppliers);
+
   app.get('/showSuppl/edit/:Id', sqlsupp.get);
-  app.post('showSuppl/edit/:Id', sqlsupp.update)
+  app.post('/showSuppl/edit/:Id', sqlsupp.update)
   app.post('/showSuppl/update/:Id', sqlsupp.update);
   app.post('/showSuppl/add', sqlsupp.add);
 

@@ -22,7 +22,7 @@ exports.showSuppliers = function(req, res, next){
 		
 		var input = JSON.parse(JSON.stringify(req.body));
 		var data = {
-            		shop: input.shop,
+            		Shop: input.shop,
         	};
 		connection.query('insert into suppliers set ?', data, function(err, results) {
         		if (err)
@@ -34,7 +34,7 @@ exports.showSuppliers = function(req, res, next){
 };
 
 exports.get = function(req, res, next){
-	var id = req.params.id;
+	var id = req.params.Id;
 	req.getConnection(function(err, connection){
 		connection.query('SELECT * FROM suppliers WHERE Id = ?', [id], function(err,rows){
 			if(err){
@@ -48,7 +48,7 @@ exports.get = function(req, res, next){
 exports.update = function(req, res, next){
 
 	var data = JSON.parse(JSON.stringify(req.body));
-    	var id = req.params.id;
+    	var id = req.params.Id;
     	req.getConnection(function(err, connection){
     		connection.query('UPDATE suppliers SET ? WHERE Id = ?', [data, id], function(err, rows){
     			if (err){
