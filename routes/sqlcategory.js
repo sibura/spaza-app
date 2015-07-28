@@ -35,7 +35,7 @@ exports.showCategorys = function(req, res, next){
 exports.get = function(req, res, next){
 	var id = req.params.Id;
 	req.getConnection(function(err, connection){
-		connection.query('SELECT * FROM categories WHERE id = ?', [Id], function(err,rows){
+		connection.query('SELECT * FROM categories WHERE Id = ?', [Id], function(err,rows){
 			if(err){
     				console.log("Error Selecting : %s ",err );
 			}

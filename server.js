@@ -1,20 +1,20 @@
- //var express = require('express');
- //var app = express()
- var express = require('express');
- var exphbs  = require('express-handlebars');
- var mysql = require('mysql'),
-	bodyParser = require('body-parser'),
-    myConnection = require('express-myconnection');
-var sqlfunctions = require('./routes/SqlFunctions');
-var sqlCategorys = require('./routes/sqlcategory');
-var sqlsupp = require('./routes/suppliers');
-var sqlsales = require('./routes/sales');
-var ListOfProdz = require('./routes/groupProducts');
-var ListOfCat = require('./routes/listOfCateg');
-var mostPopul = require('./routes/mostPoP');
-var MostPoPCat = require('./routes/most_popCateg');
-var ProdsEarns = require('./routes/earningsPerProd');
-var ProfitProduct = require('./routes/Profitables');
+   //var express = require('express');
+   //var app = express()
+   var express = require('express');
+   var exphbs  = require('express-handlebars');
+   var mysql = require('mysql'),
+   bodyParser = require('body-parser'),
+   myConnection = require('express-myconnection');
+   var sqlfunctions = require('./routes/SqlFunctions');
+   var sqlCategorys = require('./routes/sqlcategory');
+   var sqlsupp = require('./routes/suppliers');
+   var sqlsales = require('./routes/sales');
+   var ListOfProdz = require('./routes/groupProducts');
+   var ListOfCat = require('./routes/listOfCateg');
+   var mostPopul = require('./routes/mostPoP');
+   var MostPoPCat = require('./routes/most_popCateg');
+   var ProdsEarns = require('./routes/earningsPerProd');
+   var ProfitProduct = require('./routes/Profitables');
 
 	var dbOptions = {
 	     host: 'localhost',
