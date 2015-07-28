@@ -1,7 +1,12 @@
+/*!
+ * Start Bootstrap - Business Casual Bootstrap Theme (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
 
 body {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    background: url('http://i.imgur.com/NguuM20.jpg') no-repeat center center fixed;
+    background: url('../img/bg.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -19,7 +24,6 @@ h6 {
     font-weight: 700;
     letter-spacing: 1px;
 }
-
 
 p {
     font-size: 1.25em;
@@ -185,16 +189,4 @@ footer p {
         display: table;
         clear: both;
     }
-}
-tr {
-    font-size: 30px;
-    color: white;
-    /*width: 10px;*/
-    margin-right: -80px;
-}
-td {
-    font-size: 15px;
-    font-weight: bold;
-    /*width: 10px;*/
-    margin-right: -80px;
 }

@@ -6,8 +6,9 @@ exports.showCategorys = function(req, res, next){
 
 			connection.query('SELECT * FROM categories', [], function(error, results) {
 			    if (error) return next(error);
+				console.log(results);
 			    res.render( 'CatList', {
-			    category : results,
+				category : results
 			    });
 			});
   		});
@@ -21,13 +22,13 @@ exports.showCategorys = function(req, res, next){
 		
 		var input = JSON.parse(JSON.stringify(req.body));
 		var data = {
-					category_name : input.category_name,
+            		category_name : input.category_name,
         	};
 		connection.query('insert into categories set ?', data, function(err, results) {
         		if (err)
-              			console.log("Error inserting : %s ",err );
+	      			console.log("Error inserting : %s ",err );
          
-          		res.redirect('/category');
+          		res.redirect('/CatList');
       		});
 	});
 };
@@ -35,11 +36,11 @@ exports.showCategorys = function(req, res, next){
 exports.get = function(req, res, next){
 	var id = req.params.Id;
 	req.getConnection(function(err, connection){
-		connection.query('SELECT * FROM categories WHERE Id = ?', [Id], function(err,rows){
+		connection.query('SELECT * FROM categories WHERE Id = ?', [id], function(err,rows){
 			if(err){
     				console.log("Error Selecting : %s ",err );
 			}
-			res.render('edit',{page_title:"Edit Customers - Node.js", data : rows[0]});      
+			res.render('categoryEdit',{page_title:"Edit Customers - Node.js", data : rows[0]});      
 		}); 
 	});
 };
@@ -49,24 +50,24 @@ exports.update = function(req, res, next){
 	var data = JSON.parse(JSON.stringify(req.body));
     	var id = req.params.Id;
     	req.getConnection(function(err, connection){
-    		connection.query('UPDATE categories SET ? WHERE id = ?', [data, id], function(err, rows){
+    		connection.query('UPDATE categories SET ? WHERE Id = ?', [data, id], function(err, rows){
     			if (err){
               			console.log("Error Updating : %s ",err );
     			}
-          		res.redirect('/category');
+          		res.redirect('/CatList');
     		});
     		
     });
 };
 
 exports.delete = function(req, res, next){
-	var id = req.params.id;
+	var id = req.params.Id;
 	req.getConnection(function(err, connection){
 		connection.query('DELETE FROM categories WHERE id = ?', [id], function(err,rows){
 			if(err){
     				console.log("Error Selecting : %s ",err );
 			}
-			res.redirect('/category');
+			res.redirect('/CatList');
 		});
 	});
 };
