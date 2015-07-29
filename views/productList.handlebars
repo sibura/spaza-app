@@ -1,8 +1,6 @@
 <div id="add-products">
 <table class="table">
 	<tr>
-                <th>Product ID</th>
-		<th>Category ID</th>
                 <th>Product Name</th>
         </tr>
         <div class="container-fluid">
@@ -21,8 +19,7 @@
 </div>
 {{#product}}
         <tr>
-                <td>{{Id}}</td>
-                <td>{{Category_Id}}</td>
+               
                 <td>{{product_name}}</td>
                 <td><button><a href="/products/edit/{{Id}}">Edit</a></button></td>
                 <td><button><a href="products/delete/{{Id}}">Delete</a></button></td>

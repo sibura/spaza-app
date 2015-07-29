@@ -108,7 +108,15 @@ var MostPoPCat = require('./routes/most_popCateg');
   app.get('/showSuppl/delete/:Id', sqlsupp.delete);
 
   //hnjhougilo
-  app.get('/showSale', sqlsales.showSales);
+ // app.get('/showSale', sqlsales.showSales);
+ app.get('/Sale', sqlsales.showSales);
+app.get('/Sale/edit/:Id', sqlsales.get);
+app.post('/Sale/edit/:Id', sqlsales.update)
+// app.post('/Sales/update/:Id', sqlsales.update);
+app.post('/Sale/add', sqlsales.add);
+//this should be a post but this is only an illustration of CRUD - not on good practices
+app.get('/Sale/delete/:Id', sqlsales.delete);
+
   app.get('/showProdlist', ListOfProdz.showProdsgroup);
   app.get('/ListOfCateg', ListOfCat.showcategList);
   app.get('/showMost', mostPopul.mostProds);

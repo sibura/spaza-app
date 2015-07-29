@@ -196,47 +196,78 @@ td {
     font-size: 15px;
     font-weight: bold;
 }
-
-#images {
-  width: 400px;
-  height: 250px;
+#cssSlider {
+  width: 800px;
+  height: 300px;
   overflow: hidden;
-  position: relative;
-  
-  margin: 20px auto;
+  border: 10px solid #666;
 }
-#images img {
-  width: 400px;
-  height: 250px;
-  
-  position: absolute;
-  top: 0;
-  left: -400px;
-  z-index: 1;
-  opacity: 0;
-  
-  transition: all linear 500ms;
-  -o-transition: all linear 500ms;
-  -moz-transition: all linear 500ms;
-  -webkit-transition: all linear 500ms;
+
+#sliderImages {
+    width : 4000px;
+    height: 300px;
+    overflow: hidden;
+    
+    /* animation duration: 16s : 5x ~3s display image + 5x ~0.2s slide */
+    animation: slide 16s infinite;
+    -moz-animation: slide 16s infinite;
+    -webkit-animation: slide 16s infinite;
+    -o-animation: slide 16s infinite;
 }
-#images img:target {
-  left: 0;
-  z-index: 9;
-  opacity: 1;
+
+#sliderImages img {
+    float: right;
 }
-#images img:first-child {
-  left: 0;
-  opacity: 1;
+
+@keyframes slide{
+    0%{margin-left: 0px;}
+    17%{margin-left: 0px;}
+    20%{margin-left: -800px;}
+    37%{margin-left: -800px;}
+    40%{margin-left: -1600px;}
+    57%{margin-left: -1600px;}
+    60%{margin-left: -2400px;}
+    77%{margin-left: -2400px;}
+    80%{margin-left: -3200px;}
+    97%{margin-left: -3200px;}
+    100%{margin-left: 0px;}
 }
-#slider a {
-    text-decoration: none;
-    background: none repeat scroll 0% 0% #E3F1FA;
-    border: 1px solid #C6E4F2;
-    padding: 10px 15px;
-    color: #222;
-    border-radius: 30px;
+
+@-moz-keyframes slide{
+    0%{margin-left: 0px;}
+    17%{margin-left: 0px;}
+    20%{margin-left: -800px;}
+    37%{margin-left: -800px;}
+    40%{margin-left: -1600px;}
+    57%{margin-left: -1600px;}
+    60%{margin-left: -2400px;}
+    77%{margin-left: -2400px;}
+    80%{margin-left: -3200px;}
+    100%{margin-left: -3200px;}
 }
-#slider a:hover {
-  background: #C6E4F2;
+
+@-webkit-keyframes slide{
+    0%{margin-left: 0px;}
+    17%{margin-left: 0px;}
+    20%{margin-left: -800px;}
+    37%{margin-left: -800px;}
+    40%{margin-left: -1600px;}
+    57%{margin-left: -1600px;}
+    60%{margin-left: -2400px;}
+    77%{margin-left: -2400px;}
+    80%{margin-left: -3200px;}
+    100%{margin-left: -3200px;}
+}
+
+@-o-keyframes slide{
+    0%{margin-left: 0px;}
+    17%{margin-left: 0px;}
+    20%{margin-left: -800px;}
+    37%{margin-left: -800px;}
+    40%{margin-left: -1600px;}
+    57%{margin-left: -1600px;}
+    60%{margin-left: -2400px;}
+    77%{margin-left: -2400px;}
+    80%{margin-left: -3200px;}
+    100%{margin-left: -3200px;}
 }
