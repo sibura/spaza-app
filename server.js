@@ -1,4 +1,4 @@
- //var express = require('express');
+//var express = require('express');
  //var app = express()
  var express = require('express');
  var exphbs  = require('express-handlebars');
@@ -8,7 +8,7 @@
  var sqlfunctions = require('./routes/SqlFunctions');
  var sqlcategory = require('./routes/sqlcategory');
  var sqlsupp = require('./routes/suppliers');
- var sqlsales = require('./routes/sales');
+ var sqlsales = require('./routes/Sale');
  var ListOfProdz = require('./routes/groupProducts');
  var ListOfCat = require('./routes/listOfCateg');
  var mostPopul = require('./routes/mostPoP');
@@ -31,45 +31,7 @@
    app.use(bodyParser.json());
    var fs = require('fs');
 
-   //var products = require('./most_popular_products')
-
-   //var products = require('./least_popular_products')
-   //var sortedList = products.productNames('Nelisa  Sales History.csv');
-
-   var Products = require('./most_popular_products');
-   var products = new Products();
-   var productList = products.productNames('./Nelisa Sales History.csv');
-
-   var groupedProducts = products.groupItems(productList);
-   var mostPopular = products.mostpopularproducts(groupedProducts);
-   var leastPopular = products.leastpopularproducts(groupedProducts);
-
-
-   var group = products.groupCateg(productList);
-   var mostPopularCateg = products.mostPopularCtg(group);
-   var leastpopularCateg = products.leastPopularCtg(group);
-   
-   var prodctEarnings = products.earningsPerProduct(productList);
-   var CategEarnings = products.earningsCategory(productList);
-
-   
-   var earningsPerProduct = products.earningsPerProduct(productList);
-   var mostProfitableproductResuts = products.mostProfitableproduct(earningsPerProduct);
-  // console.log("Profitable Product" + JSON.stringify(mostProfitableproductResuts));
-
-  var group = products.groupCateg(productList);
-  var mostPopularCateg = products.mostPopularCtg(group);
-  var leastpopularCateg = products.leastPopularCtg(group);
-
-  var prodctEarnings = products.earningsPerProduct(productList);
-  var CategEarnings = products.earningsCategory(productList);
-
-  var profitables = products.earningsPerProduct(productList);
-  var ProfitableProduct = products.mostProfitableproduct(profitables);
-  
-  var earningsCategoryResults = products.earningsCategory(productList);
-  var ProfitableCategory = products.mostProfitableCategory(earningsCategoryResults);
-  
+ 
   //products
   app.get('/products', sqlfunctions.showProducts);
 
@@ -83,7 +45,7 @@
   //categories
   app.get('/CatList', sqlcategory.showCategorys);
 
-  app.get('/showCat', sqlcategory.showCategorys);
+  app.get('/category', sqlcategory.showCategorys);
   //app.get('/showCat', sqlcategory.showSuppliers);
   app.get('/showCat/edit/:Id', sqlcategory.get);
   app.post('/showCat/edit/:Id', sqlcategory.update);
@@ -97,7 +59,7 @@
  //suppiers
  app.get('/Supplist', sqlsupp.showSuppliers);
 
- app.get('/showSuppl', sqlsupp.showSuppliers);
+ app.get('/Supply', sqlsupp.showSuppliers);
 
  app.get('/showSuppl/edit/:Id', sqlsupp.get);
  app.post('/showSuppl/edit/:Id', sqlsupp.update)
@@ -108,7 +70,18 @@
   app.get('/showSuppl/delete/:Id', sqlsupp.delete);
 
   //hnjhougilo
-  app.get('/showSale', sqlsales.showSales);
+
+ app.get('/Sale', sqlsales.showSales);
+ app.get('/Sale/edit/:Id', sqlsales.get);
+ app.post('/Sale/edit/:Id', sqlsales.update)
+// app.post('/Sales/update/:Id', sqlsales.update);
+ app.post('/Sale/add', sqlsales.add);
+
+  //this should be a post but this is only an illustration of CRUD - not on good practices
+  app.get('/Sale/delete/:Id', sqlsales.delete);
+
+
+
   app.get('/showProdlist', ListOfProdz.showProdsgroup);
   app.get('/ListOfCateg', ListOfCat.showcategList);
   app.get('/showMost', mostPopul.mostProds);
@@ -119,10 +92,10 @@
  //console.log(formData.product_name);
  res.render('product', {product_name :  formData.product_name});
 });
-  app.use(express.static('public'));
+  //app.use(express.static('public'));
 
   app.get('/', function (req, res) {
-    res.render('home',{cat:mostPopularCateg});
+    res.render('home')
  // res.render('home',{cat:leastPopularCateg});
 
 });

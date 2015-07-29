@@ -1,7 +1,6 @@
- <table class="table">
-	<tr>
-                <th>Product ID</th>
-		         <th>Category ID</th>
+<div id="add-products">
+<table class="table">
+  <tr>
                 <th>Product Name</th>
         </tr>
         <div class="container-fluid">
@@ -20,15 +19,9 @@
 </div>
 {{#product}}
         <tr>
-                <td>{{Id}}</td>
-                <td>{{Category_Id}}</td>
                 <td>{{product_name}}</td>
                 <td><button><a href="/products/edit/{{Id}}">Edit</a></button></td>
-<<<<<<< HEAD
-                <td><button><a href="/products/delete/{{Id}}">Delete</a></button></td>
-=======
                 <td><button><a href="products/delete/{{Id}}">Delete</a></button></td>
->>>>>>> f329bd4219a41a2a3b89e4c1b057390d66930a0d
         </tr>
 {{/product}}
 </table>
@@ -36,18 +29,11 @@
         <form action="/products/add" method="POST">
                 product_name: <input type="text" name="product_name"> 
                 <select name="Category_Id">
-<<<<<<< HEAD
-    {{#categories}}
-    <option value="{{Id}}">{{category_name}}</option>
-    {{/categories}}
-    </select>    
-=======
                 {{#categories}}
                 <option value="{{Id}}">{{category_name}}
                 </option>
                 {{/categories}}
                 </select>    
->>>>>>> f329bd4219a41a2a3b89e4c1b057390d66930a0d
                 <input type="submit">
         </form>
 </div>

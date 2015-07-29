@@ -1,39 +1,17 @@
-<<<<<<< HEAD
-<div id="add-category">
- <table class="table">
-=======
 <form action="/showCat/add" method="POST">
         category_name: <input type="text" name="category_name">
         <input type="submit">
 </form>
 <table class="table">
->>>>>>> f329bd4219a41a2a3b89e4c1b057390d66930a0d
-	<tr>
-        <th>Category Name</th>
-		<th>Category ID</th>
+    <tr>
+                <th>Category Name</th>
         </tr>
 {{#category}}
         <tr>
                 <td>{{category_name}}</td>
-<<<<<<< HEAD
-                <td>{{Id}}</td>
-                
-                <td><button><a href="/category/edit/{{Id}}">Edit</a></button></td>
-                <td><button><a href="/category/delete/{{Id}}">Delete</a></button></td>
-=======
                 <td><button><a href="/showCat/edit/{{Id}}">Edit</a></button></td>
                 <td><button><a href="/showCat/delete/{{Id}}">Delete</a></button></td>
->>>>>>> f329bd4219a41a2a3b89e4c1b057390d66930a0d
         </tr>
 
 {{/category}}
 </table>
-<<<<<<< HEAD
-      <h1>Add a category</h1>
-        <form action="/category/add" method="POST">
-                Description: <input type="text" name="description"><input type="submit">
-        </form>
-
-</div>
-=======
->>>>>>> f329bd4219a41a2a3b89e4c1b057390d66930a0d
