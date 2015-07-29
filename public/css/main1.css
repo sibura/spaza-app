@@ -186,8 +186,15 @@ table {
 }
 td,
 th {
+<<<<<<< HEAD
+  padding: 0 auto;
+  width: 20px;
+  height: 20px;
+  float: 100em;
+=======
   padding: 0;
   
+>>>>>>> f329bd4219a41a2a3b89e4c1b057390d66930a0d
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
@@ -265,6 +272,19 @@ th {
     border: 1px solid #ddd !important;
   }
 }
+/*.listItemA {
+    height: 40px;
+    width: 240px;
+/* Alter this to be the .sidebar:width PLUS 40 */
+   /* transition: .3s;*/
+/* Speed of the hover animation */
+   /* position: relative;
+    left: -40px;
+}*/
+
+/*.listItemA:hover {
+    left: 0;
+}*/
 @font-face {
   font-family: 'Glyphicons Halflings';
 
