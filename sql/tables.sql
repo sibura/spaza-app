@@ -22,11 +22,11 @@ CREATE TABLE purchases
 (
    Id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
    product_Id int NOT NULL,
-   cost_price int,
-   supplier_ID int,
+   supplier_Id int,
+   cost int,
    FOREIGN KEY (Supplier_Id) REFERENCES suppliers(Id),
    FOREIGN KEY (Product_Id) REFERENCES products(Id)
-);
+   );
 
 CREATE TABLE sales
 (

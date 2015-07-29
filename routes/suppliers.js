@@ -4,13 +4,18 @@ exports.showSuppliers = function(req, res, next){
   				return next(error);
   			}
 
-			connection.query('SELECT * FROM suppliers LIMIT 0 , 5', [], function(error, results) {
+			connection.query('SELECT shop FROM suppliers LIMIT 0 , 5', [], function(error, results) {
 			    if (error) return next(error);
 				console.log(results);
+			connection.query('SELECT shop FROM suppliers LIMIT 0 , 5', [], function(error, results1) {
+			    if (error) return next(error);
+			    console.log(results1);
 			    res.render( 'Supplist', {
-				supplier : results
+				supplier : results,
+				suppliers : results1
 			    });
 			});
+		    });
   		});
   };
 
@@ -36,7 +41,7 @@ exports.showSuppliers = function(req, res, next){
 exports.get = function(req, res, next){
 	var id = req.params.Id;
 	req.getConnection(function(err, connection){
-		connection.query('SELECT * FROM suppliers WHERE Id = ?', [id], function(err,rows){
+		connection.query('SELECT shop FROM suppliers WHERE Id = ?', [id], function(err,rows){
 			if(err){
     				console.log("Error Selecting : %s ",err );
 			}
@@ -61,7 +66,7 @@ exports.update = function(req, res, next){
 };
 
 exports.delete = function(req, res, next){
-	var id = req.params.id;
+	var id = req.params.Id;
 	req.getConnection(function(err, connection){
 		connection.query('DELETE FROM suppliers WHERE Id = ?', [id], function(err,rows){
 			if(err){

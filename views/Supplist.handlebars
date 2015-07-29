@@ -1,12 +1,12 @@
+<div id="add-suppliers">
 <table class="table">
 	<tr>
-                <th>supplier-Id</th>
+                
                 <th>Shop</th>
               
         </tr>
 {{#supplier}}
         <tr>
-        		<td>{{Id}}</td>
         		<td>{{shop}}</td>
             <td><button><a href="/showSuppl/edit/{{Id}}">Edit</a></button></td>
                 <td><button><a href="showSuppl/delete/{{Id}}">Delete</a></button></td>
@@ -15,7 +15,14 @@
 </table>
         <h1>Add a supplier</h1>
         <form action="/showSuppl/add" method="POST">
-                shop: <input type="text" name="shop">     
+                Shop: <input type="text" name="shop">     
+                <select name="shop">
+                {{#suppliers}}
+                <option value="{{Id}}">{{shop}}
+                </option>
+                {{/suppliers}}
+                </select>    
                 <input type="submit">
+        </form>
         </form>
 </div>
