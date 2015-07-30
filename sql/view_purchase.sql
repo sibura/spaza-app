@@ -1,0 +1,1 @@
+select products.Id, suppliers.Id, stock_purchases_csv.cost, purchases.Id from purchases, suppliers, products, stock_purchases_csv where product_Id = products.Id, where supplier_ID = suppliers.Id and where cost_price = stock_purchases_csv.cost

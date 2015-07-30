@@ -1,0 +1,41 @@
+<div id="add-products">
+<table class="table">
+	<tr>
+
+                <th>Product Name</th>
+        </tr>
+        <div class="container-fluid">
+  <div class="btn-group pull-right" >
+  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+      Menu
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu">
+      <li><a href="showMost">Most Popular Product</a></li>
+      <li><a href="#">Least Popular Product</a></li>
+      <li><a href="#">Earnings Per Product</a></li>
+     <li><a href="#">Most Profitable Product</a></li>
+
+  </div>
+</div>
+{{#product}}
+        <tr>
+
+                <td>{{product_name}}</td>
+                <td><button><a href="/products/edit/{{Id}}">Edit</a></button></td>
+                <td><button><a href="products/delete/{{Id}}">Delete</a></button></td>
+        </tr>
+{{/product}}
+</table>
+        <h1>Add a product</h1>
+        <form action="/products/add" method="POST">
+                <h6>product_name</h6>: <input type="text" name="product_name"> 
+                <select name="Category_Id">
+                {{#categories}}
+                <option value="{{Id}}">{{category_name}}
+                </option>
+                {{/categories}}
+                </select>    
+                <input type="submit">
+        </form>
+</div>
