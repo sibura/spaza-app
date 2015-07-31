@@ -4,13 +4,13 @@ exports.showSales = function(req, res, next){
   				return next(error);
   			}
 
-			connection.query('SELECT products.product_name, date, sale_price, no_sold FROM sales, products WHERE products.Id=sales.product_Id order by sales.Id', [], function(error, results) {
+			connection.query('SELECT sales.Id,products.product_name, date, sale_price, no_sold FROM sales, products WHERE products.Id=sales.product_Id order by sales.Id', [], function(error, results) {
 			    if (error) return next(error);
 			 connection.query('SELECT product_name FROM products', [], function(error, results2) {
 			    if (error) return next(error);
 				console.log(results);
 			    res.render( 'SaleList', {
-				Sale : results,
+				Sales : results,
 				products : results2
 			    });
 			});
@@ -36,7 +36,7 @@ exports.showSales = function(req, res, next){
         		if (err)
               			console.log("Error inserting : %s ",err );
          
-          		res.redirect('/Sale');
+          		res.redirect('/sales');
       		});
 	});
 };
@@ -44,11 +44,11 @@ exports.showSales = function(req, res, next){
 exports.get = function(req, res, next){
 	var Id = req.params.Id;
 	req.getConnection(function(err, connection){
-		connection.query('SELECT date, sale_price, no_sold FROM sales WHERE Id = ?', [Id], function(err,rows){
+		connection.query('SELECT Id,date, sale_price, no_sold FROM sales WHERE Id = ?', [Id], function(err,rows){
 			if(err){
     				console.log("Error Selecting : %s ",err );
 			}
-			res.render('salesEdit',{page_title:"Edit Customers - Node.js", data : rows[0]});      
+			res.render('SalesEdit',{page_title:"Edit Customers - Node.js", data : rows[0]});      
 		}); 
 	});
 };
@@ -62,7 +62,7 @@ exports.update = function(req, res, next){
     			if (err){
               			console.log("Error Updating : %s ",err );
     			}
-          		res.redirect('/Sale');
+          		res.redirect('/sales');
     		});
     		
     });
@@ -75,7 +75,7 @@ exports.delete = function(req, res, next){
 			if(err){
     				console.log("Error Selecting : %s ",err );
 			}
-			res.redirect('/Sale');
+			res.redirect('/sales');
 		});
 	});
 };

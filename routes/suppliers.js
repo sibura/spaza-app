@@ -7,7 +7,7 @@ exports.showSuppliers = function(req, res, next){
 			connection.query('SELECT shop FROM suppliers LIMIT 0 , 5', [], function(error, results) {
 			    if (error) return next(error);
 				console.log(results);
-			connection.query('SELECT shop FROM suppliers LIMIT 0 , 5', [], function(error, results1) {
+			connection.query('SELECT suppliers.Id, shop FROM suppliers LIMIT 0 , 5', [], function(error, results1) {
 			    if (error) return next(error);
 			    console.log(results1);
 			    res.render( 'Supplist', {
@@ -33,7 +33,7 @@ exports.showSuppliers = function(req, res, next){
         		if (err)
               			console.log("Error inserting : %s ",err );
          
-          		res.redirect('/Supplist');
+          		res.redirect('/Supply');
       		});
 	});
 };
@@ -59,7 +59,7 @@ exports.update = function(req, res, next){
     			if (err){
               			console.log("Error Updating : %s ",err );
     			}
-          		res.redirect('/Supplist');
+          		res.redirect('/Supply');
     		});
     		
     });
@@ -72,7 +72,7 @@ exports.delete = function(req, res, next){
 			if(err){
     				console.log("Error Selecting : %s ",err );
 			}
-			res.redirect('/Supplist');
+			res.redirect('/Supply');
 		});
 	});
 };

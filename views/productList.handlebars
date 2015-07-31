@@ -1,10 +1,8 @@
 <div id="add-products">
+
 <table class="table">
-<<<<<<< HEAD
-	<tr>
-=======
   <tr>
->>>>>>> ed2f908231610318c0be1d5fd0de7d1f24330470
+
                 <th>Product Name</th>
         </tr>
         <div class="container-fluid">
@@ -23,16 +21,14 @@
 </div>
 {{#product}}
         <tr>
-<<<<<<< HEAD
-               
-=======
->>>>>>> ed2f908231610318c0be1d5fd0de7d1f24330470
+
                 <td>{{product_name}}</td>
                 <td><button><a href="/products/edit/{{Id}}">Edit</a></button></td>
                 <td><button><a href="products/delete/{{Id}}">Delete</a></button></td>
         </tr>
 {{/product}}
 </table>
+
         <h1>Add a product</h1>
         <form action="/products/add" method="POST">
                 <h6>product_name</h6>: <input type="text" name="product_name"> 

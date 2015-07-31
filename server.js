@@ -43,7 +43,7 @@
   app.get('/products/delete/:Id', sqlfunctions.delete);
   
   //categories
-  app.get('/CatList', sqlcategory.showCategorys);
+ // app.get('/CatList', sqlcategory.showCategorys);
 
   app.get('/category', sqlcategory.showCategorys);
   //app.get('/showCat', sqlcategory.showSuppliers);
@@ -57,41 +57,29 @@
 
 
  //suppiers
- app.get('/Supplist', sqlsupp.showSuppliers);
+ //app.get('/Supply', sqlsupp.showSuppliers);
 
  app.get('/Supply', sqlsupp.showSuppliers);
 
- app.get('/showSuppl/edit/:Id', sqlsupp.get);
- app.post('/showSuppl/edit/:Id', sqlsupp.update)
- app.post('/showSuppl/update/:Id', sqlsupp.update);
- app.post('/showSuppl/add', sqlsupp.add);
+ app.get('/Supply/edit/:Id', sqlsupp.get);
+ app.post('/Supply/edit/:Id', sqlsupp.update)
+ app.post('/Supply/update/:Id', sqlsupp.update);
+ app.post('/Supply/add', sqlsupp.add);
 
   //this should be a post but this is only an illustration of CRUD - not on good practices
-  app.get('/showSuppl/delete/:Id', sqlsupp.delete);
+  app.get('/Supply/delete/:Id', sqlsupp.delete);
 
   //hnjhougilo
-<<<<<<< HEAD
+
  // app.get('/showSale', sqlsales.showSales);
- app.get('/Sale', sqlsales.showSales);
-app.get('/Sale/edit/:Id', sqlsales.get);
-app.post('/Sale/edit/:Id', sqlsales.update)
-// app.post('/Sales/update/:Id', sqlsales.update);
-app.post('/Sale/add', sqlsales.add);
+ app.get('/sales', sqlsales.showSales);
+app.get('/sales/edit/:Id', sqlsales.get);
+app.post('/sales/edit/:Id', sqlsales.update);
+ app.post('/sales/update/:Id', sqlsales.update);
+app.post('/sales/add', sqlsales.add);
 //this should be a post but this is only an illustration of CRUD - not on good practices
-app.get('/Sale/delete/:Id', sqlsales.delete);
-=======
+app.get('/sales/delete/:Id', sqlsales.delete);
 
- app.get('/Sale', sqlsales.showSales);
- app.get('/Sale/edit/:Id', sqlsales.get);
- app.post('/Sale/edit/:Id', sqlsales.update)
-// app.post('/Sales/update/:Id', sqlsales.update);
- app.post('/Sale/add', sqlsales.add);
-
-  //this should be a post but this is only an illustration of CRUD - not on good practices
-  app.get('/Sale/delete/:Id', sqlsales.delete);
-
-
->>>>>>> ed2f908231610318c0be1d5fd0de7d1f24330470
 
   app.get('/showProdlist', ListOfProdz.showProdsgroup);
   app.get('/ListOfCateg', ListOfCat.showcategList);
@@ -100,7 +88,7 @@ app.get('/Sale/delete/:Id', sqlsales.delete);
 
   app.post('/add_product', function(req, res){
    var formData = req.body;
- //console.log(formData.product_name);
+  console.log(formData.product_name);
  res.render('product', {product_name :  formData.product_name});
 });
   //app.use(express.static('public'));

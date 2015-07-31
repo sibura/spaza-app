@@ -1,63 +1,32 @@
-<<<<<<< HEAD
- <h1>Add a Sale</h1>
- <form action="/Sale/add" method="POST">
- product_name: <input type="text" name="product_name">
- <select name="product_name">
- {{#each products}}
- <option value="{{Id}}">{{product_name}}
- </option>
- {{/each}}
- </select>
- <input type="submit">
- </form>
- <table class="table">
- <tr>
- <th>Product-name</th>
- <th>Date</th>
- <th>Sales-price</th>
- <th>No-Sold</th>
- </tr>
- {{#Sale}}
- <tr>
- <td>{{product_name}}</td>
- <td>{{date}}</td>
- <td>{{no_sold}}</td>
- <td>{{sale_price}}</td>
- <td><button><a href="/Sales/edit/{{Id}}">Edit</a></button></td>
- <td><button><a href="/Sales/delete/{{Id}}">Delete</a></button></td>
- </tr>
- {{/Sale}}
-=======
-   <h1>Add a Sale</h1>
-        <form action="/Sale/add" method="POST">
-                product_name: <input type="text" name="product_name"> 
+<h1>Add a Sale</h1>
+<form action="/sales/add" method="POST">
+	product_name: <input type="text" name="product_name">
+<select name="product_name">
+	{{#each products}}
+	<option value="{{Id}}">{{product_name}}
+	</option>
+	{{/each}}
 
-                <select name="product_name">
-                {{#each products}}
-                <option value="{{Id}}">{{product_name}}
-                </option>
-                {{/each}}
-                </select>    
-                <input type="submit">
-        </form>
+</select>
+	<input type="submit">
+</form>
+
 <table class="table">
 	<tr>
-               
-                <th>Product-name</th>
-                <th>Date</th>
-                <th>Sales-price</th>
-                <th>No-Sold</th>
+		<th>Product-name</th>
+		<th>Date</th>
+		<th>Sales-price</th>
+		<th>No-Sold</th>
+	</tr>
 
-        </tr>
-{{#Sale}}
-        <tr>
-        		<td>{{product_name}}</td> 
-        		<td>{{date}}</td> 
-        		<td>{{no_sold}}</td> 
-                <td>{{sale_price}}</td>  
-                <td><button><a href="/Sales/edit/{{Id}}">Edit</a></button></td>
-                <td><button><a href="/Sales/delete/{{Id}}">Delete</a></button></td>
-        </tr>
-{{/Sale}}
+{{#Sales}}
+	<tr>
+		<td>{{product_name}}</td>
+		<td>{{date}}</td>
+		<td>{{no_sold}}</td>
+		<td>{{sale_price}}</td>
+		<td><button><a href="/sales/edit/{{Id}}">Edit</a></button></td>
+		<td><button><a href="/sales/delete/{{Id}}">Delete</a></button></td>
+	</tr>
+{{/Sales}}
 </table>
->>>>>>> ed2f908231610318c0be1d5fd0de7d1f24330470
