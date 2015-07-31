@@ -12,6 +12,7 @@
           
             <br /><br /><input type="submit">
         </form>
+
  <table class="table">
  <tr>
  <th>Product-name</th>
@@ -19,6 +20,7 @@
  <th>Sales-price</th>
  <th>No-Sold</th>
  </tr>
+
  {{#Sale}}
  <tr>
  <td>{{product_name}}</td>
@@ -29,3 +31,25 @@
  <td><button><a href="/sales/delete/{{Id}}">Delete</a></button></td>
  </tr>
  {{/Sale}}
+
+<table class="table">
+	<tr>
+               
+                <th>Product-name</th>
+                <th>Date</th>
+                <th>Sales-price</th>
+                <th>No-Sold</th>
+
+        </tr>
+{{#Sale}}
+        <tr>
+        		<td>{{product_name}}</td> 
+        		<td>{{date}}</td> 
+        		<td>{{no_sold}}</td> 
+                <td>{{sale_price}}</td>  
+                <td><button><a href="/Sales/edit/{{Id}}">Edit</a></button></td>
+                <td><button><a href="/Sales/delete/{{Id}}">Delete</a></button></td>
+        </tr>
+{{/Sale}}
+</table>
+

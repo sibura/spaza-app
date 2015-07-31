@@ -84,6 +84,7 @@ app.post('/sales/edit/:Id', sqlsales.update)
 // app.post('/Sales/update/:Id', sqlsales.update);
 app.post('/sales/add', sqlsales.add);
 //this should be a post but this is only an illustration of CRUD - not on good practices
+
 app.get('/sales/delete/:Id', sqlsales.delete);
 
 

@@ -11,11 +11,13 @@
         <input type="submit">
 </form>
 <table class="table">
+
     <tr>
                 <th>Category Name</th>
         </tr>
 {{#category}}
         <tr>
+
                 <td>{{category_name}}</td>
                 <td><button><a href="/showCat/edit/{{Id}}">Edit</a></button></td>
                 <td><button><a href="/showCat/delete/{{Id}}">Delete</a></button></td>
