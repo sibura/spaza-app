@@ -13,11 +13,16 @@
  var ListOfCat = require('./routes/listOfCateg');
  var mostPopul = require('./routes/mostPoP');
  var MostPoPCat = require('./routes/most_popCateg');
+ var LeastPopCat = require('./routes/least_popCateg');
+ var LeastPopular = require('./routes/LeastPopular');
+ var earningsPerProduct = require('./routes/Earnings');
+ var catEarning = require('./routes/CategEarnings');
+ var profitables = require('./routes/allProfitables');
 
  var dbOptions = {
    host: 'localhost',
    user: 'root',
-   password: 'coder123',
+   password: 'nwabisamilisantmasiko',
    port: 3306,
    database: 'SpazaApp'
  };
@@ -44,6 +49,7 @@
   
   //categories
   app.get('/CatList', sqlcategory.showCategorys);
+    app.get('/showCat', sqlcategory.showCategorys);
 
   app.get('/category', sqlcategory.showCategorys);
   //app.get('/showCat', sqlcategory.showSuppliers);
@@ -59,7 +65,7 @@
  //suppiers
  app.get('/Supplist', sqlsupp.showSuppliers);
 
- app.get('/Supply', sqlsupp.showSuppliers);
+  app.get('/showSuppl', sqlsupp.showSuppliers);
 
  app.get('/showSuppl/edit/:Id', sqlsupp.get);
  app.post('/showSuppl/edit/:Id', sqlsupp.update)
@@ -70,33 +76,26 @@
   app.get('/showSuppl/delete/:Id', sqlsupp.delete);
 
   //hnjhougilo
-<<<<<<< HEAD
+
  // app.get('/showSale', sqlsales.showSales);
- app.get('/Sale', sqlsales.showSales);
-app.get('/Sale/edit/:Id', sqlsales.get);
-app.post('/Sale/edit/:Id', sqlsales.update)
+ app.get('/sales', sqlsales.showSales);
+app.get('/sales/edit/:Id', sqlsales.get);
+app.post('/sales/edit/:Id', sqlsales.update)
 // app.post('/Sales/update/:Id', sqlsales.update);
-app.post('/Sale/add', sqlsales.add);
+app.post('/sales/add', sqlsales.add);
 //this should be a post but this is only an illustration of CRUD - not on good practices
-app.get('/Sale/delete/:Id', sqlsales.delete);
-=======
+app.get('/sales/delete/:Id', sqlsales.delete);
 
- app.get('/Sale', sqlsales.showSales);
- app.get('/Sale/edit/:Id', sqlsales.get);
- app.post('/Sale/edit/:Id', sqlsales.update)
-// app.post('/Sales/update/:Id', sqlsales.update);
- app.post('/Sale/add', sqlsales.add);
-
-  //this should be a post but this is only an illustration of CRUD - not on good practices
-  app.get('/Sale/delete/:Id', sqlsales.delete);
-
-
->>>>>>> ed2f908231610318c0be1d5fd0de7d1f24330470
 
   app.get('/showProdlist', ListOfProdz.showProdsgroup);
   app.get('/ListOfCateg', ListOfCat.showcategList);
   app.get('/showMost', mostPopul.mostProds);
+  app.get('/showLeast', LeastPopular.LeastProds);
   app.get('/showpopCat', MostPoPCat.mostCat);
+  app.get('/showEarnings', earningsPerProduct.EarningsPro);
+  app.get('/CatgEarnings', catEarning.EarningsCateg);
+  app.get('/showProfitables', profitables.profitableProdz);
+  app.get('/showLeastCat', LeastPopCat.LeastCat);
 
   app.post('/add_product', function(req, res){
    var formData = req.body;

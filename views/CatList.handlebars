@@ -1,22 +1,21 @@
+<div class="container-fluid">
+                <div class="btn-group pull-right" >
+                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                        Menu
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu">      <li><a href="showpopCat">Most Popular Category</a></li>      <li><a href="showLeastCat">Least Popular Category</a></li>      <li><a href="CatgEarnings">Earnings Per Category</a></li>     <li><a href="#">Most Profitable Category</a></li>  </div>
+
 <form action="/showCat/add" method="POST">
         category_name: <input type="text" name="category_name">
         <input type="submit">
 </form>
 <table class="table">
-<<<<<<< HEAD
-	<tr>
-		<
-=======
     <tr>
->>>>>>> ed2f908231610318c0be1d5fd0de7d1f24330470
                 <th>Category Name</th>
         </tr>
 {{#category}}
         <tr>
-<<<<<<< HEAD
-               
-=======
->>>>>>> ed2f908231610318c0be1d5fd0de7d1f24330470
                 <td>{{category_name}}</td>
                 <td><button><a href="/showCat/edit/{{Id}}">Edit</a></button></td>
                 <td><button><a href="/showCat/delete/{{Id}}">Delete</a></button></td>
