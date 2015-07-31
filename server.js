@@ -63,14 +63,14 @@
 
 
  //suppiers
- app.get('/Supplist', sqlsupp.showSuppliers);
+ //app.get('/Suppl', sqlsupp.showSuppliers);
 
-  app.get('/showSuppl', sqlsupp.showSuppliers);
+  app.get('/Supply', sqlsupp.showSuppliers);
 
- app.get('/showSuppl/edit/:Id', sqlsupp.get);
- app.post('/showSuppl/edit/:Id', sqlsupp.update)
- app.post('/showSuppl/update/:Id', sqlsupp.update);
- app.post('/showSuppl/add', sqlsupp.add);
+ app.get('/Supply/edit/:Id', sqlsupp.get);
+ app.post('/Supply/edit/:Id', sqlsupp.update)
+ app.post('/Supply/update/:Id', sqlsupp.update);
+ app.post('/Supply/add', sqlsupp.add);
 
   //this should be a post but this is only an illustration of CRUD - not on good practices
   app.get('/showSuppl/delete/:Id', sqlsupp.delete);

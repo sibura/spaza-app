@@ -1,3 +1,14 @@
+<h1>Add a product</h1>
+                <form action="/products/add" method="POST">
+                    product_name: <input type="text" name="product_name" required> 
+                    <select name="Category_Id">
+                        {{#categories}}
+                        <option value="{{Id}}">{{category_name}}
+                        </option>
+                        {{/categories}}
+                    </select>    
+                    <input type="submit">
+                </form>
 <div id="add-products">
     <table class="table">
         <tr>
@@ -19,15 +30,5 @@
                     </tr>
                     {{/product}}
                 </table>
-                <h1>Add a product</h1>
-                <form action="/products/add" method="POST">
-                    product_name: <input type="text" name="product_name"> 
-                    <select name="Category_Id">
-                        {{#categories}}
-                        <option value="{{Id}}">{{category_name}}
-                        </option>
-                        {{/categories}}
-                    </select>    
-                    <input type="submit">
-                </form>
+                
             </div>
