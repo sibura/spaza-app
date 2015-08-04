@@ -8,7 +8,7 @@
  var sqlfunctions = require('./routes/SqlFunctions');
  var sqlcategory = require('./routes/sqlcategory');
  var sqlsupp = require('./routes/suppliers');
- var sqlsales = require('./routes/Sale');
+ var sqlsales = require('./routes/sales');
  var ListOfProdz = require('./routes/groupProducts');
  var ListOfCat = require('./routes/listOfCateg');
  var mostPopul = require('./routes/mostPoP');
@@ -65,8 +65,13 @@ app.use(express.static('public'));
 
 
 
+<<<<<<< HEAD
  //suppiers
  //app.get('/Supplist', sqlsupp.showSuppliers);
+=======
+ //suppliers
+ //app.get('/Suppl', sqlsupp.showSuppliers);
+>>>>>>> 643ec51f5a05f9d3796d4489703fb18aa0e07cf1
 
   app.get('/Supply', sqlsupp.showSuppliers);
 
@@ -78,13 +83,16 @@ app.use(express.static('public'));
   //this should be a post but this is only an illustration of CRUD - not on good practices
   app.get('/Supply/delete/:Id', sqlsupp.delete);
 
-  //hnjhougilo
+ //app.get('/sales', sqlsales.showSales);
 
- // app.get('/showSale', sqlsales.showSales);
- app.get('/sales', sqlsales.showSales);
+app.get('/Sale', sqlsales.showSales);
+
+app.get('/SaleList', sqlsales.showSales);
+app.get('/sales', sqlsales.showSales);
+
 app.get('/sales/edit/:Id', sqlsales.get);
 app.post('/sales/edit/:Id', sqlsales.update)
-// app.post('/Sales/update/:Id', sqlsales.update);
+//app.post('/sales/update/:Id', sqlsales.update);
 app.post('/sales/add', sqlsales.add);
 //this should be a post but this is only an illustration of CRUD - not on good practices
 

@@ -1,5 +1,6 @@
  <h1>Add a Sale</h1>
  <form action="/sales/add" method="POST">
+<<<<<<< HEAD
     Date:<input type="date" name="date"><br />
     Product-name:<br /> 
     <select name="product_name">
@@ -20,6 +21,41 @@
        <th>Sales-price</th>
        <th>No-Sold</th>
    </tr>
+=======
+            Date:<input type="date" name="date"><br />
+            Product-name:<br /> 
+            <select name="product_name">
+                {{#products}}
+                    <option value="{{product_name}}">{{product_name}}</option>
+                {{/products}}
+            </select><br />
+            Sales-price:<br /><input type="price" name="sale_price" required><br />
+            No-Sold:<br /><input type="number" name="no_sold" required><br />
+          
+            <br /><br /><input type="submit">
+        </form>
+
+ <table class="table">
+ <tr>
+ <th>Product-name</th>
+ <th>Date</th>
+ <th>Sales-price</th>
+ <th>No-Sold</th>
+ </tr>
+
+ {{#Sale}}
+ <tr>
+ <td>{{product_name}}</td>
+ <td>{{date}}</td>
+ <td>{{no_sold}}</td>
+ <td>{{sale_price}}</td>
+ <td><button><a href="/sales/edit/{{Id}}">Edit</a></button></td>
+ <td><button><a href="/sales/delete/{{Id}}">Delete</a></button></td>
+ </tr>
+ {{/Sale}}
+
+
+>>>>>>> 643ec51f5a05f9d3796d4489703fb18aa0e07cf1
 
    {{#Sale}}
    <tr>

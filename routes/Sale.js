@@ -37,7 +37,7 @@ exports.add = function (req, res, next) {
 			if (err)
 				console.log("Error inserting : %s ",err );
 
-			res.redirect('/sales');
+			res.redirect('/SaleList');
 		});
 	});	
 };
@@ -63,7 +63,7 @@ exports.add = function (req, res, next) {
 					if (err){
 						console.log("Error Updating : %s ",err );
 					}
-					res.redirect('/sales');
+					res.redirect('/SaleList');
 				});
 
 			});
@@ -76,7 +76,7 @@ exports.add = function (req, res, next) {
 					if(err){
 						console.log("Error Selecting : %s ",err );
 					}
-					res.redirect('/sales');
+					res.redirect('/SaleList');
 				});
 			});
 		};	

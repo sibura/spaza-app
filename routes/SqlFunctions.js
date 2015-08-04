@@ -72,7 +72,7 @@ exports.delete = function(req, res, next){
 	req.getConnection(function(err, connection){
 		connection.query('DELETE FROM products WHERE Id = ?', [Id], function(err,rows){
 			if(err){
-		         window.alert("Are You sure You Want To delete This Product?");
+		         //alert("Are You sure You Want To delete This Product?");
     				console.log("Error Selecting : %s ",err );
 			}
 			res.redirect('/products');
