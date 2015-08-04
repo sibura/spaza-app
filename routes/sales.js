@@ -3,11 +3,10 @@ exports.showSales = function(req, res, next){
 		if(error){
 			return next(error);
 		}
-		connection.query('SELECT products.product_name, sale_price, no_sold FROM sales, products WHERE products.Id=sales.product_Id order by sales.Id', [], function(error, results) {
+		connection.query('SELECT sales.Id,products.product_name, date, sale_price, no_sold FROM sales, products WHERE products.Id=sales.product_Id order by sales.Id;', [], function(error, results) {
 			if (error) return next(error);
 			connection.query('SELECT product_name FROM products', [], function(error, results2) {
 				if (error) return next(error);
-				console.log(results2);
 				res.render( 'SaleList', {
 					Sale : results,
 					products : results2
@@ -24,14 +23,15 @@ exports.add = function (req, res, next) {
 			}
 			var input = JSON.parse(JSON.stringify(req.body));
 			var data = {
-						product_name : input.product_name,
+						//product_name : input.product_name,
 						sale_price : input.sale_price,
-						no_sold : input.no_sold
+						no_sold : input.no_sold,
+						date : input.date
 			};
-			connection.query('insert into sales set ?', data, function(err, results) {
+			connection.query('insert into sales set product_Id=(select Id FROM products WHERE product_name=?), ?', [input.product_name,data], function(err, results) {
 				if (err)
 					console.log("Error inserting : %s ",err );
-				res.redirect('/Sale');
+				res.redirect('/SaleList');
 			});
 		});
 	};
@@ -54,7 +54,7 @@ exports.update = function(req, res, next){
 			if (err){
 				console.log("Error Updating : %s ",err );
 			}
-			res.redirect('/Sale');
+			res.redirect('/SaleList');
 		});
 	});
 };
@@ -65,7 +65,7 @@ exports.delete = function(req, res, next){
 			if(err){
 				console.log("Error Selecting : %s ",err );
 			}
-			res.redirect('/Sale');
+			res.redirect('/SaleList');
 		});
 	});
 };

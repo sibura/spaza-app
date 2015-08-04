@@ -3,12 +3,12 @@
             Date:<input type="date" name="date"><br />
             Product-name:<br /> 
             <select name="product_name">
-                {{#each products}}
-                    <option value="{{Id}}">{{product_name}}</option>
-                {{/each}}
+                {{#products}}
+                    <option value="{{product_name}}">{{product_name}}</option>
+                {{/products}}
             </select><br />
-            Sales-price:<br /><input type="price" name="sale-price"><br />
-            No-Sold:<br /><input type="number" name="no-sold"><br />
+            Sales-price:<br /><input type="price" name="sale_price" required><br />
+            No-Sold:<br /><input type="number" name="no_sold" required><br />
           
             <br /><br /><input type="submit">
         </form>
@@ -32,24 +32,5 @@
  </tr>
  {{/Sale}}
 
-<table class="table">
-	<tr>
-               
-                <th>Product-name</th>
-                <th>Date</th>
-                <th>Sales-price</th>
-                <th>No-Sold</th>
 
-        </tr>
-{{#Sale}}
-        <tr>
-        		<td>{{product_name}}</td> 
-        		<td>{{date}}</td> 
-        		<td>{{no_sold}}</td> 
-                <td>{{sale_price}}</td>  
-                <td><button><a href="/Sales/edit/{{Id}}">Edit</a></button></td>
-                <td><button><a href="/Sales/delete/{{Id}}">Delete</a></button></td>
-        </tr>
-{{/Sale}}
-</table>
 
