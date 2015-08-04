@@ -3,7 +3,7 @@ exports.MostProfits = function(req, res, next){
   			if(error){
   				return next(error);
   			}
-			connection.query('SELECT stock_item, sales_price, cost FROM sales_csv INNER JOIN stock_purchases_csv ON stock_item = stock_purchases_csv.item GROUP BY stock_item, sales_price, cost LIMIT 0 , 30', [], function(error, results) {
+			connection.query('SELECT stock_item, sales_price, cost FROM sales_csv INNER JOIN stock_purchases_csv ON stock_item = stock_purchases_csv.item GROUP BY stock_item, sales_price, cost LIMIT 0 , 1', [], function(error, results) {
 			    if (error) return next(error);
 			    console.log(results);
 			    res.render( 'ProfitsProduct', {

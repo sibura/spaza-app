@@ -1,12 +1,12 @@
-exports.showProducts = function(req, res, next){
+ exports.showProducts = function(req, res, next){
   		req.getConnection(function(error, connection){
   			if(error){
   				return next(error);
   			}
 
-			connection.query('SELECT * FROM products', [], function(error, results) {
+			connection.query('SELECT  products.product_name, categories.category_name, products.Category_Id FROM products, categories  where products.Category_Id = categories.Id;', [], function(error, results) {
 			    if (error) return next(error);
-			connection.query('SELECT category_name FROM categories', [], function(error, results1) {
+			connection.query('SELECT Id, category_name FROM categories', [], function(error, results1) {
                  if (error) return next(error);
                  
 				//console.log(results);
@@ -29,6 +29,7 @@ exports.showProducts = function(req, res, next){
 		var data = {
             		product_name : input.product_name,
             		Category_Id : input.Category_Id
+            		
         	};
 		connection.query('insert into products set ?', data, function(err, results) {
         		if (err)

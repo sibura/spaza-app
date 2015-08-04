@@ -1,32 +1,33 @@
-<h1>Add a Sale</h1>
-<form action="/sales/add" method="POST">
-	product_name: <input type="text" name="product_name">
-<select name="product_name">
-	{{#each products}}
-	<option value="{{Id}}">{{product_name}}
-	</option>
-	{{/each}}
-
-</select>
-	<input type="submit">
+ <h1>Add a Sale</h1>
+ <form action="/sales/add" method="POST">
+    Date:<input type="date" name="date"><br />
+    Product-name:<br /> 
+    <select name="product_name">
+        {{#each products}}
+        <option value="{{Id}}">{{product_name}}</option>
+        {{/each}}
+    </select><br />
+    Sales-price:<br /><input type="price" name="sale-price"><br />
+    No-Sold:<br /><input type="number" name="no-sold"><br />
+    
+    <br /><br /><input type="submit">
 </form>
 
 <table class="table">
-	<tr>
-		<th>Product-name</th>
-		<th>Date</th>
-		<th>Sales-price</th>
-		<th>No-Sold</th>
-	</tr>
+   <tr>
+       <th>Product-name</th>
+       <th>Date</th>
+       <th>Sales-price</th>
+       <th>No-Sold</th>
+   </tr>
 
-{{#Sales}}
-	<tr>
-		<td>{{product_name}}</td>
-		<td>{{date}}</td>
-		<td>{{no_sold}}</td>
-		<td>{{sale_price}}</td>
-		<td><button><a href="/sales/edit/{{Id}}">Edit</a></button></td>
-		<td><button><a href="/sales/delete/{{Id}}">Delete</a></button></td>
-	</tr>
-{{/Sales}}
-</table>
+   {{#Sale}}
+   <tr>
+       <td>{{product_name}}</td>
+       <td>{{date}}</td>
+       <td>{{no_sold}}</td>
+       <td>{{sale_price}}</td>
+       <td><button><a href="/sales/edit/{{Id}}">Edit</a></button></td>
+       <td><button><a href="/sales/delete/{{Id}}">Delete</a></button></td>
+   </tr>
+   {{/Sale}}

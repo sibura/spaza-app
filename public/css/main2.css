@@ -275,3 +275,13 @@ td {
     80%{margin-left: -3200px;}
     100%{margin-left: -3200px;}
 }
+form {
+    color: grey;
+    font-size: 20px;
+
+}
+.dropdown-menu dropdown-menu-right {
+    color: grey;
+    font-size: 20px;
+
+}

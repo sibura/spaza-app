@@ -3,7 +3,7 @@ exports.EarnProduct = function(req, res, next){
   			if(error){
   				return next(error);
   			}
-			connection.query('SELECT products.product_name, SUM(sales.sale_price * sales.no_sold) as EarningPerProduct FROM sales INNER JOIN products ON sales.product_Id = products.Id GROUP BY product_name order by SUM(sales.sale_price) DESC', [], function(error, results) {
+			connection.query('SELECT products.product_name, SUM(sales.sale_price * sales.no_sold) as EarningPerProduct FROM sales INNER JOIN products ON sales.product_Id = products.Id GROUP BY product_name order by SUM(sales.sale_price) DESC;', [], function(error, results) {
 			    if (error) return next(error);
 			    console.log(results);
 			    res.render( 'EarniPerProducts', {

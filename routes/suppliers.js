@@ -1,23 +1,22 @@
 exports.showSuppliers = function(req, res, next){
- 	req.getConnection(function(error, connection){
-  			if(error){
-  				return next(error);
-  			}
-
-			connection.query('SELECT shop FROM suppliers LIMIT 0 , 5', [], function(error, results) {
-			    if (error) return next(error);
-				console.log(results);
-			connection.query('SELECT suppliers.Id, shop FROM suppliers LIMIT 0 , 5', [], function(error, results1) {
-			    if (error) return next(error);
-			    console.log(results1);
-			    res.render( 'Supplist', {
-				supplier : results,
-				suppliers : results1
-			    });
+	req.getConnection(function(error, connection){
+		if(error){
+			return next(error);
+		}
+		connection.query('SELECT shop  FROM suppliers LIMIT 0 , 5', [], function(error, results) {
+			if (error) return next(error);
+			//console.log(results);
+			connection.query('SELECT suppliers.Id, shop  FROM suppliers LIMIT 0 , 5', [], function(error, results1) {
+				if (error) return next(error);
+				console.log(results1);
+				res.render( 'Supplist', {
+					supplier : results,
+					suppliers : results1
+				});
 			});
-		    });
-  		});
-  };
+		});
+	});
+};
 
     exports.add = function (req, res, next) {
 	req.getConnection(function(err, connection){
@@ -27,7 +26,7 @@ exports.showSuppliers = function(req, res, next){
 		
 		var input = JSON.parse(JSON.stringify(req.body));
 		var data = {
-            		Shop: input.shop,
+            		shop : input.shop ,
         	};
 		connection.query('insert into suppliers set ?', data, function(err, results) {
         		if (err)
@@ -41,7 +40,7 @@ exports.showSuppliers = function(req, res, next){
 exports.get = function(req, res, next){
 	var id = req.params.Id;
 	req.getConnection(function(err, connection){
-		connection.query('SELECT shop FROM suppliers WHERE Id = ?', [id], function(err,rows){
+		connection.query('SELECT shop  FROM suppliers WHERE Id = ?', [id], function(err,rows){
 			if(err){
     				console.log("Error Selecting : %s ",err );
 			}
