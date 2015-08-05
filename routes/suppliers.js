@@ -3,22 +3,17 @@ exports.showSuppliers = function(req, res, next){
 		if(error){
 			return next(error);
 		}
-		connection.query('SELECT shop  FROM suppliers LIMIT 0 , 5', [], function(error, results) {
-			if (error) return next(error);
-			//console.log(results);
-			connection.query('SELECT suppliers.Id, shop  FROM suppliers LIMIT 0 , 5', [], function(error, results1) {
+			connection.query('SELECT Id, shop  FROM suppliers', [], function(error, results) {
 				if (error) return next(error);
-				console.log(results1);
+				console.log(results);
 				res.render( 'Supplist', {
-					supplier : results,
-					suppliers : results1
+					suppliers : results
 				});
 			});
 		});
-	});
-};
+	};
 
-    exports.add = function (req, res, next) {
+exports.add = function (req, res, next) {
 	req.getConnection(function(err, connection){
 		if (err){ 
 			return next(err);
@@ -26,7 +21,7 @@ exports.showSuppliers = function(req, res, next){
 		
 		var input = JSON.parse(JSON.stringify(req.body));
 		var data = {
-            		shop : input.shop ,
+            		shop : input.shop
         	};
 		connection.query('insert into suppliers set ?', data, function(err, results) {
         		if (err)
