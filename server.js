@@ -1,5 +1,3 @@
-//var express = require('express');
- //var app = express()
  var express = require('express');
  var exphbs  = require('express-handlebars');
  var mysql = require('mysql'),
@@ -67,7 +65,7 @@
 
 
  //suppliers
- //app.get('/Suppl', sqlsupp.showSuppliers);
+ app.get('/Supplist', sqlsupp.showSuppliers);
 
  app.get('/Supply', sqlsupp.showSuppliers);
 
@@ -77,7 +75,7 @@
  app.post('/Supply/add', sqlsupp.add);
 
   //this should be a post but this is only an illustration of CRUD - not on good practices
-  app.get('/showSuppl/delete/:Id', sqlsupp.delete);
+  app.get('/Supply/delete/:Id', sqlsupp.delete);
 
  //app.get('/sales', sqlsales.showSales);
 
