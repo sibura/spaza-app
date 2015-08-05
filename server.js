@@ -3,6 +3,8 @@
  var mysql = require('mysql'),
  bodyParser = require('body-parser'),
  myConnection = require('express-myconnection');
+ var session = require('express-session');
+
  var sqlfunctions = require('./routes/SqlFunctions');
  var sqlcategory = require('./routes/sqlcategory');
  var sqlsupp = require('./routes/suppliers');
@@ -16,6 +18,7 @@
  var earningsPerProduct = require('./routes/Earnings');
  var catEarning = require('./routes/CategEarnings');
  var profitables = require('./routes/allProfitables');
+ var loggin = require('./routes/login');
 
  var dbOptions = {
    host: 'localhost',
@@ -98,6 +101,22 @@ app.get('/sales/delete/:Id', sqlsales.delete);
   app.get('/CatgEarnings', catEarning.EarningsCateg);
   app.get('/showProfitables', profitables.profitableProdz);
   app.get('/showLeastCat', LeastPopCat.LeastCat);
+
+app.use(function(req, res, next){
+  console.log('in my middleware!');
+  //proceed to the next middleware component
+  next();
+});
+
+app.get('/user', function(req, res){
+  var userData = userService.getUserData();
+  res.render('user', userData)
+});
+
+app.get('/login', function(req, res){
+   res.render('log')
+
+});
 
   app.post('/add_product', function(req, res){
    var formData = req.body;
