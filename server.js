@@ -5,6 +5,8 @@
  var mysql = require('mysql'),
  bodyParser = require('body-parser'),
  myConnection = require('express-myconnection');
+ var session = require('express-session');
+
  var sqlfunctions = require('./routes/SqlFunctions');
  var sqlcategory = require('./routes/sqlcategory');
  var sqlsupp = require('./routes/suppliers');
@@ -18,7 +20,7 @@
  var earningsPerProduct = require('./routes/Earnings');
  var catEarning = require('./routes/CategEarnings');
  var profitables = require('./routes/allProfitables');
- //var loggin = require('./routes/login');
+ var loggin = require('./routes/login');
 
  var dbOptions = {
    host: 'localhost',
@@ -27,6 +29,7 @@
    port: 3306,
    database: 'SpazaApp'
  };
+
 
    // create a route
    var app = express();
@@ -38,8 +41,6 @@
    var fs = require('fs');
 
 
-app.use(express.static('public'));
- 
   //products
   app.get('/products', sqlfunctions.showProducts);
 
@@ -52,7 +53,7 @@ app.use(express.static('public'));
   
   //categories
   app.get('/CatList', sqlcategory.showCategorys);
-    app.get('/showCat', sqlcategory.showCategorys);
+  app.get('/showCat', sqlcategory.showCategorys);
 
   app.get('/category', sqlcategory.showCategorys);
   //app.get('/showCat', sqlcategory.showSuppliers);
@@ -65,15 +66,10 @@ app.use(express.static('public'));
 
 
 
-<<<<<<< HEAD
- //suppiers
- //app.get('/Supplist', sqlsupp.showSuppliers);
-=======
  //suppliers
  //app.get('/Suppl', sqlsupp.showSuppliers);
->>>>>>> 643ec51f5a05f9d3796d4489703fb18aa0e07cf1
 
-  app.get('/Supply', sqlsupp.showSuppliers);
+ app.get('/Supply', sqlsupp.showSuppliers);
 
  app.get('/Supply/edit/:Id', sqlsupp.get);
  app.post('/Supply/edit/:Id', sqlsupp.update)
@@ -81,17 +77,17 @@ app.use(express.static('public'));
  app.post('/Supply/add', sqlsupp.add);
 
   //this should be a post but this is only an illustration of CRUD - not on good practices
-  app.get('/Supply/delete/:Id', sqlsupp.delete);
+  app.get('/showSuppl/delete/:Id', sqlsupp.delete);
 
  //app.get('/sales', sqlsales.showSales);
 
-app.get('/Sale', sqlsales.showSales);
+ app.get('/Sale', sqlsales.showSales);
 
-app.get('/SaleList', sqlsales.showSales);
-app.get('/sales', sqlsales.showSales);
+ app.get('/SaleList', sqlsales.showSales);
+ app.get('/sales', sqlsales.showSales);
 
-app.get('/sales/edit/:Id', sqlsales.get);
-app.post('/sales/edit/:Id', sqlsales.update)
+ app.get('/sales/edit/:Id', sqlsales.get);
+ app.post('/sales/edit/:Id', sqlsales.update)
 //app.post('/sales/update/:Id', sqlsales.update);
 app.post('/sales/add', sqlsales.add);
 //this should be a post but this is only an illustration of CRUD - not on good practices
@@ -99,36 +95,50 @@ app.post('/sales/add', sqlsales.add);
 app.get('/sales/delete/:Id', sqlsales.delete);
 
 
-  app.get('/showProdlist', ListOfProdz.showProdsgroup);
-  app.get('/ListOfCateg', ListOfCat.showcategList);
-  app.get('/showMost', mostPopul.mostProds);
-  app.get('/showLeast', LeastPopular.LeastProds);
-  app.get('/showpopCat', MostPoPCat.mostCat);
-  app.get('/showEarnings', earningsPerProduct.EarningsPro);
-  app.get('/CatgEarnings', catEarning.EarningsCateg);
-  app.get('/showProfitables', profitables.profitableProdz);
-  app.get('/showLeastCat', LeastPopCat.LeastCat);
+app.get('/showProdlist', ListOfProdz.showProdsgroup);
+app.get('/ListOfCateg', ListOfCat.showcategList);
+app.get('/showMost', mostPopul.mostProds);
+app.get('/showLeast', LeastPopular.LeastProds);
+app.get('/showpopCat', MostPoPCat.mostCat);
+app.get('/showEarnings', earningsPerProduct.EarningsPro);
+app.get('/CatgEarnings', catEarning.EarningsCateg);
+app.get('/showProfitables', profitables.profitableProdz);
+app.get('/showLeastCat', LeastPopCat.LeastCat);
 
-  app.post('/add_product', function(req, res){
-   // app.get('/login', loggin.Logging);
-   var formData = req.body;
+
+//app.use('/log', loggin.loggin);
+app.use(function(req, res, next){
+  console.log('in my middleware!');
+  //proceed to the next middleware component
+  next();
+});
+
+app.get('/users', function(req, res){
+  var userData = userService.getUserData();
+  res.render('users', userData)
+});
+
+app.get('/login', function (req, res) {
+    res.render('log')
+ // res.render('home',{cat:leastPopularCateg});
+
+});
+
+app.post('/add_product', function(req, res){
+ var formData = req.body;
  //console.log(formData.product_name);
  res.render('product', {product_name :  formData.product_name});
 });
   //app.use(express.static('public'));
 
-  app.all('/', function (req, res, next) {
+  app.get('/', function (req, res) {
     res.render('home')
  // res.render('home',{cat:leastPopularCateg});
 
- //app.('', function() {
-    // Just send the index.html for other files to support HTML5Mode
-    //res.sendFile('home', { root: routes });
 });
 
-  
+  app.use(express.static('public'));
 
   app.get('/showProdlist', ListOfProdz.showProdsgroup);  
 
   app.listen(3000);
-  console.log('Express server listening on port 3000');
