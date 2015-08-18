@@ -10,9 +10,10 @@
                     <input type="submit">
                 </form>
 <div id="add-products">
-    <table class="table">
+<table class="table">
         <tr>
             <th>Product Name</th>
+            <th>Category Name</th>
             <div class="container-fluid">
                 <div class="btn-group pull-right" >
                     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -24,11 +25,16 @@
                     </tr>
                     {{#product}}
                     <tr>
+                        
                         <td>{{product_name}}</td>
+                        <td>{{category_name}}</td>
                         <td><button><a href="/products/edit/{{Id}}">Edit</a></button></td>
                         <td><button><a href="products/delete/{{Id}}">Delete</a></button></td>
                     </tr>
+                      
                     {{/product}}
+                  
                 </table>
-                
+       
             </div>
+

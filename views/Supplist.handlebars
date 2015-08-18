@@ -17,10 +17,23 @@
 
         		<td>{{shop}}</td>
 
+
             <td><button><a href="/Supply/edit/{{Id}}">Edit</a></button></td>
                 <td><button><a href="Supply/delete/{{Id}}">Delete</a></button></td>
         </tr>
 {{/suppliers}}
 </table>
 
+        <h1>Add a supplier</h1>
+        <form action="/Supply/add" method="POST">
+                Shop: <input type="text" name="shop">     
+                <select name="shop">
+             {{#suppliers}}
+                <option value="{{Id}}">{{shop}}
+                </option>
+             {{/suppliers}}
+
+                </select>    
+                <input type="submit">
+        </form>
 </div>

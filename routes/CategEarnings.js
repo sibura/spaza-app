@@ -4,7 +4,7 @@ exports.EarningsCateg = function(req, res, next){
 			return next(error);
 		}
 
-		connection.query('SELECT category_name, sum(no_Sold) as total_sold FROM products, categories, sales  WHERE products.Id = sales.product_Id AND categories.Id = products.Category_Id GROUP BY category_name ORDER BY total_sold DESC;', [], function(error, results) {
+		connection.query('SELECT categories.category_name, SUM(sales.no_sold*sales.sale_price) AS Total FROM sales INNER JOIN products ON sales.product_Id = products.Id INNER JOIN categories ON products.Category_Id = categories.Id GROUP BY categories.category_name ORDER BY Total DESC;', [], function(error, results) {
 			if (error) {
 				return next(error);
 			}
@@ -13,5 +13,5 @@ exports.EarningsCateg = function(req, res, next){
 				EarningsPerCatego : results
 			});
 		});
-	});
+	});		
 };

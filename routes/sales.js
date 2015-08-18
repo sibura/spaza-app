@@ -17,24 +17,24 @@ exports.showSales = function(req, res, next){
 };
 
 exports.add = function (req, res, next) {
-		req.getConnection(function(err, connection){
-			if (err){
-				return next(err);
-			}
-			var input = JSON.parse(JSON.stringify(req.body));
-			var data = {
+	req.getConnection(function(err, connection){
+		if (err){
+			return next(err);
+		}
+		var input = JSON.parse(JSON.stringify(req.body));
+		var data = {
 						//product_name : input.product_name,
 						sale_price : input.sale_price,
 						no_sold : input.no_sold,
 						date : input.date
-			};
-			connection.query('insert into sales set product_Id=(select Id FROM products WHERE product_name=?), ?', [input.product_name,data], function(err, results) {
-				if (err)
-					console.log("Error inserting : %s ",err );
-				res.redirect('/SaleList');
-			});
-		});
-	};
+					};
+					connection.query('insert into sales set product_Id=(select Id FROM products WHERE product_name=?), ?', [input.product_name,data], function(err, results) {
+						if (err)
+							console.log("Error inserting : %s ",err );
+						res.redirect('/SaleList');
+					});
+				});
+};
 exports.get = function(req, res, next){
 	var Id = req.params.Id;
 	req.getConnection(function(err, connection){

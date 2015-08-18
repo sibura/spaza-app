@@ -28,6 +28,7 @@
    database: 'SpazaApp'
  };
 
+
    // create a route
    var app = express();
    app.use(myConnection(mysql, dbOptions, 'single'));
@@ -37,7 +38,7 @@
    app.use(bodyParser.json());
    var fs = require('fs');
 
- 
+
   //products
   app.get('/products', sqlfunctions.showProducts);
 
@@ -50,7 +51,7 @@
   
   //categories
   app.get('/CatList', sqlcategory.showCategorys);
-    app.get('/showCat', sqlcategory.showCategorys);
+  app.get('/showCat', sqlcategory.showCategorys);
 
   app.get('/category', sqlcategory.showCategorys);
   //app.get('/showCat', sqlcategory.showSuppliers);
@@ -66,7 +67,7 @@
  //suppliers
  app.get('/Supplist', sqlsupp.showSuppliers);
 
-  app.get('/Supply', sqlsupp.showSuppliers);
+ app.get('/Supply', sqlsupp.showSuppliers);
 
  app.get('/Supply/edit/:Id', sqlsupp.get);
  app.post('/Supply/edit/:Id', sqlsupp.update)
@@ -78,13 +79,13 @@
 
  //app.get('/sales', sqlsales.showSales);
 
-app.get('/Sale', sqlsales.showSales);
+ app.get('/Sale', sqlsales.showSales);
 
-app.get('/SaleList', sqlsales.showSales);
-app.get('/sales', sqlsales.showSales);
+ app.get('/SaleList', sqlsales.showSales);
+ app.get('/sales', sqlsales.showSales);
 
-app.get('/sales/edit/:Id', sqlsales.get);
-app.post('/sales/edit/:Id', sqlsales.update)
+ app.get('/sales/edit/:Id', sqlsales.get);
+ app.post('/sales/edit/:Id', sqlsales.update)
 //app.post('/sales/update/:Id', sqlsales.update);
 app.post('/sales/add', sqlsales.add);
 //this should be a post but this is only an illustration of CRUD - not on good practices
@@ -92,34 +93,38 @@ app.post('/sales/add', sqlsales.add);
 app.get('/sales/delete/:Id', sqlsales.delete);
 
 
-  app.get('/showProdlist', ListOfProdz.showProdsgroup);
-  app.get('/ListOfCateg', ListOfCat.showcategList);
-  app.get('/showMost', mostPopul.mostProds);
-  app.get('/showLeast', LeastPopular.LeastProds);
-  app.get('/showpopCat', MostPoPCat.mostCat);
-  app.get('/showEarnings', earningsPerProduct.EarningsPro);
-  app.get('/CatgEarnings', catEarning.EarningsCateg);
-  app.get('/showProfitables', profitables.profitableProdz);
-  app.get('/showLeastCat', LeastPopCat.LeastCat);
+app.get('/showProdlist', ListOfProdz.showProdsgroup);
+app.get('/ListOfCateg', ListOfCat.showcategList);
+app.get('/showMost', mostPopul.mostProds);
+app.get('/showLeast', LeastPopular.LeastProds);
+app.get('/showpopCat', MostPoPCat.mostCat);
+app.get('/showEarnings', earningsPerProduct.EarningsPro);
+app.get('/CatgEarnings', catEarning.EarningsCateg);
+app.get('/showProfitables', profitables.profitableProdz);
+app.get('/showLeastCat', LeastPopCat.LeastCat);
 
+
+//app.use('/log', loggin.loggin);
 app.use(function(req, res, next){
   console.log('in my middleware!');
   //proceed to the next middleware component
   next();
 });
 
-app.get('/user', function(req, res){
+app.get('/users', function(req, res){
   var userData = userService.getUserData();
-  res.render('user', userData)
+  res.render('users', userData)
 });
 
-app.get('/login', function(req, res){
-   res.render('log')
+app.get('/login', function (req, res) {
+    res.render('log')
+ // res.render('home',{cat:leastPopularCateg});
 
 });
 
-  app.post('/add_product', function(req, res){
-   var formData = req.body;
+
+app.post('/add_product', function(req, res){
+ var formData = req.body;
  //console.log(formData.product_name);
  res.render('product', {product_name :  formData.product_name});
 });
