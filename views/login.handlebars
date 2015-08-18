@@ -12,14 +12,14 @@
 
  <section class="Nelisa-login">
   
-  <form action="/login" name = "myform" method="post">  
+  <form form method="post" action="/home">  
     <div id="fade-box">
-      <input type="text" name="username" id="username" placeholder="username" required autofocus>
-        <input type="password" name="password" placeholder="Password" required autofocus>
-          <button type="login" class="btn btn-default" onclick="validate()">Log In</button> 
-        </div>
-      </form>
-   
+      <input type="text" name="username" value="" placeholder="Username or Email" required>
+      <input type="password" name="password" value="" placeholder="Password" required>	
+        <p class="submit"><input type="submit" name="commit" value="Login"></p>
+   <a href="signup"><strong>Dont Have Account??</strong>Sign Up  </a> 
+   </div>     
+</form>
  </section> 
  <!--script type="text/javascript">
  var count = 2;
