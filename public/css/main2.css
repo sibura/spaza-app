@@ -76,7 +76,7 @@ hr {
 
 .box {
     margin-bottom: 20px;
-    padding: 30px 15px;
+    padding: 30px;
     background: #fff;
     background: rgba(255,255,255,0.9);
 }
@@ -176,7 +176,6 @@ footer p {
         float: none;
         margin: 0 auto;
         table-layout: fixed;
-        
         font-size: 1.25em;
     }
 }
@@ -205,6 +204,8 @@ td {
   height: 300px;
   overflow: hidden;
   border: 10px solid #666;
+  margin-left: 20%;
+
 }
 
 #sliderImages {
@@ -221,6 +222,7 @@ td {
 
 #sliderImages img {
     float: right;
+
 }
 
 @keyframes slide{
@@ -283,5 +285,8 @@ form {
 .dropdown-menu dropdown-menu-right {
     color: grey;
     font-size: 20px;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 754e87ea151a3118efba490924ca7437c6c5c6b6
 }

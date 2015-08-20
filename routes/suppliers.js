@@ -3,7 +3,7 @@ exports.showSuppliers = function(req, res, next){
 		if(error){
 			return next(error);
 		}
-			connection.query('SELECT Id, shop  FROM suppliers', [], function(error, results) {
+			connection.query('SELECT Id, shop  FROM suppliers LIMIT 0, 5;', [], function(error, results) {
 				if (error) return next(error);
 				console.log(results);
 				res.render( 'Supplist', {
