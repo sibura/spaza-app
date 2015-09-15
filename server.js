@@ -6,6 +6,7 @@ bodyParser = require('body-parser'),
 myConnection = require('express-myconnection');
 session = require('express-session');
 var cookieSession =require('cookie-session');
+var bcrypt = require('bcrypt');
 
  var sqlfunctions = require('./routes/SqlFunctions');
  var sqlcategory = require('./routes/sqlcategory');
@@ -97,11 +98,21 @@ app.get('/login', function (req, res) {
 // });
 
   app.get('/signup', function(req, res){
-  res.render('signup', {layout: false})
+      app.post('/signup', function(req, res){
+    var user = JSON.parse(JSON.stringify(req.body));
+    if(user.password === user.confirm_password){
+      if(user[user.username] === undefined){
+        user[user.username] = user.password;
+        res.redirect('/signup');
+      }
+    }
+    res.render('signup');
 });
+    });
 
- app.post('/signup', function(req, res){
-  var formData = JSON.parse(JSON.stringify(req.body));
+
+ app.post('/signup', register.add);
+  /*var formData = JSON.parse(JSON.stringify(req.body));
   if(formData.password == formData.confirm_password){
     if(user[formData.username] === undefined)
     user[formData.username] = formData.password;
@@ -109,7 +120,7 @@ app.get('/login', function (req, res) {
     return res.redirect('/')
   }
   res.redirect('signup')
-});
+});*/
 /*app.get('/login', function (req, res) {
     res.render('log',{layout:false});
 });
@@ -220,10 +231,6 @@ app.get('/showEarnings', earningsPerProduct.EarningsPro);
 app.get('/CatgEarnings', catEarning.EarningsCateg);
 app.get('/showProfitables', profitables.profitableProdz);
 app.get('/showLeastCat', LeastPopCat.LeastCat);
-
-
-
-
 
 /*app.get('/login', function (req, res) {
     res.render('');
