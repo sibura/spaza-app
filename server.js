@@ -6,7 +6,7 @@ bodyParser = require('body-parser'),
 myConnection = require('express-myconnection');
 session = require('express-session');
 var cookieSession =require('cookie-session');
-//var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt');
 
  var sqlfunctions = require('./routes/SqlFunctions');
  var sqlcategory = require('./routes/sqlcategory');
@@ -95,8 +95,18 @@ app.get('/login', function (req, res) {
 // });
 
   app.get('/signup', function(req, res){
-  res.render('signup', {layout: false})
+      app.post('/signup', function(req, res){
+    var user = JSON.parse(JSON.stringify(req.body));
+    if(user.password === user.confirm_password){
+      if(user[user.username] === undefined){
+        user[user.username] = user.password;
+        res.redirect('/signup');
+      }
+    }
+    res.render('signup');
 });
+    });
+
 
  app.post('/signup', register.add);
   /*var formData = JSON.parse(JSON.stringify(req.body));
