@@ -27,7 +27,7 @@ var cookieSession =require('cookie-session');
  var dbOptions = {
    host: 'localhost',
    user: 'root',
-   password: 'nwabisamilisantmasiko',
+   password: 'coder123',
    port: 3306,
    database: 'SpazaApp'
  };
@@ -67,7 +67,7 @@ var checkUser = function(req, res, next){
 
   app.post('/home', function (req, res) {
     var formData = JSON.parse(JSON.stringify(req.body))
-    if(user[formData.username] !== undefined){
+    if(user[formData.username] == formData.password && user.hasOwnProperty(formData.username)){
       req.session.user = formData.username;
       return res.redirect('home')
     }
@@ -85,6 +85,9 @@ var checkUser = function(req, res, next){
 //   }
 
 // });
+app.get('/home', checkUser, function (req, res) {
+  res.render('home')
+});
 
 app.get('/login', function (req, res) {
   res.render('home');
@@ -244,11 +247,11 @@ app.post('/add_product', function(req, res){
     res.redirect('/');
   });
 
-app.get('/signup/edit/:id', register.get);
-//app.post('/signUp/update/:id', register.update);
-app.post('/signup/add', register.add);
-//this should be a post but this is only an illustration of CRUD - not on good practices
-app.get('/signup/delete/:id', register.delete);
+// app.get('/signup/edit/:id', register.get);
+// //app.post('/signUp/update/:id', register.update);
+// app.post('/signup/add', register.add);
+// //this should be a post but this is only an illustration of CRUD - not on good practices
+// app.get('/signup/delete/:id', register.delete);
 
 
   app.get('/showProdlist', ListOfProdz.showProdsgroup);  
