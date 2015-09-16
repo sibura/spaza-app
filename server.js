@@ -167,6 +167,7 @@ app.use(function(req, res, next){
 
   //products
   app.get('/products', sqlfunctions.showProducts);
+  app.get('/productList', sqlfunctions.showProducts);
 
   app.get('/products', sqlfunctions.showProducts);
   app.get('/products/edit/:Id', sqlfunctions.get);
