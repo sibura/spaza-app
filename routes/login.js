@@ -13,10 +13,8 @@ exports.login = function(req, res, next){
 			     var user = users[0];
 			     console.log(users);
 
-			    
-			    
 			    bcrypt.compare(input.password, user.password, function(err, pass){
-			  
+			  	 bcrypt.compare(input.Admin, user.Admin, function(err, admin){
 			    	if (err) {
 			    		console.log(err);
 			    	}
@@ -28,13 +26,13 @@ exports.login = function(req, res, next){
 			    		req.session.role =  user.User_role;
 			    		return res.render("home")
 			    		console.log(password);
+			    		console.log(Admin);
 			    	} else {
-			    		 res.redirect('/');
-
+			    		 res.redirect('/home');
+			    	
 			    	};
 				});
-				
-
+			  	});
 			});
 		    });
   		};

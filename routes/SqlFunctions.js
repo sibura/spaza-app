@@ -5,7 +5,7 @@
   				return next(error);
   			}
 
-			connection.query('SELECT  products.product_name, categories.category_name, products.Category_Id FROM products, categories  where products.Category_Id = categories.Id;', [], function(error, results) {
+			connection.query('SELECT  products.Id,products.product_name, categories.category_name, products.Category_Id FROM products, categories  where products.Category_Id = categories.Id;', [], function(error, results) {
 			    if (error) return next(error);
 			connection.query('SELECT Id, category_name FROM categories', [], function(error, results1) {
                  if (error) return next(error);
