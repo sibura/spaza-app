@@ -1,9 +1,9 @@
 <h1>Edit</h1>
 
-{{#data}}
+{{#products}}
 <form action="/products/edit/{{Id}}" method="POST">
-	product_name: <input type="text" name="description" value="{{Id}}">	
+	product_name: <input type="text" name="product_name" value="{{product_name}}">	
 	<input type="submit">
 
 </form>
-{{/data}}
+{{/products}}

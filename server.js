@@ -37,6 +37,7 @@ var bcrypt = require('bcrypt');
 
    // create a route
 var app = express();
+
 app.use(express.static('public'));
 app.use(myConnection(mysql, dbOptions, 'single'));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
@@ -45,54 +46,52 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({ 
-secret : 'coder123', resave : true, cookie: { maxAge: 60000 }}))
+secret : 'coder123', resave : true, cookie: { maxAge: 60000 }}));
 
 
 
 var fs = require('fs');
 var user = {};
+
+
+app.use(function(req, res, next){
+  console.log('in my middleware!');
+  //proceed to the next middleware component
+  next();
+});
+
 var checkUser = function(req, res, next){
-  if (req.session.username){
+  if (req.session.user){
     return next();
-    res.render("home")
   }
-  else{// the user is not logged in redirect him to the login page
-    res.redirect('/login');
-  }
+  // the user is not logged in redirect them to the login page
+  res.redirect('/');
 };
+
+app.get('/users', checkUser, function(req, res){
+  var userData = userService.getUserData();
+  res.render('users', userData)
+});
   
 
  app.get('/', function(req, res){
   res.render('login', {layout: false})
 });
 
-  app.post('/home', function (req, res) {
-    var formData = JSON.parse(JSON.stringify(req.body))
-    if(user[formData.username] !== undefined){
-      req.session.user = formData.username;
-      return res.redirect('home')
-    }
-    return res.redirect('login')
-   // alert ("Login was successful");
-  });
 
+app.post('/home', loggin.login);
 
-
-// app.post('/home', function(req, res){
-//   var formData = JSON.parse(JSON.stringify(req.body));
-//   if(user[formData.username] !== undefined){
-//     req.session.user = formData.username;
-//     return res.redirect('home')
-//   }
-
-// });
+app.get('/home', checkUser, function (req, res) {
+  res.render('login')
+});
 
 app.get('/login', function (req, res) {
   res.render('home');
 });
-//  app.get('/logout', function(req, res){
-//   res.render('login');
-// });
+
+ app.get('/signup', function(req, res){
+  res.render('signup', {layout: false})
+});
 
   app.get('/signup', function(req, res){
       app.post('/signup', function(req, res){
@@ -100,7 +99,7 @@ app.get('/login', function (req, res) {
     if(user.password === user.confirm_password){
       if(user[user.username] === undefined){
         user[user.username] = user.password;
-        res.redirect('/signup');
+        res.redirect('/');
       }
     }
     res.render('signup');
@@ -109,67 +108,15 @@ app.get('/login', function (req, res) {
 
 
  app.post('/signup', register.add);
-  /*var formData = JSON.parse(JSON.stringify(req.body));
-  if(formData.password == formData.confirm_password){
-    if(user[formData.username] === undefined)
-    user[formData.username] = formData.password;
-    console.log(user)
-    return res.redirect('/')
-  }
-  res.redirect('signup')
-});*/
-/*app.get('/login', function (req, res) {
-    res.render('log',{layout:false});
-});
-   app.post('/login', function (req, res) {
-    var input = JSON.parse(JSON.stringify(req.body))
-    if(input.username === 'Admin' && input.password === 'coder123'){
-      req.session.user = input.username;
-      return res.redirect('home')
-    }
-    return res.redirect('login');
-  });
-
-   app.get('/', function (req, res) {
-    if(req.session.user){
-      res.render('home')
-    }
-    else {
-      res.render('log');
-    }
-
-  });
-
-   app.get('/home', function (req, res, next) {
-     // body...
-     if(req.session.user){
-      return next()
-    }
-    return res.redirect('/login')
-  }, function (req, res) {
-    res.render('home')
-  });
-
-//app.use('/log', loggin.loggin);
-app.use(function(req, res, next){
-  console.log('in my middleware!');
-  if(req.session.user){
-   return  next();
-
- }
- else{
-  res.redirect('/login');
-}
-});
-*/
-//app.use('/', loggin.loggin);
 
 
   //products
   app.get('/products', sqlfunctions.showProducts);
   app.get('/productList', sqlfunctions.showProducts);
 
-  app.get('/products', sqlfunctions.showProducts);
+  app.get('/products',checkUser, sqlfunctions.showProducts);
+
+  //app.get('/products', sqlfunctions.showProducts);
   app.get('/products/edit/:Id', sqlfunctions.get);
   app.post('/products/edit/:Id', sqlfunctions.update);
   app.post('/products/add', sqlfunctions.add);
@@ -177,10 +124,10 @@ app.use(function(req, res, next){
   app.get('/products/delete/:Id', sqlfunctions.delete);
   
   //categories
-  app.get('/CatList', sqlcategory.showCategorys);
-  app.get('/showCat', sqlcategory.showCategorys);
+  app.get('/CatList',checkUser, sqlcategory.showCategorys);
+  app.get('/showCat',checkUser, sqlcategory.showCategorys);
 
-  app.get('/category', sqlcategory.showCategorys);
+  app.get('/category',checkUser, sqlcategory.showCategorys);
   //app.get('/showCat', sqlcategory.showSuppliers);
   app.get('/showCat/edit/:Id', sqlcategory.get);
   app.post('/showCat/edit/:Id', sqlcategory.update);
@@ -192,9 +139,9 @@ app.use(function(req, res, next){
 
 
  //suppliers
- app.get('/Supplist', sqlsupp.showSuppliers);
+ app.get('/Supplist',checkUser, sqlsupp.showSuppliers);
 
- app.get('/Supply', sqlsupp.showSuppliers);
+ app.get('/Supply',checkUser, sqlsupp.showSuppliers);
 
  app.get('/Supply/edit/:Id', sqlsupp.get);
  app.post('/Supply/edit/:Id', sqlsupp.update)
@@ -204,12 +151,10 @@ app.use(function(req, res, next){
   //this should be a post but this is only an illustration of CRUD - not on good practices
   app.get('/Supply/delete/:Id', sqlsupp.delete);
 
- //app.get('/sales', sqlsales.showSales);
+ app.get('/Sale',checkUser, sqlsales.showSales);
 
- app.get('/Sale', sqlsales.showSales);
-
- app.get('/SaleList', sqlsales.showSales);
- app.get('/sales', sqlsales.showSales);
+ app.get('/SaleList',checkUser, sqlsales.showSales);
+ app.get('/sales',checkUser, sqlsales.showSales);
 
  app.get('/sales/edit/:Id', sqlsales.get);
  app.post('/sales/edit/:Id', sqlsales.update);
@@ -220,15 +165,15 @@ app.post('/sales/add', sqlsales.add);
 app.get('/sales/delete/:Id', sqlsales.delete);
 
 
-app.get('/showProdlist', ListOfProdz.showProdsgroup);
-app.get('/ListOfCateg', ListOfCat.showcategList);
-app.get('/showMost', mostPopul.mostProds);
-app.get('/showLeast', LeastPopular.LeastProds);
-app.get('/showpopCat', MostPoPCat.mostCat);
-app.get('/showEarnings', earningsPerProduct.EarningsPro);
-app.get('/CatgEarnings', catEarning.EarningsCateg);
-app.get('/showProfitables', profitables.profitableProdz);
-app.get('/showLeastCat', LeastPopCat.LeastCat);
+app.get('/showProdlist',checkUser, ListOfProdz.showProdsgroup);
+app.get('/ListOfCateg',checkUser, ListOfCat.showcategList);
+app.get('/showMost',checkUser, mostPopul.mostProds);
+app.get('/showLeast',checkUser, LeastPopular.LeastProds);
+app.get('/showpopCat',checkUser, MostPoPCat.mostCat);
+app.get('/showEarnings',checkUser, earningsPerProduct.EarningsPro);
+app.get('/CatgEarnings',checkUser, catEarning.EarningsCateg);
+app.get('/showProfitables',checkUser, profitables.profitableProdz);
+app.get('/showLeastCat',checkUser, LeastPopCat.LeastCat);
 
 /*app.get('/login', function (req, res) {
     res.render('');
@@ -252,13 +197,15 @@ app.post('/add_product', function(req, res){
     res.redirect('/');
   });
 
-app.get('/signup/edit/:id', register.get);
-//app.post('/signUp/update/:id', register.update);
-app.post('/signup/add', register.add);
-//this should be a post but this is only an illustration of CRUD - not on good practices
-app.get('/signup/delete/:id', register.delete);
 
 
-  app.get('/showProdlist', ListOfProdz.showProdsgroup);  
+ app.get('/signup/edit/:id', register.get);
+app.post('/signUp/update/:id', register.update);
+ app.post('/signup/add', register.add);
+// //this should be a post but this is only an illustration of CRUD - not on good practices
+ app.get('/signup/delete/:id', register.delete);
+
+
+  app.get('/showProdlist',checkUser, ListOfProdz.showProdsgroup);  
 
   app.listen(3000);

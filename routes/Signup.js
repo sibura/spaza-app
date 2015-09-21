@@ -13,6 +13,11 @@ exports.add = function (req, res, next) {
         bcrypt.genSalt(10, function(err, salt) {
 			bcrypt.hash(input.password, salt, function(err, hash) {
 		        // Store hash in your password DB. 
+
+		        console.log("hash details...")
+		        console.log(hash)
+		        console.log(hash.length)
+
 		        data.password = hash;
 		        connection.query('insert into users set ?', data, function(err, results) {
 		        	if (err)

@@ -37,3 +37,12 @@ CREATE TABLE sales
   no_sold int,
   FOREIGN KEY (product_Id) REFERENCES products(Id)
 );
+
+CREATE TABLE  users
+(
+Id int NOT NULL auto_increment primary key,
+usename VARCHAR(30) NOT NULL,
+password VARCHAR(100) NOT NULL,
+role VARCHAR(15) NOT NULL
+);
+)
