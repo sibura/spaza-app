@@ -21,17 +21,18 @@
 {{#in_ca}}
 	<h1>Add a Sale</h1>
 <form action="/sales/add" method="POST">
-	Date:<input type="date" name="date"><br />
-	Product-name:<br /> 
+	Date:<input type="date" name="date">
+	Product-name: 
 	<select name="product_name">
 		{{#products}}
 		<option value="{{product_name}}">{{product_name}}</option>
 		{{/products}}
-	</select><br />
-	Sales-price:<br /><input type="price" name="sale_price" required><br />
-	No-Sold:<br /><input type="number" name="no_sold" required><br />
+	</select>
+	Sales-price:<input type="price" name="sale_price" required><br />
+	<br />
+	No-Sold:<input type="number" name="no_sold" required>
 
-	<br /><br /><input type="submit">
+	<input type="submit">
 </form>
 
 <table class="table">
