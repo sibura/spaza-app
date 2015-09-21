@@ -121,7 +121,7 @@ app.get('/login', function (req, res) {
   app.get('/products/delete/:Id', sqlfunctions.delete);
   
   //categories
-  //app.get('/CatList',checkUser, sqlcategory.showCategorys);
+  app.get('/CatList',checkUser, sqlcategory.showCategorys);
   app.get('/showCat',checkUser, sqlcategory.showCategorys);
 
   //app.get('/category',checkUser, sqlcategory.showCategorys);
@@ -198,7 +198,7 @@ app.post('/add_product', function(req, res){
 
   //these are the logout
   app.get('/logout', function(req, res){
-   
+
     delete req.session.user;
     res.redirect('/');
     

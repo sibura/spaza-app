@@ -164,7 +164,7 @@ footer p {
     }
 
     .nav>li>a {
-        padding: 35px;
+        padding: 30px;
     }
 
     .navbar-nav>li>a {
@@ -176,7 +176,7 @@ footer p {
         float: none;
         margin: 0 auto;
         table-layout: fixed;
-        font-size: 1.25em;
+        font-size: 1.20em;
     }
 }
 
@@ -281,6 +281,7 @@ td {
 form {
     color: grey;
     font-size: 20px;
+    display: inline;
 
 }
 .dropdown-menu dropdown-menu-right {
