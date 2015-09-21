@@ -22,8 +22,8 @@ var bcrypt = require('bcrypt');
  var catEarning = require('./routes/CategEarnings');
  var profitables = require('./routes/allProfitables');
  var loggin = require('./routes/login');
- var register = require('./routes/Signup');
- 
+ var register = require('./routes/Users');
+ var usrs =require('./routes/Users');
 
  var dbOptions = {
    host: 'localhost',
@@ -37,7 +37,6 @@ var bcrypt = require('bcrypt');
 
    // create a route
 var app = express();
-
 app.use(express.static('public'));
 app.use(myConnection(mysql, dbOptions, 'single'));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
@@ -51,8 +50,6 @@ secret : 'coder123', resave : true, cookie: { maxAge: 60000 }}));
 
 
 var fs = require('fs');
-var user = {};
-
 
 app.use(function(req, res, next){
   console.log('in my middleware!');
@@ -106,7 +103,6 @@ app.get('/login', function (req, res) {
 });
     });
 
-
  app.post('/signup', register.add);
 
 
@@ -116,18 +112,19 @@ app.get('/login', function (req, res) {
 
   app.get('/products',checkUser, sqlfunctions.showProducts);
 
-  //app.get('/products', sqlfunctions.showProducts);
+ // app.get('/productList', sqlfunctions.showProducts);
   app.get('/products/edit/:Id', sqlfunctions.get);
   app.post('/products/edit/:Id', sqlfunctions.update);
+  app.post('/products/update/:Id', sqlfunctions.update);
   app.post('/products/add', sqlfunctions.add);
   //this should be a post but this is only an illustration of CRUD - not on good practices
   app.get('/products/delete/:Id', sqlfunctions.delete);
   
   //categories
-  app.get('/CatList',checkUser, sqlcategory.showCategorys);
+  //app.get('/CatList',checkUser, sqlcategory.showCategorys);
   app.get('/showCat',checkUser, sqlcategory.showCategorys);
 
-  app.get('/category',checkUser, sqlcategory.showCategorys);
+  //app.get('/category',checkUser, sqlcategory.showCategorys);
   //app.get('/showCat', sqlcategory.showSuppliers);
   app.get('/showCat/edit/:Id', sqlcategory.get);
   app.post('/showCat/edit/:Id', sqlcategory.update);
@@ -164,6 +161,13 @@ app.post('/sales/add', sqlsales.add);
 
 app.get('/sales/delete/:Id', sqlsales.delete);
 
+app.get('/user', checkUser, usrs.usser);
+app.get('/user/add', usrs.usser);
+app.get('/user/edit/:Id', usrs.get);
+app.get('/user/edit/:Id', usrs.update);
+app.post('/user/update/:Id', usrs.update);
+app.post('/user/add', usrs.add);
+app.get('/user/delete/:Id', usrs.delete);
 
 app.get('/showProdlist',checkUser, ListOfProdz.showProdsgroup);
 app.get('/ListOfCateg',checkUser, ListOfCat.showcategList);
@@ -175,6 +179,7 @@ app.get('/CatgEarnings',checkUser, catEarning.EarningsCateg);
 app.get('/showProfitables',checkUser, profitables.profitableProdz);
 app.get('/showLeastCat',checkUser, LeastPopCat.LeastCat);
 
+
 /*app.get('/login', function (req, res) {
     res.render('');
   });*/
@@ -182,7 +187,7 @@ app.get('/showLeastCat',checkUser, LeastPopCat.LeastCat);
 app.post('/add_product', function(req, res){
  var formData = req.body;
  //console.log(formData.product_name);
- res.render('product', {product_name :  formData.product_name});
+ res.render('products', {product_name :  formData.product_name});
 });
 
   //app.use(express.static('public'));
@@ -193,8 +198,10 @@ app.post('/add_product', function(req, res){
 
   //these are the logout
   app.get('/logout', function(req, res){
+   
     delete req.session.user;
     res.redirect('/');
+    
   });
 
 

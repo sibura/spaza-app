@@ -1,27 +1,45 @@
-<div id="add-suppliers">
- <h1>Add a supplier</h1>
-        <form action="/Supply/add" method="POST">
-                Shop: <input type="text" name="shop">     
-                <input type="submit">
-        </form>
+{{#action}}
 <table class="table">
 
     <tr>
 
 
-                <th>Shop</th>
-              
-        </tr>
-{{#suppliers}}
-        <tr>
+        <th>Shop</th>
 
-        		<td>{{shop}}</td>
+    </tr>
+    {{#suppliers}}
+    <tr>
 
-
-            <td><button><a href="/Supply/edit/{{Id}}">Edit</a></button></td>
-                <td><button><a href="Supply/delete/{{Id}}">Delete</a></button></td>
-        </tr>
-{{/suppliers}}
+        <td>{{shop}}</td>
+    </tr>
+    {{/suppliers}}
 </table>
+{{/action}} 
+      
+{{#in_ca}}
+<h1>Add a supplier</h1>
+<form action="/Supply/add" method="POST">
+    Shop: <input type="text" name="shop">     
+    <input type="submit">
+</form>
 
-</div>
+<table class="table">
+
+    <tr>
+
+
+        <th>Shop</th>
+
+    </tr>
+    {{#suppliers}}
+    <tr>
+
+      <td>{{shop}}</td>
+
+
+      <td><button><a href="/Supply/edit/{{Id}}">Edit</a></button></td>
+      <td><button><a href="Supply/delete/{{Id}}">Delete</a></button></td>
+  </tr>
+  {{/suppliers}}
+</table>
+{{/in_ca}}

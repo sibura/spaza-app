@@ -1,13 +1,36 @@
 var bcrypt = require('bcrypt');
+exports.usser = function (req, res, next) {
+	req.getConnection(function(error, connection){
+		var Administrator = req.session.role === "Admin"
+		var user = req.session.role !== "Admin"
+  		var input = JSON.parse(JSON.stringify(req.body));
+  		
+		if(error){
+			return next(error);
+		}
+		connection.query('SELECT * FROM users;', [], function(error, results) {
+			if (error) return next(error);
+				res.render( 'User', {
+					USer: results,
+					in_ca : Administrator,
+					action : user
+				});
+			});
+	});
+};
+
 exports.add = function (req, res, next) {
 	req.getConnection(function(err, connection){
+
 		if (err){ 
 			return next(err);
 		}
 		var input = JSON.parse(JSON.stringify(req.body));
+		
 		var data = {
 			username : input.username,
 			role : 'View'
+
 		};
 
         bcrypt.genSalt(10, function(err, salt) {
@@ -23,7 +46,7 @@ exports.add = function (req, res, next) {
 		        	if (err)
 		        		console.log("Error inserting : %s ", err);
 
-		        	res.redirect('/');
+		        	res.redirect('/user');
 		        });
 		    });
 		});
@@ -37,7 +60,7 @@ exports.get = function(req, res, next){
 			if(err){
 				console.log("Error Selecting : %s ",err );
 			}
-			res.render('usersEdit',{page_title:"Edit Customers - Node.js", data : rows[0]});      
+			res.render('usersEdit', {page_title:"Edit Customers - Node.js", data : rows[0]});      
 		}); 
 	});
 };
@@ -45,13 +68,14 @@ exports.get = function(req, res, next){
 exports.update = function(req, res, next){
 
 	var data = JSON.parse(JSON.stringify(req.body));
+	console.log(data)
 	var Id = req.params.Id;
 	req.getConnection(function(err, connection){
 		connection.query('UPDATE users SET ? WHERE Id = ?', [data, Id], function(err, rows){
 			if (err){
 				console.log("Error Updating : %s ",err );
 			}
-			res.redirect('/');
+			res.redirect('/user');
 		});
 
 	});
@@ -65,7 +89,7 @@ exports.delete = function(req, res, next){
 		         //alert("Are You sure You Want To delete This Product?");
 		         console.log("Error Selecting : %s ",err );
 		     }
-		     res.redirect('/');
+		     res.redirect('/user');
 		 });
 
 	});	

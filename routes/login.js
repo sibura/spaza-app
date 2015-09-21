@@ -9,14 +9,12 @@ exports.login = function(req, res, next){
   				return next(error);
   			}
 
-			connection.query('SELECT  password FROM users WHERE username = ?', username, function(error, users) {
+			connection.query('SELECT  * FROM users WHERE username = ?', username, function(error, users) {
 			     var user = users[0];
 			     console.log(users);
 
-			    
-			    
 			    bcrypt.compare(input.password, user.password, function(err, pass){
-			  
+			  	 bcrypt.compare(input.Admin, user.Admin, function(err, admin){
 			    	if (err) {
 			    		console.log(err);
 			    	}
@@ -25,16 +23,16 @@ exports.login = function(req, res, next){
 
 			    	if (pass) {
 			    		req.session.user = username;
-			    		req.session.role =  user.User_role;
+			    		req.session.role =  user.role;
 			    		return res.render("home")
-			    		console.log(password);
+			    		console.log(pass);
+			    		console.log(Admin);
 			    	} else {
-			    		 res.redirect('/');
-
+			    		 res.redirect('/home');
+			    	
 			    	};
 				});
-				
-
+			  	});
 			});
 		    });
   		};
