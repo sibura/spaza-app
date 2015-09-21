@@ -1,5 +1,8 @@
 exports.showSales = function(req, res, next){
 	req.getConnection(function(error, connection){
+		var Administrator = req.session.role === "Admin"
+		var user = req.session.role !== "Admin"
+
 		if(error){
 			return next(error);
 		}
@@ -9,7 +12,9 @@ exports.showSales = function(req, res, next){
 				if (error) return next(error);
 				res.render( 'SaleList', {
 					Sale : results,
-					products : results2
+					products : results2,
+					in_ca : Administrator,
+					action : user
 				});
 			});
 		});

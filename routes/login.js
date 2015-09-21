@@ -9,7 +9,7 @@ exports.login = function(req, res, next){
   				return next(error);
   			}
 
-			connection.query('SELECT  password FROM users WHERE username = ?', username, function(error, users) {
+			connection.query('SELECT  * FROM users WHERE username = ?', username, function(error, users) {
 			     var user = users[0];
 			     console.log(users);
 
@@ -23,9 +23,9 @@ exports.login = function(req, res, next){
 
 			    	if (pass) {
 			    		req.session.user = username;
-			    		req.session.role =  user.User_role;
+			    		req.session.role =  user.role;
 			    		return res.render("home")
-			    		console.log(password);
+			    		console.log(pass);
 			    		console.log(Admin);
 			    	} else {
 			    		 res.redirect('/home');

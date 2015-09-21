@@ -1,8 +1,10 @@
 var bcrypt = require('bcrypt');
 exports.usser = function (req, res, next) {
 	req.getConnection(function(error, connection){
-
+		var Administrator = req.session.role === "Admin"
+		var user = req.session.role !== "Admin"
   		var input = JSON.parse(JSON.stringify(req.body));
+  		
 		if(error){
 			return next(error);
 		}
@@ -10,6 +12,8 @@ exports.usser = function (req, res, next) {
 			if (error) return next(error);
 				res.render( 'User', {
 					USer: results,
+					in_ca : Administrator,
+					action : user
 				});
 			});
 	});
@@ -25,7 +29,7 @@ exports.add = function (req, res, next) {
 		
 		var data = {
 			username : input.username,
-			role : 'Admin'
+			role : 'View'
 
 		};
 

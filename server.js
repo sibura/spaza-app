@@ -37,7 +37,6 @@ var bcrypt = require('bcrypt');
 
    // create a route
 var app = express();
-
 app.use(express.static('public'));
 app.use(myConnection(mysql, dbOptions, 'single'));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
@@ -51,8 +50,6 @@ secret : 'coder123', resave : true, cookie: { maxAge: 60000 }}));
 
 
 var fs = require('fs');
-var user = {};
-
 
 app.use(function(req, res, next){
   console.log('in my middleware!');
@@ -198,9 +195,10 @@ app.post('/add_product', function(req, res){
 
   //these are the logout
   app.get('/logout', function(req, res){
+   
     delete req.session.user;
     res.redirect('/');
-    alert('Are you sure');
+    
   });
 
 

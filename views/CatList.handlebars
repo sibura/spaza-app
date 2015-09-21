@@ -1,4 +1,36 @@
+{{#action}}
 <div class="container-fluid">
+    
+                <div class="btn-group pull-right" >
+                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                        Menu
+                        <span class="caret"></span>
+                    </a>
+                <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu">
+                    <li><a href="showpopCat">Most Popular Category</a></li>
+                    <li><a href="showLeastCat">Least Popular Category</a></li>
+                    <li><a href="CatgEarnings">Earnings Per Category</a></li>
+                    <li><a href="#">Most Profitable Category</a></li>  </div>
+
+    <table class="table">
+
+    <tr>
+
+                <th>Category Name</th>
+        </tr>
+
+{{#category}}
+        <tr>
+
+                <td>{{category_name}}</td>
+
+{{/category}}
+</table>
+{{/action}}
+{{#in_ca}}
+
+<div class="container-fluid">
+    
                 <div class="btn-group pull-right" >
                     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                         Menu
@@ -20,6 +52,7 @@
 
                 <th>Category Name</th>
         </tr>
+
 {{#category}}
         <tr>
 
@@ -29,4 +62,6 @@
         </tr>
 
 {{/category}}
+
 </table>
+{{/in_ca}}

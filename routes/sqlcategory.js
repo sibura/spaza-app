@@ -1,5 +1,8 @@
 exports.showCategorys = function(req, res, next){
  	req.getConnection(function(error, connection){
+ 		var Administrator = req.session.role === "Admin"
+		var user = req.session.role !== "Admin"
+
   			if(error){
   				return next(error);
   			}
@@ -8,7 +11,9 @@ exports.showCategorys = function(req, res, next){
 			    if (error) return next(error);
 				console.log(results);
 			    res.render( 'CatList', {
-				category : results
+				category : results,
+				in_ca : Administrator,
+				action : user
 			    });
 			});
   		});

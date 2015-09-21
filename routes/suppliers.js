@@ -1,5 +1,8 @@
 exports.showSuppliers = function(req, res, next){
 	req.getConnection(function(error, connection){
+		var Administrator = req.session.role === "Admin"
+		var user = req.session.role !== "Admin"
+
 		if(error){
 			return next(error);
 		}
@@ -7,7 +10,9 @@ exports.showSuppliers = function(req, res, next){
 				if (error) return next(error);
 				console.log(results);
 				res.render( 'Supplist', {
-					suppliers : results
+					suppliers : results,
+					in_ca : Administrator,
+					action : user
 				});
 			});
 		});
