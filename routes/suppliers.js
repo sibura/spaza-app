@@ -11,7 +11,7 @@ exports.showSuppliers = function(req, res, next){
 				console.log(results);
 				res.render( 'Supplist', {
 					suppliers : results,
-					in_ca : Administrator,
+					isAdmin : Administrator,
 					action : user
 				});
 			});

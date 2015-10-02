@@ -1,7 +1,7 @@
 CREATE TABLE suppliers
 (
     Id int NOT NULL auto_increment primary key,
-	shop VARCHAR(255) NOT NULL
+	  shop VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE categories 

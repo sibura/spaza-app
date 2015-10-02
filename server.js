@@ -7,6 +7,9 @@ myConnection = require('express-myconnection');
 session = require('express-session');
 var cookieSession =require('cookie-session');
 var bcrypt = require('bcrypt');
+var request = require('request');
+//var path = require('path');
+
 
  var sqlfunctions = require('./routes/SqlFunctions');
  var sqlcategory = require('./routes/sqlcategory');
@@ -24,6 +27,10 @@ var bcrypt = require('bcrypt');
  var loggin = require('./routes/login');
  var register = require('./routes/Users');
  var usrs =require('./routes/Users');
+ var Search = require('./routes/search');
+ var searchAll = require('./routes/search');
+ var searchCat = require('./routes/search');
+ var searchSales = require('./routes/search');
 
  var dbOptions = {
    host: 'localhost',
@@ -33,21 +40,18 @@ var bcrypt = require('bcrypt');
    database: 'SpazaApp'
  };
 
- //dbOptions.connect();
-
    // create a route
 var app = express();
 app.use(express.static('public'));
 app.use(myConnection(mysql, dbOptions, 'single'));
+//app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({ 
-secret : 'coder123', resave : true, cookie: { maxAge: 60000 }}));
-
-
+secret : 'coder123', resave : true,   saveUninitialized: true, cookie: { maxAge: 60000 }}));
 
 var fs = require('fs');
 
@@ -56,30 +60,43 @@ app.use(function(req, res, next){
   //proceed to the next middleware component
   next();
 });
+var contains = function(str, part){
+  return str.indexOf(part) !== -1;
+};
 
 var checkUser = function(req, res, next){
+  console.log("path : " + req.path);
   if (req.session.user){
+
+    var pathNeedsAdminRights = contains(req.path, "add") || 
+          contains(req.path, "edit") || 
+          contains("delete");
+
+    if(pathNeedsAdminRights && req.session.role !== "Admin"){
+      //why is there are error
+      res.send(500, "ACCESS DENIED");
+    }
+
     return next();
   }
+
   // the user is not logged in redirect them to the login page
   res.redirect('/');
 };
 
-app.get('/users', checkUser, function(req, res){
+app.get('/users:Id',checkUser, function(req, res){
   var userData = userService.getUserData();
   res.render('users', userData)
 });
-  
-
  app.get('/', function(req, res){
-  res.render('login', {layout: false})
+  res.render('login', {layout: false});
 });
 
 
 app.post('/home', loggin.login);
 
-app.get('/home', checkUser, function (req, res) {
-  res.render('login')
+app.get('/home', function (req, res) {
+    res.render('login', {layout: false})
 });
 
 app.get('/login', function (req, res) {
@@ -106,16 +123,28 @@ app.get('/login', function (req, res) {
  app.post('/signup', register.add);
 
 
-  //products
+  //products && prod_search!!
+  app.get('/products/search', Search.Prods_search);
+
+  app.get('/products/search/:value', searchAll.Prods_search);
+  //app.get('/products/search/:value', searchAll.Prods_search);
+  app.get('/showCat/search/:value', searchCat.Category_search);
+  app.get('/sales/search/:value', searchSales.Sales_search);
+   //app.get('/Supply/search/:value', checkUser, sqlsupp.get);
+
+
+  
+
+  
   app.get('/products',checkUser, sqlfunctions.showProducts);
 
  // app.get('/productList', sqlfunctions.showProducts);
-  app.get('/products/edit/:Id', sqlfunctions.get);
-  app.post('/products/edit/:Id', sqlfunctions.update);
-  app.post('/products/update/:Id', sqlfunctions.update);
-  app.post('/products/add', sqlfunctions.add);
+  app.get('/products/edit/:Id', checkUser, sqlfunctions.get);
+  app.post('/products/edit/:Id',  checkUser, sqlfunctions.update);
+  app.post('/products/update/:Id',checkUser, sqlfunctions.update);
+  app.post('/products/add', checkUser, sqlfunctions.add);
   //this should be a post but this is only an illustration of CRUD - not on good practices
-  app.get('/products/delete/:Id', sqlfunctions.delete);
+  app.get('/products/delete/:Id',checkUser, sqlfunctions.delete);
   
   //categories
   app.get('/CatList',checkUser, sqlcategory.showCategorys);
@@ -123,12 +152,12 @@ app.get('/login', function (req, res) {
 
   //app.get('/category',checkUser, sqlcategory.showCategorys);
   //app.get('/showCat', sqlcategory.showSuppliers);
-  app.get('/showCat/edit/:Id', sqlcategory.get);
-  app.post('/showCat/edit/:Id', sqlcategory.update);
-  app.post('/showCat/update/:Id', sqlcategory.update);
-  app.post('/showCat/add', sqlcategory.add);
+  app.get('/showCat/edit/:Id', checkUser, sqlcategory.get);
+  app.post('/showCat/edit/:Id', checkUser, sqlcategory.update);
+  app.post('/showCat/update/:Id',checkUser, sqlcategory.update);
+  app.post('/showCat/add', checkUser, sqlcategory.add);
   //this should be a post but this is only an illustration of CRUD - not on good practices
-  app.get('/showCat/delete/:Id', sqlcategory.delete);
+  app.get('/showCat/delete/:Id',checkUser, sqlcategory.delete);
 
 
 
@@ -137,34 +166,34 @@ app.get('/login', function (req, res) {
 
  app.get('/Supply',checkUser, sqlsupp.showSuppliers);
 
- app.get('/Supply/edit/:Id', sqlsupp.get);
- app.post('/Supply/edit/:Id', sqlsupp.update)
- app.post('/Supply/update/:Id', sqlsupp.update);
- app.post('/Supply/add', sqlsupp.add);
+ app.get('/Supply/edit/:Id', checkUser, sqlsupp.get);
+ app.post('/Supply/edit/:Id', checkUser, sqlsupp.update)
+ app.post('/Supply/update/:Id',checkUser, sqlsupp.update);
+ app.post('/Supply/add', checkUser, sqlsupp.add);
 
   //this should be a post but this is only an illustration of CRUD - not on good practices
-  app.get('/Supply/delete/:Id', sqlsupp.delete);
+  app.get('/Supply/delete/:Id',checkUser, sqlsupp.delete);
 
  app.get('/Sale',checkUser, sqlsales.showSales);
 
  app.get('/SaleList',checkUser, sqlsales.showSales);
  app.get('/sales',checkUser, sqlsales.showSales);
 
- app.get('/sales/edit/:Id', sqlsales.get);
- app.post('/sales/edit/:Id', sqlsales.update);
-//app.post('/sales/update/:Id', sqlsales.update);
-app.post('/sales/add', sqlsales.add);
+ app.get('/sales/edit/:Id', checkUser, sqlsales.get);
+ app.post('/sales/edit/:Id', checkUser, sqlsales.update);
+ app.post('/sales/update/:Id', checkUser, sqlsales.update);
+app.post('/sales/add', checkUser, sqlsales.add);
 //this should be a post but this is only an illustration of CRUD - not on good practices
 
-app.get('/sales/delete/:Id', sqlsales.delete);
+app.get('/sales/delete/:Id',checkUser, sqlsales.delete);
 
 app.get('/user', checkUser, usrs.usser);
-app.get('/user/add', usrs.usser);
-app.get('/user/edit/:Id', usrs.get);
-app.get('/user/edit/:Id', usrs.update);
-app.post('/user/update/:Id', usrs.update);
-app.post('/user/add', usrs.add);
-app.get('/user/delete/:Id', usrs.delete);
+app.get('/user/add', checkUser, usrs.usser);
+app.get('/user/edit/:Id', checkUser, usrs.get);
+app.get('/user/edit/:Id',checkUser, usrs.update);
+app.post('/user/update/:Id', checkUser, usrs.update);
+app.post('/user/add',checkUser, usrs.add);
+app.get('/user/delete/:Id',checkUser, usrs.delete);
 
 app.get('/showProdlist',checkUser, ListOfProdz.showProdsgroup);
 app.get('/ListOfCateg',checkUser, ListOfCat.showcategList);
@@ -177,31 +206,27 @@ app.get('/showProfitables',checkUser, profitables.profitableProdz);
 app.get('/showLeastCat',checkUser, LeastPopCat.LeastCat);
 
 
-/*app.get('/login', function (req, res) {
-    res.render('');
-  });*/
 
-app.post('/add_product', function(req, res){
+
+app.post('/add_product',checkUser, function(req, res){
  var formData = req.body;
  //console.log(formData.product_name);
  res.render('products', {product_name :  formData.product_name});
 });
 
   //app.use(express.static('public'));
-  app.get('/users', function(req, res){
+  app.get('/users',checkUser, function(req, res){
     var userData = userService.getUserData();
     res.render('users', userData)
   });
 
   //these are the logout
-  app.get('/logout', function(req, res){
+  app.get('/logout/',checkUser, function(req, res){
 
     delete req.session.user;
     res.redirect('/');
     
   });
-
-
 
  app.get('/signup/edit/:id', register.get);
 app.post('/signUp/update/:id', register.update);

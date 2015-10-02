@@ -295,3 +295,31 @@ select {
     font-size: 15px;
 
 }
+/*search bar*/
+.search-form .searchbar{
+  border:2px solid #000;
+  padding:10px 10px;
+  height:43px;
+  background:white;
+  color:#fff;
+  float:right;
+
+}
+.search-form .searchsubmit{
+  background:#00cfff;
+  border:2px solid #00bfff;
+  color:#fff;
+  height:43px;
+  cursor:pointer;
+  float:right;
+  padding:10px 10px;
+
+}
+.search-alert{
+  color:#f7f7f7;
+  padding:10px 10px 10px 30px;
+  display:none;
+  margin:5px;
+  background:#222 url(https://lh3.googleusercontent.com/-uCQ8C_HxYfc/VDULKHiLW4I/AAAAAAAAFlE/cAIFLVqhEVQ/w20-h20-no/Indicate%2Bicon.jpg) no-repeat;
+  background-position:5px;
+}

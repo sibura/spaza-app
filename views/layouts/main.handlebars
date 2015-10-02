@@ -27,7 +27,6 @@
 
     <div class="brand">Nelisa's Spaza Shop</div>
     <div class="address-bar">E216 Phakamani Road E-Section Khayelitsha 7784</div>
-    
     <!-- Navigation -->
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
@@ -71,9 +70,11 @@
                                 <li>
                                     <a href="Supply">Suppliers</a>
                                 </li>
+                                {{#isAdmin}}
                                  <li>
                                     <a href="user">Users</a>
                                 </li>
+                                {{/isAdmin}}
                                 <li>
                                      <a href="logout">Log-Out</a>
                                 </li>
@@ -86,6 +87,7 @@
                     <script src="/home/coder/Desktop/Projects/spaza-app/views/layouts/main.js"></script>
                     <script src="/home/coder/Desktop/Projects/spaza-app/views/layouts/main2.js"></script>
                     <script src="js/login.js"></script>
+  
                 </body>
             </html>
 

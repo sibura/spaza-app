@@ -3,6 +3,7 @@
   			
 		var Administrator = req.session.role === "Admin"
 		var user = req.session.role !== "Admin"
+	
   				
   			if(error){
   				return next(error);
@@ -18,7 +19,7 @@
 			    res.render( 'productList', {
 				product : results,
 				categories: results1,
-				 in_ca: Administrator, 
+				 isAdmin: Administrator, 
                  action: user
 			    });
 			});

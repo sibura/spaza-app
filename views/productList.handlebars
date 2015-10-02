@@ -1,6 +1,11 @@
+<div class='search-form'>
+<form action='/search' class='searchblog' method='get'>
+<input class='searchbar' name='q' placeholder='Search Here' size='15' type='text' x-webkit-speech='true'/>
+<input class='searchsubmit' type='submit' value='Search'/>
+</form>
+</div>
 {{#action}} 
-
-                    <table class="table">
+<table class="table">
         <tr>
             <th>Product Name</th>
             <th>Category Name</th>
@@ -14,7 +19,6 @@
                     </tr>
                     {{#product}}
                     <tr>
-                        
                         <td>{{product_name}}</td>
                         <td>{{category_name}}</td>
                     {{/product}}
@@ -23,7 +27,7 @@
                    
   {{/action}} 
 
-{{#in_ca}}
+{{#isAdmin}}
 <h1>Add a product</h1>
                 <form action="/products/add" method="POST">
                     product_name: <input type="text" name="product_name" required> 
@@ -59,4 +63,6 @@
                     {{/product}}
                   
                 </table>
-{{/in_ca}}
+{{/isAdmin}}
+
+

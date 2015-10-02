@@ -12,7 +12,7 @@ exports.showCategorys = function(req, res, next){
 				console.log(results);
 			    res.render( 'CatList', {
 				category : results,
-				in_ca : Administrator,
+				isAdmin : Administrator,
 				action : user
 			    });
 			});

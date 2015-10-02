@@ -12,7 +12,7 @@ exports.usser = function (req, res, next) {
 			if (error) return next(error);
 				res.render( 'User', {
 					USer: results,
-					in_ca : Administrator,
+					isAdmin : Administrator,
 					action : user
 				});
 			});
