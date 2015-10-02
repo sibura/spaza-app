@@ -18,7 +18,7 @@
  </table>
 {{/action}}
 
-{{#in_ca}}
+{{#isAdmin}}
 	<h1>Add a Sale</h1>
 <form action="/sales/add" method="POST">
 	Date:<input type="date" name="date">
@@ -54,4 +54,4 @@
 	</tr>
 	{{/Sale}}
 </table>
-{{/in_ca}}
+{{/isAdmin}}

@@ -14,7 +14,7 @@
 </table>
 {{/action}} 
 
-{{#in_ca}}
+{{#isAdmin}}
 <h1>Add a supplier</h1>
 <form action="/Supply/add" method="POST">
     Shop: <input type="text" name="shop">     
@@ -40,4 +40,4 @@
   </tr>
   {{/suppliers}}
 </table>
-{{/in_ca}}
+{{/isAdmin}}

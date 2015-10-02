@@ -1,6 +1,14 @@
-{{#action}} 
 
-                    <table class="table">
+<section class="header">
+          <form action="/products" method="GET" class="cont">
+            <input type="text" class="srchFld" placeholder="" ng-model="search" name="search"/>
+            <button type="submit" class="srchBtn">Search</button>
+            <div class="entypo-search ico"></div>
+        </form>
+    </section>
+{{#action}} 
+<div class="Add-Products">
+<table class="table">
         <tr>
             <th>Product Name</th>
             <th>Category Name</th>
@@ -20,10 +28,10 @@
                     {{/product}}
                   
                 </table>   
-                   
+                   </tr>
   {{/action}} 
 
-{{#in_ca}}
+{{#isAdmin}}
 <h1>Add a product</h1>
                 <form action="/products/add" method="POST">
                     product_name: <input type="text" name="product_name" required> 
@@ -59,4 +67,4 @@
                     {{/product}}
                   
                 </table>
-{{/in_ca}}
+{{/isAdmin}}

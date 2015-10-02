@@ -7,6 +7,7 @@ myConnection = require('express-myconnection');
 session = require('express-session');
 var cookieSession =require('cookie-session');
 var bcrypt = require('bcrypt');
+var request = require('request');
 
  var sqlfunctions = require('./routes/SqlFunctions');
  var sqlcategory = require('./routes/sqlcategory');
@@ -24,6 +25,9 @@ var bcrypt = require('bcrypt');
  var loggin = require('./routes/login');
  var register = require('./routes/Users');
  var usrs =require('./routes/Users');
+ var SearchIt = require('./routes/search');
+ //var apiRoutes = express.Router();
+
 
  var dbOptions = {
    host: 'localhost',
@@ -45,7 +49,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({ 
-secret : 'coder123', resave : true, cookie: { maxAge: 60000 }}));
+secret : 'coder123', resave : true,saveUninitialized: true, cookie: { maxAge: 60000 }}));
 
 
 
@@ -57,15 +61,28 @@ app.use(function(req, res, next){
   next();
 });
 
+request("http://localhost:3000/user", function(error, response, body){
+  console.log(error);
+});
+
 var checkUser = function(req, res, next){
   if (req.session.user){
     return next();
   }
-  // the user is not logged in redirect them to the login page
+  // the user is not losgged in redirect them to the login page
   res.redirect('/');
 };
 
-app.get('/users', checkUser, function(req, res){
+var check = function(req, res, next){
+  if(req.session.role === "Admin"){
+    next();
+  }
+  else{
+    res.redirect('/login');
+  }
+}
+
+app.get('/users', function(req, res){
   var userData = userService.getUserData();
   res.render('users', userData)
 });
@@ -85,7 +102,9 @@ app.get('/home', checkUser, function (req, res) {
 app.get('/login', function (req, res) {
   res.render('home');
 });
-
+app.get('/search', function(req, res){
+  res.render('search', {layout: false})
+});
  app.get('/signup', function(req, res){
   res.render('signup', {layout: false})
 });
@@ -107,18 +126,18 @@ app.get('/login', function (req, res) {
 
 
   //products
-  app.get('/products', sqlfunctions.showProducts);
-  app.get('/productList', sqlfunctions.showProducts);
+  app.get('/products',check, sqlfunctions.showProducts);
+  app.get('/productList',check, sqlfunctions.showProducts);
 
   app.get('/products',checkUser, sqlfunctions.showProducts);
 
  // app.get('/productList', sqlfunctions.showProducts);
-  app.get('/products/edit/:Id', sqlfunctions.get);
-  app.post('/products/edit/:Id', sqlfunctions.update);
-  app.post('/products/update/:Id', sqlfunctions.update);
-  app.post('/products/add', sqlfunctions.add);
+  app.get('/products/edit/:Id',check, sqlfunctions.get);
+  app.post('/products/edit/:Id',check, sqlfunctions.update);
+  app.post('/products/update/:Id',check, sqlfunctions.update);
+  app.post('/products/add',check, sqlfunctions.add);
   //this should be a post but this is only an illustration of CRUD - not on good practices
-  app.get('/products/delete/:Id', sqlfunctions.delete);
+  app.get('/products/delete/:Id',check, sqlfunctions.delete);
   
   //categories
   app.get('/CatList',checkUser, sqlcategory.showCategorys);
@@ -179,7 +198,6 @@ app.get('/CatgEarnings',checkUser, catEarning.EarningsCateg);
 app.get('/showProfitables',checkUser, profitables.profitableProdz);
 app.get('/showLeastCat',checkUser, LeastPopCat.LeastCat);
 
-
 /*app.get('/login', function (req, res) {
     res.render('');
   });*/
@@ -198,13 +216,14 @@ app.post('/add_product', function(req, res){
 
   //these are the logout
   app.get('/logout', function(req, res){
-
     delete req.session.user;
     res.redirect('/');
     
   });
 
-
+app.get('/search', function(req, res){
+     res.render('productList')
+});
 
  app.get('/signup/edit/:id', register.get);
 app.post('/signUp/update/:id', register.update);

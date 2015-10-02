@@ -13,7 +13,7 @@ exports.showSales = function(req, res, next){
 				res.render( 'SaleList', {
 					Sale : results,
 					products : results2,
-					in_ca : Administrator,
+					isAdmin : Administrator,
 					action : user
 				});
 			});
