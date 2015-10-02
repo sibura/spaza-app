@@ -124,12 +124,13 @@ app.get('/login', function (req, res) {
 
 
   //products && prod_search!!
-  app.get('/products/search', Search.Prods_search);
+  app.post('/products/search', Search.Prods_search);
+  //app.get('/products/search', searchAll.Prods_search);
 
   app.get('/products/search/:value', searchAll.Prods_search);
   //app.get('/products/search/:value', searchAll.Prods_search);
-  app.get('/showCat/search/:value', searchCat.Category_search);
-  app.get('/sales/search/:value', searchSales.Sales_search);
+  app.post('/showCat/search', searchCat.Category_search);
+  app.post('/sales/search', searchSales.Sales_search);
    //app.get('/Supply/search/:value', checkUser, sqlsupp.get);
 
 

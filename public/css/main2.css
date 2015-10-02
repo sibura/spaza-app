@@ -298,12 +298,12 @@ select {
 /*search bar*/
 .search-form .searchbar{
   border:2px solid #000;
-  padding:10px 10px;
+  padding:10px 5px;
   height:43px;
-  background:white;
+  background:#222;
   color:#fff;
-  float:right;
-
+  float: right;
+  position: relative;
 }
 .search-form .searchsubmit{
   background:#00cfff;
@@ -311,9 +311,7 @@ select {
   color:#fff;
   height:43px;
   cursor:pointer;
-  float:right;
-  padding:10px 10px;
-
+  float: right;
 }
 .search-alert{
   color:#f7f7f7;

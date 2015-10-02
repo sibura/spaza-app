@@ -1,37 +1,60 @@
   exports.Prods_search = function (req, res, next) {
   	req.getConnection(function(err, connection){
+
+      var Administrator = req.session.role === "Admin"
+      var user = req.session.role !== "Admin"
+
   		if (err){ 
   			return next(err);
   		}
 
-  		var searchVar = "%" + req.params.value  + "%";
-  		
-  		connection.query('SELECT  products.Id,products.product_name, categories.category_name, products.Category_Id FROM products, categories  where products.Category_Id = categories.Id LIKE ?', [searchVar], function(err, results) {
-  			if (err)
+  		var searchVar = "%" + JSON.parse(JSON.stringify(req.body)).product_name  + "%";
+      console.log(searchVar);
+
+      // how do we get parameters from a form?  		
+  		connection.query('SELECT * FROM products FROM products WHERE product_name LIKE  '%' OR category_name LIKE  '%'', [searchVar], function(err, results) {
+  			if (err){
+
+         // return next(error);
   				console.log("Error inserting : %s ",err );
-        console.log(searchVar);
-        res.render('searchProducts', {
-          Prdsearch : results
-        });
-      });
+        }
+
+        // connection.query('SELECT Id, category_name FROM categories LIKE ?', [searchVar], function(error, results1) {
+             //     if (error) return next(error);
+        console.log(results);
+          res.render('productList', {
+            product : results,
+            categories: results,
+            isAdmin: Administrator, 
+            action: user
+            // categories: results1
+          });
+       //});
     });
+  });
   };
 
   //This Searches The Categories {{#Cat}}
     exports.Category_search = function (req, res, next) {
     req.getConnection(function(err, connection){
+
+      var Administrator = req.session.role === "Admin"
+      var user = req.session.role !== "Admin"
+
       if (err){ 
         return next(err);
       }
 
-      var cat_search = "%" + req.params.value  + "%";
+      var cat_search = "%" + JSON.parse(JSON.stringify(req.body)).category_name  + "%";
 
       connection.query('SELECT * FROM categories WHERE category_name LIKE ?', cat_search, function(err, results) {
         if (err)
           console.log("Error inserting : %s ",err );
         console.log(cat_search);
-        res.render('searchCateg', {
-          Catsearch : results
+        res.render('CatList', {
+          category : results,
+          isAdmin: Administrator, 
+           action: user 
         });
       });
     });
@@ -40,19 +63,27 @@
   //this searches Sales
    exports.Sales_search = function (req, res, next) {
     req.getConnection(function(err, connection){
+      var Administrator = req.session.role === "Admin"
+      var user = req.session.role !== "Admin"
       if (err){ 
         return next(err);
       }
 
-      var sale_search = "%" + req.params.value  + "%";
+      var sale_search = "%" + JSON.parse(JSON.stringify(req.body)).product_name + "%";
       
-      connection.query('SELECT * FROM sales WHERE Id LIKE ?', sale_search, function(err, results) {
+      connection.query('SELECT sales.Id,products.product_name, date, sale_price, no_sold FROM sales, products WHERE products.Id=sales.product_Id LIKE ?', sale_search, function(err, results) {
         if (err)
           console.log("Error inserting : %s ",err );
         console.log(sale_search);
-        res.render('Sales_searcher', {
-          search_sale : results
+         //connection.query('SELECT product_name FROM products', [], function(error, results2) {
+        //if (error) return next(error);
+        res.render('SaleList', {
+          Sale : results,
+          products : results,
+          isAdmin : Administrator,
+          action : user
         });
-      });
+     // });
     });
-  };
+  });
+};

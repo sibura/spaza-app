@@ -4,10 +4,10 @@
 		<th>Category Name</th>
 
 	</tr>
-	<tr>
-	   {{#Prdsearch}} 
-		 <td>{{product_name}}</td>
-		 <td>{{category_name}}</td>
-	   {{/Prdsearch}}
-	</tr>
+	{{#product}}
+		<tr>
+			<td>{{product_name}}</td>
+			<td>{{category_name}}</td>
+		</tr>
+	{{/product}}
 </table>   
