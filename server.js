@@ -8,7 +8,6 @@ session = require('express-session');
 var cookieSession =require('cookie-session');
 var bcrypt = require('bcrypt');
 var request = require('request');
-//var path = require('path');
 
 
  var sqlfunctions = require('./routes/SqlFunctions');
@@ -32,6 +31,7 @@ var request = require('request');
  var searchCat = require('./routes/search');
  var searchSales = require('./routes/search');
 
+
  var dbOptions = {
    host: 'localhost',
    user: 'root',
@@ -51,7 +51,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({ 
+
 secret : 'coder123', resave : true,   saveUninitialized: true, cookie: { maxAge: 60000 }}));
+
 
 var fs = require('fs');
 
@@ -60,9 +62,14 @@ app.use(function(req, res, next){
   //proceed to the next middleware component
   next();
 });
-var contains = function(str, part){
-  return str.indexOf(part) !== -1;
+
+ var contains = function(str, part){
+   return str.indexOf(part) !== -1;
 };
+
+// request("http://localhost:3000/user", function(error, response, body){
+//   console.log(error);
+// });
 
 var checkUser = function(req, res, next){
   console.log("path : " + req.path);
@@ -80,14 +87,31 @@ var checkUser = function(req, res, next){
     return next();
   }
 
+
   // the user is not logged in redirect them to the login page
   res.redirect('/');
 };
 
-app.get('/users:Id',checkUser, function(req, res){
+// app.get('/users:Id',checkUser, function(req, res){
+
+//   // the user is not losgged in redirect them to the login page
+//   res.redirect('/');
+// });
+
+// var check = function(req, res, next){
+//   if(req.session.role === "Admin"){
+//     next();
+//   }
+//   else{
+//     res.redirect('/login');
+//   }
+// }
+
+app.get('/users', function(req, res){
   var userData = userService.getUserData();
   res.render('users', userData)
 });
+
  app.get('/', function(req, res){
   res.render('login', {layout: false});
 });
@@ -102,6 +126,10 @@ app.get('/home', function (req, res) {
 app.get('/login', function (req, res) {
   res.render('home');
 });
+
+// app.get('/search', function(req, res){
+//   res.render('search', {layout: false})
+// });
 
  app.get('/signup', function(req, res){
   res.render('signup', {layout: false})
@@ -123,6 +151,7 @@ app.get('/login', function (req, res) {
  app.post('/signup', register.add);
 
 
+
   //products && prod_search!!
   app.post('/products/search', searchAll.Prods_search);
   //app.get('/products/search', searchAll.Prods_search);
@@ -133,15 +162,21 @@ app.get('/login', function (req, res) {
   app.post('/sales/search', searchSales.Sales_search);
   app.post('/Supply/search',  supplyers.Supply_search);
  
+
+  //products
+  //app.get('/products', sqlfunctions.showProducts);
+  //app.get('/productList',checkUser, sqlfunctions.showProducts);
+
   app.get('/products',checkUser, sqlfunctions.showProducts);
 
  // app.get('/productList', sqlfunctions.showProducts);
-  app.get('/products/edit/:Id', checkUser, sqlfunctions.get);
-  app.post('/products/edit/:Id',  checkUser, sqlfunctions.update);
+  app.get('/products/edit/:Id',checkUser, sqlfunctions.get);
+  app.post('/products/edit/:Id',checkUser, sqlfunctions.update);
   app.post('/products/update/:Id',checkUser, sqlfunctions.update);
-  app.post('/products/add', checkUser, sqlfunctions.add);
+  app.post('/products/add',checkUser, sqlfunctions.add);
   //this should be a post but this is only an illustration of CRUD - not on good practices
   app.get('/products/delete/:Id',checkUser, sqlfunctions.delete);
+
   
   //categories
   app.get('/CatList',checkUser, sqlcategory.showCategorys);
@@ -204,7 +239,6 @@ app.get('/showLeastCat',checkUser, LeastPopCat.LeastCat);
 
 
 
-
 app.post('/add_product',checkUser, function(req, res){
  var formData = req.body;
  //console.log(formData.product_name);
@@ -218,7 +252,9 @@ app.post('/add_product',checkUser, function(req, res){
   });
 
   //these are the logout
-  app.get('/logout/',checkUser, function(req, res){
+  
+
+  app.get('/logout', function(req, res){
 
     delete req.session.user;
     res.redirect('/');

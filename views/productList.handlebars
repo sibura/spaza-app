@@ -4,7 +4,8 @@
         <input class='searchsubmit' type='submit' value='Search'/>
     </form>
 </div>
-{{#action}}
+
+{{#action}} 
 <table class="table">
         <tr>
             <th>Product Name</th>
@@ -24,9 +25,9 @@
                     </tr>
                     {{/product}}
                   
-                </table>   
-                   
+                </table>                      
 {{/action}}
+
 {{#isAdmin}}
 <h1>Add a product</h1>
                 <form action="/products/add" method="POST">
@@ -56,13 +57,11 @@
                         
                         <td>{{product_name}}</td>
                         <td>{{category_name}}</td>
-                        <td><button><a href="/products/edit/{{Id}}">Edit</a></button></td>
-                        <td><button><a href="/products/delete/{{Id}}">Delete</a></button></td>
+                        <td><button><a href="/products/edit/{{id}}">Edit</a></button></td>
+                        <td><button><a href="/products/delete/{{id}}">Delete</a></button></td>
                     </tr>
                       
                     {{/product}}
                   
                 </table>
 {{/isAdmin}}
-
-
