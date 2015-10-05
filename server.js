@@ -27,7 +27,7 @@ var request = require('request');
  var loggin = require('./routes/login');
  var register = require('./routes/Users');
  var usrs =require('./routes/Users');
- var Search = require('./routes/search');
+ var supplyers = require('./routes/search');
  var searchAll = require('./routes/search');
  var searchCat = require('./routes/search');
  var searchSales = require('./routes/search');
@@ -124,19 +124,15 @@ app.get('/login', function (req, res) {
 
 
   //products && prod_search!!
-  app.post('/products/search', Search.Prods_search);
+  app.post('/products/search', searchAll.Prods_search);
   //app.get('/products/search', searchAll.Prods_search);
 
-  app.get('/products/search/:value', searchAll.Prods_search);
+  //app.get('/products/search', searchAll.Prods_search);
   //app.get('/products/search/:value', searchAll.Prods_search);
   app.post('/showCat/search', searchCat.Category_search);
   app.post('/sales/search', searchSales.Sales_search);
-   //app.get('/Supply/search/:value', checkUser, sqlsupp.get);
-
-
-  
-
-  
+  app.post('/Supply/search',  supplyers.Supply_search);
+ 
   app.get('/products',checkUser, sqlfunctions.showProducts);
 
  // app.get('/productList', sqlfunctions.showProducts);
