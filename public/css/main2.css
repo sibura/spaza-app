@@ -203,7 +203,7 @@ td {
 #cssSlider {
   width: 800px;
   height: 300px;
-  overflow: hidden;
+  overflow:hidden;
   border: 10px solid #666;
   margin-left: 20%;
 
@@ -303,8 +303,9 @@ select {
   height:43px;
   background:#222;
   color:#fff;
-  float: right;
+  float: left;
   position: relative;
+  margin: 40px 5px;
 }
 .search-form .searchsubmit{
   background:#00cfff;
@@ -312,7 +313,9 @@ select {
   color:#fff;
   height:43px;
   cursor:pointer;
-  float: right;
+  float: left;
+  padding:10px 5px;
+  margin: 40px 5px;
 }
 .search-alert{
   color:#f7f7f7;

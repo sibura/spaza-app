@@ -1,5 +1,4 @@
-
-  exports.Prods_search = function (req, res, next) {
+exports.Prods_search = function (req, res, next) {
   	req.getConnection(function(err, connection){
 
       var Administrator = req.session.role === "Admin"
@@ -9,7 +8,7 @@
   			return next(err);
   		}
 
-  		var searchVar = "%" + JSON.parse(JSON.stringify(req.body)).product_name  + "%";
+  		var searchVar = "%" + JSON.parse(JSON.stringify(req.body)).product_name + "%";
       console.log(searchVar);
 
       // how do we get parameters from a form?  		
@@ -20,15 +19,16 @@
   				console.log("Error inserting : %s ",err );
         }
 
-        // connection.query('SELECT Id, category_name FROM categories LIKE ?', [searchVar], function(error, results1) {
-             //     if (error) return next(error);
+         connection.query('SELECT Id, category_name FROM categories', [searchVar], function(error, results1) {
+                if (error) return next(error);
         console.log(results);
           res.render('productList', {
              product : results,
-              isAdmin: Administrator, 
+             categories: results1,
+             isAdmin: Administrator, 
              action: user
           });
-       //});
+       });
     });
   });
   };
