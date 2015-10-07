@@ -34,7 +34,7 @@
 </table>
 {{/action}}
 {{#isAdmin}}
-
+<h1>Add a Category</h1>
 <div class="container-fluid">
     
                 <div class="btn-group pull-right" >
@@ -49,7 +49,7 @@
                     <li><a href="#">Most Profitable Category</a></li>  </div>
 
 <form action="/showCat/add" method="POST">
-        category_name: <input type="text" name="category_name" required>
+        <input type="text" name="category_name" placeholder=" category name" required>
         <input type="submit">
 </form>
 <table class="table">

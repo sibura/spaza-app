@@ -32,7 +32,7 @@
 <h1>Add a product</h1>
 
                 <form action="/products/add" method="POST">
-                    product name: <input type="text" name="product_name" required> 
+                     <input type="text" name="product_name" placeholder="product name"required> 
                     <select name="Category_Id">
                         {{#categories}}
                         <option value="{{Id}}">{{category_name}}
@@ -58,8 +58,8 @@
                         
                         <td>{{product_name}}</td>
                         <td>{{category_name}}</td>
-                        <td><button><a href="/products/edit/{{id}}">Edit</a></button></td>
-                        <td><button><a href="/products/delete/{{id}}">Delete</a></button></td>
+                        <td><button><a href="/products/edit/{{Id}}">Edit</a></button></td>
+                        <td><button><a href="/products/delete/{{Id}}">Delete</a></button></td>
                     </tr>
                       
                     {{/product}}

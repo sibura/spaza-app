@@ -12,7 +12,7 @@ exports.Prods_search = function (req, res, next) {
       console.log(searchVar);
 
       // how do we get parameters from a form?  		
-  		connection.query('SELECT product_name, category_name FROM (SELECT  products.Id,products.product_name, categories.category_name, products.Category_Id FROM products, categories  where products.Category_Id = categories.Id) AS prods_cats WHERE product_name LIKE ? OR category_name LIKE ?', [searchVar,searchVar], function(err, results) {
+  		connection.query('SELECT Id,product_name, category_name FROM (SELECT  products.Id,products.product_name, categories.category_name, products.Category_Id FROM products, categories  where products.Category_Id = categories.Id) AS prods_cats WHERE product_name LIKE ? OR category_name LIKE ?', [searchVar,searchVar], function(err, results) {
   			if (err){
 
          // return next(error);
@@ -70,16 +70,19 @@ exports.Prods_search = function (req, res, next) {
 
       var sale_search = "%" + JSON.parse(JSON.stringify(req.body)).product_name + "%";
       
-      connection.query('SELECT products.product_name,date, sale_price, no_sold FROM sales, products WHERE product_name LIKE ?', [sale_search], function(err, results) {
+      connection.query('SELECT sales.Id,products.product_name,date, sale_price, no_sold FROM sales, products WHERE product_name LIKE ?', [sale_search], function(err, results) {
         if (err)
           console.log("Error inserting : %s ",err );
         console.log(sale_search);
+        connection.query('SELECT Id,product_name FROM products', [], function(error, results2) {
+        if (error) return next(error);
         res.render('SaleList', {
            Sale : results,
-          isAdmin : Administrator,
-          action : user
+           products : results2,
+           isAdmin : Administrator,
+           action : user
         });
-     // });
+     });
     });
   });
 };

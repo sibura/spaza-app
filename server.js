@@ -26,10 +26,10 @@ var request = require('request');
  var loggin = require('./routes/login');
  var register = require('./routes/Users');
  var usrs =require('./routes/Users');
- var supplyers = require('./routes/search');
+ //var supplyers = require('./routes/search');
  var searchAll = require('./routes/search');
- var searchCat = require('./routes/search');
- var searchSales = require('./routes/search');
+ //var searchCat = require('./routes/search');
+ //var searchSales = require('./routes/search');
 
 
  var dbOptions = {
@@ -154,25 +154,28 @@ app.get('/login', function (req, res) {
 
   //products && prod_search!!
   app.post('/products/search/', searchAll.Prods_search);
-  app.get('/products/search/', function(req, res){
-    res.render('/products/search/', {layout: false})
-  });
-  //app.get('/products/search', searchAll.Prods_search);
+  app.get('/products/search/', searchAll.Prods_search);
+    //app.get('/products/search', searchAll.Prods_search);
 
   //app.get('/products/search', searchAll.Prods_search);
   //app.get('/products/search/:value', searchAll.Prods_search);
-  app.post('/showCat/search/', searchCat.Category_search);
-  app.post('/sales/search/', searchSales.Sales_search);
-  app.post('/Supply/search/',  supplyers.Supply_search);
- 
+  app.post('/showCat/search/', searchAll.Category_search);
+  app.get('/showCat/search/', searchAll.Category_search);
+  app.post('/sales/search/', searchAll.Sales_search);
+  app.get('/sales/search/', searchAll.Sales_search);
+  app.post('/Supply/search/',  searchAll.Supply_search);
+  app.get('/Supply/search/',  searchAll.Supply_search);
 
   //products
   //app.get('/products', sqlfunctions.showProducts);
-  //app.get('/productList',checkUser, sqlfunctions.showProducts);
+  app.get('/productList',checkUser, sqlfunctions.showProducts);
 
   app.get('/products',checkUser, sqlfunctions.showProducts);
 
- // app.get('/productList', sqlfunctions.showProducts);
+  app.get('/productList',checkUser, sqlfunctions.showProducts);
+  //app.get('/products/delete/:Id',checkUser, searchAll.delete);
+
+
   app.get('/products/edit/:Id',checkUser, sqlfunctions.get);
   app.post('/products/edit/:Id',checkUser, sqlfunctions.update);
   app.post('/products/update/:Id',checkUser, sqlfunctions.update);
@@ -182,7 +185,7 @@ app.get('/login', function (req, res) {
 
   
   //categories
-  //app.get('/CatList',checkUser, sqlcategory.showCategorys);
+  app.get('/CatList',checkUser, sqlcategory.showCategorys);
   app.get('/showCat',checkUser, sqlcategory.showCategorys);
 
   //app.get('/category',checkUser, sqlcategory.showCategorys);
