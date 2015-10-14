@@ -26,7 +26,7 @@ var request = require('request');
  var loggin = require('./routes/login');
  var register = require('./routes/Users');
  var usrs =require('./routes/Users');
- //var searchAll = require('./routes/search');
+ var searchAll = require('./routes/search');
 
 
 
@@ -128,11 +128,11 @@ app.get('/login', function (req, res) {
 
 
   //products && prod_search!!
-  //app.post('/products/search/', searchAll.Prods_search);
+  app.post('/products/search/', searchAll.Prods_search);
   //app.get('/products/search/', searchAll.Prods_search);
 
  
-  //app.post('/showCat/search/', searchAll.Category_search);
+ // app.post('/showCat/search/', searchAll.Category_search);
   //app.get('/showCat/search/', searchAll.Category_search);
   //app.post('/sales/search/', searchAll.Sales_search);
   //app.get('/sales/search/', searchAll.Sales_search);
