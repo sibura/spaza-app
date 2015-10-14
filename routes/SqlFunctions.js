@@ -1,3 +1,28 @@
+exports.search = function(req, res, next){
+	req.getConnection(function(error, connection){
+        		if(error) return next(error);
+        
+        var searchVar = req.params.query;
+        searchVar = "%" + searchVar + "%";
+        console.log(searchVar);
+
+		var Administrator = req.session.role === "Admin"
+		var user = req.session.role !== "Admin"
+
+
+		connection.query('SELECT * FROM products WHERE product_name LIKE?', searchVar, function(error, results) {
+			if (error) return next(error);
+			    console.log(Administrator);
+				res.render( 'products', {
+					product : results,
+					layout : false,
+					isAdmin: Administrator, 
+					action: user
+				});
+			});
+		});	
+	}; 
+
 exports.showProducts = function(req, res, next){
 	req.getConnection(function(error, connection){
 

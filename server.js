@@ -26,16 +26,14 @@ var request = require('request');
  var loggin = require('./routes/login');
  var register = require('./routes/Users');
  var usrs =require('./routes/Users');
- //var supplyers = require('./routes/search');
- var searchAll = require('./routes/search');
- //var searchCat = require('./routes/search');
- //var searchSales = require('./routes/search');
+ //var searchAll = require('./routes/search');
+
 
 
  var dbOptions = {
    host: 'localhost',
    user: 'root',
-   password: 'coder123',
+   password: 'nwabisamilisantmasiko',
    port: 3306,
    database: 'SpazaApp'
  };
@@ -44,7 +42,6 @@ var request = require('request');
 var app = express();
 app.use(express.static('public'));
 app.use(myConnection(mysql, dbOptions, 'single'));
-//app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -67,10 +64,6 @@ app.use(function(req, res, next){
    return str.indexOf(part) !== -1;
 };
 
-// request("http://localhost:3000/user", function(error, response, body){
-//   console.log(error);
-// });
-
 var checkUser = function(req, res, next){
   console.log("path : " + req.path);
   if (req.session.user){
@@ -92,20 +85,6 @@ var checkUser = function(req, res, next){
   res.redirect('/');
 };
 
-// app.get('/users:Id',checkUser, function(req, res){
-
-//   // the user is not losgged in redirect them to the login page
-//   res.redirect('/');
-// });
-
-// var check = function(req, res, next){
-//   if(req.session.role === "Admin"){
-//     next();
-//   }
-//   else{
-//     res.redirect('/login');
-//   }
-// }
 
 app.get('/users', function(req, res){
   var userData = userService.getUserData();
@@ -126,10 +105,6 @@ app.get('/home', function (req, res) {
 app.get('/login', function (req, res) {
   res.render('home');
 });
-
-// app.get('/search', function(req, res){
-//   res.render('search', {layout: false})
-// });
 
  app.get('/signup', function(req, res){
   res.render('signup', {layout: false})
@@ -153,30 +128,23 @@ app.get('/login', function (req, res) {
 
 
   //products && prod_search!!
-  app.post('/products/search/', searchAll.Prods_search);
-  app.get('/products/search/', searchAll.Prods_search);
-    //app.get('/products/search', searchAll.Prods_search);
+  //app.post('/products/search/', searchAll.Prods_search);
+  //app.get('/products/search/', searchAll.Prods_search);
 
-  //app.get('/products/search', searchAll.Prods_search);
-  //app.get('/products/search/:value', searchAll.Prods_search);
-  app.post('/showCat/search/', searchAll.Category_search);
-  app.get('/showCat/search/', searchAll.Category_search);
-  app.post('/sales/search/', searchAll.Sales_search);
-  app.get('/sales/search/', searchAll.Sales_search);
-  app.post('/Supply/search/',  searchAll.Supply_search);
-  app.get('/Supply/search/',  searchAll.Supply_search);
+ 
+  //app.post('/showCat/search/', searchAll.Category_search);
+  //app.get('/showCat/search/', searchAll.Category_search);
+  //app.post('/sales/search/', searchAll.Sales_search);
+  //app.get('/sales/search/', searchAll.Sales_search);
+  //app.post('/Supply/search/',  searchAll.Supply_search);
+  //app.get('/Supply/search/',  searchAll.Supply_search);
 
   //products
-  //app.get('/products', sqlfunctions.showProducts);
   app.get('/productList',checkUser, sqlfunctions.showProducts);
-
   app.get('/products',checkUser, sqlfunctions.showProducts);
-
   app.get('/productList',checkUser, sqlfunctions.showProducts);
-  //app.get('/products/delete/:Id',checkUser, searchAll.delete);
-
-
   app.get('/products/edit/:Id',checkUser, sqlfunctions.get);
+  app.get('/products/search/:query',checkUser, sqlfunctions.search);
   app.post('/products/edit/:Id',checkUser, sqlfunctions.update);
   app.post('/products/update/:Id',checkUser, sqlfunctions.update);
   app.post('/products/add',checkUser, sqlfunctions.add);
@@ -187,10 +155,8 @@ app.get('/login', function (req, res) {
   //categories
   app.get('/CatList',checkUser, sqlcategory.showCategorys);
   app.get('/showCat',checkUser, sqlcategory.showCategorys);
-
-  //app.get('/category',checkUser, sqlcategory.showCategorys);
-  //app.get('/showCat', sqlcategory.showSuppliers);
   app.get('/showCat/edit/:Id', checkUser, sqlcategory.get);
+  app.get('/showCat/search/:query',checkUser, sqlcategory.search);
   app.post('/showCat/edit/:Id', checkUser, sqlcategory.update);
   app.post('/showCat/update/:Id',checkUser, sqlcategory.update);
   app.post('/showCat/add', checkUser, sqlcategory.add);
@@ -201,30 +167,26 @@ app.get('/login', function (req, res) {
 
  //suppliers
  app.get('/Supplist',checkUser, sqlsupp.showSuppliers);
-
  app.get('/Supply',checkUser, sqlsupp.showSuppliers);
-
  app.get('/Supply/edit/:Id', checkUser, sqlsupp.get);
  app.post('/Supply/edit/:Id', checkUser, sqlsupp.update)
  app.post('/Supply/update/:Id',checkUser, sqlsupp.update);
  app.post('/Supply/add', checkUser, sqlsupp.add);
-
   //this should be a post but this is only an illustration of CRUD - not on good practices
-  app.get('/Supply/delete/:Id',checkUser, sqlsupp.delete);
+app.get('/Supply/delete/:Id',checkUser, sqlsupp.delete);
 
+//get sales data
  app.get('/Sale',checkUser, sqlsales.showSales);
-
  app.get('/SaleList',checkUser, sqlsales.showSales);
  app.get('/sales',checkUser, sqlsales.showSales);
-
  app.get('/sales/edit/:Id', checkUser, sqlsales.get);
  app.post('/sales/edit/:Id', checkUser, sqlsales.update);
  app.post('/sales/update/:Id', checkUser, sqlsales.update);
-app.post('/sales/add', checkUser, sqlsales.add);
+ app.post('/sales/add', checkUser, sqlsales.add);
 //this should be a post but this is only an illustration of CRUD - not on good practices
-
 app.get('/sales/delete/:Id',checkUser, sqlsales.delete);
 
+//who is the user??
 app.get('/user', checkUser, usrs.usser);
 app.get('/user/add', checkUser, usrs.usser);
 app.get('/user/edit/:Id', checkUser, usrs.get);
@@ -233,6 +195,8 @@ app.post('/user/update/:Id', checkUser, usrs.update);
 app.post('/user/add',checkUser, usrs.add);
 app.get('/user/delete/:Id',checkUser, usrs.delete);
 
+
+//answer nelisa's questions
 app.get('/showProdlist',checkUser, ListOfProdz.showProdsgroup);
 app.get('/ListOfCateg',checkUser, ListOfCat.showcategList);
 app.get('/showMost',checkUser, mostPopul.mostProds);
@@ -247,7 +211,6 @@ app.get('/showLeastCat',checkUser, LeastPopCat.LeastCat);
 
 app.post('/add_product',checkUser, function(req, res){
  var formData = req.body;
- //console.log(formData.product_name);
  res.render('products', {product_name :  formData.product_name});
 });
 
@@ -268,9 +231,9 @@ app.post('/add_product',checkUser, function(req, res){
   });
 
  app.get('/signup/edit/:id', register.get);
-app.post('/signUp/update/:id', register.update);
+ app.post('/signUp/update/:id', register.update);
  app.post('/signup/add', register.add);
-// //this should be a post but this is only an illustration of CRUD - not on good practices
+ //this should be a post but this is only an illustration of CRUD - not on good practices
  app.get('/signup/delete/:id', register.delete);
 
 

@@ -25,6 +25,7 @@ exports.Prods_search = function (req, res, next) {
           res.render('productList', {
              product : results,
              categories: results1,
+             layout: false,
              isAdmin: Administrator, 
              action: user
           });

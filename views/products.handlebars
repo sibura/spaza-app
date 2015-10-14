@@ -1,0 +1,36 @@
+{{#action}} 
+<table class="table" id="productSearchResults">
+        <tr>
+            <th>Product Name</th>
+            <th>Category Name</th>
+                    </tr>
+                    {{#product}}
+                    <tr>
+                        <td>{{product_name}}</td>
+                        <td>{{category_name}}</td>
+                    </tr>
+                    {{/product}}
+                  
+                </table>                      
+{{/action}}
+
+{{#isAdmin}}
+<table class="table" id="productSearchResults">
+        <tr>
+            <th>Product Name</th>
+            <th>Category Name</th>
+        
+                    </tr>
+                    {{#product}}
+                    <tr>
+                        
+                        <td>{{product_name}}</td>
+                        <td>{{category_name}}</td>
+                        <td><button><a href="/products/edit/{{Id}}">Edit</a></button></td>
+                        <td><button><a href="/products/delete/{{Id}}">Delete</a></button></td>
+                    </tr>
+                      
+                    {{/product}}
+                  
+                </table>
+{{/isAdmin}}

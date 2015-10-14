@@ -1,6 +1,6 @@
 <div class='search-form'>
 <form action='/showCat/search' class='searchblog' method='post'>
-    <input class='searchbar' name='category_name' placeholder='Search Here' size='15' type='text' x-webkit-speech='true'/>
+    <input class='searchbar' id="CategorySearch" name='category_name' placeholder='Search Here' size='15' type='text' x-webkit-speech='true'/>
 <input class='searchsubmit' type='submit' value='Search'/>
 </form>
 </div>
@@ -18,7 +18,7 @@
                     <li><a href="CatgEarnings">Earnings Per Category</a></li>
                     <li><a href="#">Most Profitable Category</a></li></div>
 
-    <table class="table">
+    <table class="table" id="categorySearchResults">
 
     <tr>
 
@@ -52,7 +52,7 @@
         <input type="text" name="category_name" placeholder=" category name" required>
         <input type="submit">
 </form>
-<table class="table">
+<table class="table" id="categorySearchResults">
 
     <tr>
 
