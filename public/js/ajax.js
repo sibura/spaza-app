@@ -18,4 +18,13 @@ $("#CategorySearch").keyup(function(){
 		console.log(results);
 	});
 });
+
+//Sales Search
+$("#saleSearch").keyup(function(){
+	var searchVar = $("#saleSearch").val();
+	$.get("/sales/search/" + searchVar, function(results){
+		$("#SaleSearchResults").html(results);
+		console.log(results);
+	});
+});
 });

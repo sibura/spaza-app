@@ -180,6 +180,7 @@ app.get('/Supply/delete/:Id',checkUser, sqlsupp.delete);
  app.get('/SaleList',checkUser, sqlsales.showSales);
  app.get('/sales',checkUser, sqlsales.showSales);
  app.get('/sales/edit/:Id', checkUser, sqlsales.get);
+ app.get('/sales/search/:query',checkUser, sqlsales.search);
  app.post('/sales/edit/:Id', checkUser, sqlsales.update);
  app.post('/sales/update/:Id', checkUser, sqlsales.update);
  app.post('/sales/add', checkUser, sqlsales.add);

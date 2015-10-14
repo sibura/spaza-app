@@ -1,9 +1,3 @@
-<div class='search-form'>
-<form action='/sales/search/' class='searchblog' method='post'>
-    <input class='searchbar' id="saleSearch" name='product_name' placeholder='Search Here' size='15' type='text' x-webkit-speech='true'/>
-<input class='searchsubmit' type='submit' value='Search'/>
-</form>
-</div>
 {{#action}}
   <table class="table" id="SaleSearchResults">
 	<tr>
@@ -25,22 +19,6 @@
 {{/action}}
 
 {{#isAdmin}}
-	<h1>Add a Sale</h1>
-<form action="/sales/add" method="POST">
-	Date:<input type="date" name="date">
-	Product-name: 
-	<select name="product_name">
-		{{#products}}
-		<option value="{{product_name}}">{{product_name}}</option>
-		{{/products}}
-	</select>
-	Sales-price:<input type="number" name="sale_price" required><br />
-	<br />
-	No-Sold:<input type="number" name="no_sold" required>
-
-	<input type="submit">
-</form>
-
 <table class="table" id="SaleSearchResults">
 	<tr>
 		<th>Product-name</th>

@@ -1,3 +1,32 @@
+exports.search = function(req, res, next){
+	req.getConnection(function(error, connection){
+        
+        if(error){
+			return next(error);
+		}
+		var searchVar = req.params.query;
+        searchVar = "%" + searchVar + "%";
+        console.log(searchVar);
+
+		var Administrator = req.session.role === "Admin"
+		var user = req.session.role !== "Admin"
+
+		connection.query('SELECT sales.Id,products.product_name, date, sale_price, no_sold FROM sales, products WHERE product_name LIKE?', searchVar, function(error, results) {
+			if (error) return next(error);
+			connection.query('SELECT product_name FROM products', searchVar, function(error, results2) {
+				if (error) return next(error);
+				res.render( 'sales', {
+					Sale : results,
+					products : results2,
+					layout: false,
+					isAdmin : Administrator,
+					action : user
+				});
+			});
+		});
+	});
+};
+
 exports.showSales = function(req, res, next){
 	req.getConnection(function(error, connection){
 		var Administrator = req.session.role === "Admin"
