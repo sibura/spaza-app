@@ -10,15 +10,19 @@ exports.search = function(req, res, next){
 		var user = req.session.role !== "Admin"
 
 
-		connection.query('SELECT * FROM products WHERE product_name LIKE?', searchVar, function(error, results) {
+		connection.query('SELECT Id,product_name, category_name FROM (SELECT  products.Id,products.product_name, categories.category_name, products.Category_Id FROM products, categories  where products.Category_Id = categories.Id) AS prods_cats WHERE product_name LIKE ? OR category_name LIKE ?', [searchVar,searchVar], function(error, results) {
 			if (error) return next(error);
+			connection.query('SELECT Id, category_name FROM categories', [searchVar], function(error, results1) {
+				if (error) return next(error);
 			    console.log(Administrator);
 				res.render( 'products', {
 					product : results,
+					categories: results1,
 					layout : false,
 					isAdmin: Administrator, 
 					action: user
 				});
+			});
 			});
 		});	
 	}; 

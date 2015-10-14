@@ -18,12 +18,19 @@ $("#CategorySearch").keyup(function(){
 		console.log(results);
 	});
 });
-
 //Sales Search
 $("#saleSearch").keyup(function(){
 	var searchVar = $("#saleSearch").val();
 	$.get("/sales/search/" + searchVar, function(results){
 		$("#SaleSearchResults").html(results);
+		console.log(results);
+	});
+});
+//Suppliers Search
+$("#SupplSearch").keyup(function(){
+	var searchVar = $("#SupplSearch").val();
+	$.get("/Supply/search/" + searchVar, function(results){
+		$("#SupplSearchResults").html(results);
 		console.log(results);
 	});
 });
