@@ -33,7 +33,7 @@ var request = require('request');
  var dbOptions = {
    host: 'localhost',
    user: 'root',
-   password: 'nwabisamilisantmasiko',
+   password: 'coder123',
    port: 3306,
    database: 'SpazaApp'
  };
@@ -128,7 +128,9 @@ app.get('/login', function (req, res) {
 
 
   //products && prod_search!!
-  app.post('/products/search/', searchAll.Prods_search);
+   //app.post('/products/search/', searchAll.Prods_search);
+  //app.post('/products/search/:query',checkUser, sqlfunctions.search);
+
   //app.get('/products/search/', searchAll.Prods_search);
 
  
@@ -170,6 +172,7 @@ app.get('/login', function (req, res) {
  app.get('/Supply',checkUser, sqlsupp.showSuppliers);
  app.get('/Supply/edit/:Id', checkUser, sqlsupp.get);
  app.post('/Supply/edit/:Id', checkUser, sqlsupp.update)
+ app.get('/Supply/search/:query',checkUser, sqlsupp.search);
  app.post('/Supply/update/:Id',checkUser, sqlsupp.update);
  app.post('/Supply/add', checkUser, sqlsupp.add);
   //this should be a post but this is only an illustration of CRUD - not on good practices

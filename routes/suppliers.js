@@ -1,3 +1,31 @@
+exports.search = function(req, res, next){
+	req.getConnection(function(error, connection){
+		if(error){
+			return next(error);
+		}
+
+
+		var searchVar = req.params.query;
+		searchVar = "%" + searchVar + "%";
+		console.log(searchVar);
+
+		var Administrator = req.session.role === "Admin"
+		var user = req.session.role !== "Admin"
+
+
+		connection.query('SELECT * FROM suppliers WHERE shop LIKE ? LIMIT 6;',searchVar, function(error, results) {
+			if (error) return next(error);
+			console.log(results);
+			res.render( 'suplistSearch', {
+				suppliers : results,
+				layout : false,
+				isAdmin : Administrator,
+				action : user
+			});
+		});
+	});
+};
+
 exports.showSuppliers = function(req, res, next){
 	req.getConnection(function(error, connection){
 		var Administrator = req.session.role === "Admin"

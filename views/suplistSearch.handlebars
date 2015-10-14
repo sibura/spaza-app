@@ -1,0 +1,34 @@
+{{#action}}
+<table class="table" id="SupplSearchResults">
+
+	<tr>
+		<th>Shop</th>
+
+	</tr>
+	{{#suppliers}}
+	<tr>
+
+		<td>{{shop}}</td>
+	</tr>
+	{{/suppliers}}
+</table>
+{{/action}}
+
+{{#isAdmin}}
+<table class="table" id="SupplSearchResults">
+
+	<tr>
+		<th>Shop</th>
+
+	</tr>
+	{{#suppliers}}
+	<tr>
+
+		<td>{{shop}}</td>
+
+		<td><button><a href="/Supply/edit/{{Id}}">Edit</a></button></td>
+		<td><button><a href="Supply/delete/{{Id}}">Delete</a></button></td>
+	</tr>
+	{{/suppliers}}
+</table>
+{{/isAdmin}}

@@ -18,4 +18,14 @@ $("#CategorySearch").keyup(function(){
 		console.log(results);
 	});
 });
+
+
+//Suppliers Search
+$("#SupplSearch").keyup(function(){
+	var searchVar = $("#SupplSearch").val();
+	$.get("/Supply/search/" + searchVar, function(results){
+		$("#SupplSearchResults").html(results);
+		console.log(results);
+	});
+});
 });
