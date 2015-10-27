@@ -216,18 +216,6 @@ module.exports =function(){
 		};
 		
 		
-		/*this.earningsCategory = function(listOfProduct) {
-			var categCost = {};
-			var max = 0;
-			for(var key in categCost){
-				var value = categCost[key];
-				console.log(value);
-				categCost.push({
-					name: key,
-					amt: value
-				});
-			}
-*/
 
 		this.earningsCategory = function(listOfProduct) {
 			var categCost = {};

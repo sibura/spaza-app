@@ -30,40 +30,30 @@
 {{/action}}
 
 {{#isAdmin}}
-<h1>Add a product</h1>
-
-                <form action="/products/add" method="POST">
-                     <input type="text" name="product_name" placeholder="product name"required> 
-                    <select name="Category_Id">
-                        {{#categories}}
-                        <option value="{{Id}}">{{category_name}}
-                        </option>
-                        {{/categories}}
-                    </select>    
-                    <input type="submit">
-                </form>
+<h1><a href="/products/showAdd">Add a product</a></h1>
 <table class="table" id="productSearchResults">
-        <tr>
-            <th>Product Name</th>
-            <th>Category Name</th>
-            <div class="container-fluid">
-                <div class="btn-group pull-right" >
-                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                        Menu
-                        <span class="caret"></span>
-                    </a>
-    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu"><li><a href="showMost">Most Popular Product</a></li>      <li><a href="showLeast">Least Popular Product</a></li>      <li><a href="showEarnings">Earnings Per Product</a></li>     <li><a href="showProfitables">Most Profitable Product</a></li>  </div>
-                    </tr>
-                    {{#product}}
-                    <tr>
-                        
-                        <td>{{product_name}}</td>
-                        <td>{{category_name}}</td>
-                        <td><button><a href="/products/edit/{{Id}}">Edit</a></button></td>
-                        <td><button><a href="/products/delete/{{Id}}">Delete</a></button></td>
-                    </tr>
-                      
-                    {{/product}}
-                  
-                </table>
-{{/isAdmin}}
+    <tr>
+        <th>Product Name</th>
+        <th>Category Name</th>
+        <div class="container-fluid">
+            <div class="btn-group pull-right" >
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    Menu
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu"><li><a href="showMost">Most Popular Product</a></li>      <li><a href="showLeast">Least Popular Product</a></li>      <li><a href="showEarnings">Earnings Per Product</a></li>     <li><a href="showProfitables">Most Profitable Product</a></li>  </div>
+                </tr>
+                {{#product}}
+                <tr>
+
+                    <td>{{product_name}}</td>
+                    <td>{{category_name}}</td>
+                    <td><button><a href="/products/edit/{{Id}}">Edit</a></button></td>
+                    <td><button><a href="/products/delete/{{Id}}">Delete</a></button></td>
+                </tr>
+
+                {{/product}}
+
+
+            </table>
+            {{/isAdmin}}

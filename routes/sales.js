@@ -27,6 +27,32 @@ exports.search = function(req, res, next){
 	});
 };
 
+exports.SalesAdd = function(req, res, next){
+	req.getConnection(function(error, connection){
+		var Administrator = req.session.role === "Admin"
+		var user = req.session.role !== "Admin"
+
+		if(error){
+			return next(error);
+		}
+		connection.query('SELECT sales.Id,products.product_name, date, sale_price, no_sold FROM sales, products WHERE products.Id=sales.product_Id order by sales.Id;', [], function(error, results) {
+			if (error) return next(error);
+			connection.query('SELECT product_name FROM products', [], function(error, results2) {
+				if (error) return next(error);
+				res.render( 'AddSale', {
+					Sale : results,
+					products : results2,
+					isAdmin : Administrator,
+					action : user
+				});
+			});
+		});
+	});
+};
+
+
+
+
 exports.showSales = function(req, res, next){
 	req.getConnection(function(error, connection){
 		var Administrator = req.session.role === "Admin"

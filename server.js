@@ -1,3 +1,4 @@
+//var connectionProvider = require('connection-provider');
 var express = require('express');
 var exphbs  = require('express-handlebars');
 var mysql = require('mysql'),
@@ -8,7 +9,7 @@ session = require('express-session');
 var cookieSession =require('cookie-session');
 var bcrypt = require('bcrypt');
 var request = require('request');
-
+//var ProductsDataService = require('products-data-service');
 
  var sqlfunctions = require('./routes/SqlFunctions');
  var sqlcategory = require('./routes/sqlcategory');
@@ -50,7 +51,6 @@ app.use(cookieParser());
 app.use(session({ 
 
 secret : 'coder123', resave : true,   saveUninitialized: true, cookie: { maxAge: 60000*15 }}));
-
 
 var fs = require('fs');
 
@@ -106,9 +106,10 @@ app.get('/login', function (req, res) {
   res.render('home');
 });
 
- app.get('/signup', function(req, res){
-  res.render('signup', {layout: false})
-});
+//  app.get('/signup', function(req, res){
+//   res.render('signup', {layout: false})
+// });
+
 
   app.get('/signup', function(req, res){
       app.post('/signup', function(req, res){
@@ -121,29 +122,14 @@ app.get('/login', function (req, res) {
     }
     res.render('signup');
 });
-    });
-
- app.post('/signup', register.add);
-
-
-
-  //products && prod_search!!
-   //app.post('/products/search/', searchAll.Prods_search);
-  //app.post('/products/search/:query',checkUser, sqlfunctions.search);
-
-  //app.get('/products/search/', searchAll.Prods_search);
-
+  });
+  app.get('/signup', register.get);
+  app.post('/signup', register.add);
  
- // app.post('/showCat/search/', searchAll.Category_search);
-  //app.get('/showCat/search/', searchAll.Category_search);
-  //app.post('/sales/search/', searchAll.Sales_search);
-  //app.get('/sales/search/', searchAll.Sales_search);
-  //app.post('/Supply/search/',  searchAll.Supply_search);
-  //app.get('/Supply/search/',  searchAll.Supply_search);
-
-  //products
+  //products && prod_search!! products
   app.get('/productList',checkUser, sqlfunctions.showProducts);
   app.get('/products',checkUser, sqlfunctions.showProducts);
+  app.get('/products/showAdd',checkUser, sqlfunctions.showAdd);
   app.get('/productList',checkUser, sqlfunctions.showProducts);
   app.get('/products/edit/:Id',checkUser, sqlfunctions.get);
   app.get('/products/search/:query',checkUser, sqlfunctions.search);
@@ -152,6 +138,7 @@ app.get('/login', function (req, res) {
   app.post('/products/add',checkUser, sqlfunctions.add);
   //this should be a post but this is only an illustration of CRUD - not on good practices
   app.get('/products/delete/:Id',checkUser, sqlfunctions.delete);
+ 
 
   
   //categories
@@ -187,8 +174,10 @@ app.get('/Supply/delete/:Id',checkUser, sqlsupp.delete);
  app.post('/sales/edit/:Id', checkUser, sqlsales.update);
  app.post('/sales/update/:Id', checkUser, sqlsales.update);
  app.post('/sales/add', checkUser, sqlsales.add);
+ app.get('/sales/SalesAdd',checkUser, sqlsales.SalesAdd);
 //this should be a post but this is only an illustration of CRUD - not on good practices
 app.get('/sales/delete/:Id',checkUser, sqlsales.delete);
+
 
 //who is the user??
 app.get('/user', checkUser, usrs.usser);
@@ -210,29 +199,22 @@ app.get('/showEarnings',checkUser, earningsPerProduct.EarningsPro);
 app.get('/CatgEarnings',checkUser, catEarning.EarningsCateg);
 app.get('/showProfitables',checkUser, profitables.profitableProdz);
 app.get('/showLeastCat',checkUser, LeastPopCat.LeastCat);
-
-
-
-app.post('/add_product',checkUser, function(req, res){
- var formData = req.body;
- res.render('products', {product_name :  formData.product_name});
+ app.get('/ProductSearch', function(req, res){
+    res.render('ProductSearch');
+});
+app.get('/AddSale', function(req, res){
+    res.render('AddSale');
 });
 
-  //app.use(express.static('public'));
-  app.get('/users',checkUser, function(req, res){
-    var userData = userService.getUserData();
-    res.render('users', userData)
-  });
 
-  //these are the logout
+//these are the logout
   
 
-  app.get('/logout', function(req, res){
-
-    delete req.session.user;
-    res.redirect('/');
-    
-  });
+app.get('/logout', function(req, res){
+  delete req.session.user;
+  res.redirect('/');
+  
+});
 
  app.get('/signup/edit/:id', register.get);
  app.post('/signUp/update/:id', register.update);

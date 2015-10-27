@@ -16,7 +16,7 @@ exports.search = function(req, res, next){
 				if (error) return next(error);
 			    console.log(Administrator);
 				res.render( 'products', {
-					product : results,
+					product : results, 
 					categories: results1,
 					layout : false,
 					isAdmin: Administrator, 
@@ -52,6 +52,32 @@ exports.showProducts = function(req, res, next){
 		
 	});
 }; 
+exports.showAdd =function(req, res, next){
+	req.getConnection(function(error, connection){
+
+		var Administrator = req.session.role === "Admin"
+		var user = req.session.role !== "Admin"
+
+		if(error) return next(error);
+
+		connection.query('SELECT  products.Id, products.product_name, categories.category_name, products.Category_Id FROM products, categories  where products.Category_Id = categories.Id;', [], function(error, results) {
+			if (error) return next(error);
+			connection.query('SELECT Id, category_name FROM categories', [], function(error, results1) {
+				if (error) return next(error);
+
+			    console.log(Administrator);
+				res.render( 'ProductSearch', {
+					products : results,
+					categories: results1,
+					isAdmin: Administrator, 
+					action: user
+				});
+			});
+		});
+		
+	});
+}
+
 exports.add = function(req, res, next) {
 	req.getConnection(function(err, connection){
 		if (err){ 
@@ -112,3 +138,5 @@ exports.delete = function(req, res, next){
 		 });
 	});
 };
+
+

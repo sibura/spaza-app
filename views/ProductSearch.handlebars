@@ -1,15 +1,14 @@
-{{#action}} 
-<table class="table">
-    <tr>
-        <th>Product Name</th>
-        <th>Category Name</th>
-    </tr>
-    {{#product}}
-        <tr>
-            <td>{{product_name}}</td>
-            <td>{{category_name}}</td>
-        </tr>
-    {{/product}}
+{{#isAdmin}} 
+<form action="/products/add" method="POST">
+   <input type="text" name="product_name" placeholder="product name"required> 
+   <select name="Category_Id">
+    {{#categories}}
+    <option value="{{Id}}">{{category_name}}
+    </option>
+    {{/categories}}
+</select>    
+<input type="submit">
+</form>
 
- </table>                      
-{{/action}}
+
+{{/isAdmin}}
