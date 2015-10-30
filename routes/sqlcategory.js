@@ -49,18 +49,21 @@ exports.showCategorys = function(req, res, next){
 exports.add = function (req, res, next) {
 	req.getConnection(function(err, connection){	
 		var input = JSON.parse(JSON.stringify(req.body));
+		console.log("input.category_name", input.category_name)
 		var data = {
-			category_name : input.category_name};
-			var CatAdd = function(results){
-				res.redirect('/CatList')
-			};
-			var addCat = new Categry(connection);
-			addCat.add(data)
-			.then(CatAdd)
-			.catch(function(err){
-				next(err);
-			});
+			category_name : input.category_name
+		};
+
+		var CatAdd = function(results){
+			res.redirect('/CatList')
+		};
+		var addCat = new Categry(connection);
+		addCat.add(data)
+		.then(CatAdd)
+		.catch(function(err){
+			next(err);
 		});
+	});
 };
 
 exports.get = function(req, res, next){
