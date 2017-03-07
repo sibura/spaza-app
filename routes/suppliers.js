@@ -1,4 +1,4 @@
-var suplier = require('../routes/supplierPromise');
+var suplier = require('../routes/suplierPromise');
 exports.search = function(req, res, next){
 	req.getConnection(function(error, connection){
 		var searchVar = req.params.query;
@@ -8,13 +8,13 @@ exports.search = function(req, res, next){
 		var Administrator = req.session.role === "Admin"
 		var user = req.session.role !== "Admin"
 		var SuppSearch = function(){
-			res.render( 'suplistSearch', {
+			res.render('suplistSearch', {
 				suppliers : results,
 				layout : false,
 				isAdmin : Administrator,
 				action : user
 			});
-		});
+		};
 });
 };
 
@@ -36,7 +36,7 @@ exports.showSuppliers = function(req, res, next){
 			});
 		};
     });
-});
+};
 
 exports.add = function (req, res, next) {
 	req.getConnection(function(err, connection){
@@ -55,8 +55,8 @@ exports.get = function(req, res, next){
 	var id = req.params.Id;
 	req.getConnection(function(err, connection){
 		var getSupplier = function(id){
-			res.render('suppliersEdit',{page_title:"Edit Customers - Node.js", data : rows[0]});      
-		}; 
+			res.render('suppliersEdit',{page_title:"Edit Customers - Node.js", data : rows[0]});
+		};
 	});
 };
 
@@ -77,6 +77,6 @@ exports.delete = function(req, res, next){
 	req.getConnection(function(err, connection){
 		var deleteSupplir = function(id, results){
 			res.redirect('/Supply');
-		});
+		};
 });
 };

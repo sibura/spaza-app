@@ -17,40 +17,40 @@
   }
   html { overflow-y: scroll; }
 
-  body { 
-    background: url('http://www.sabc.co.za/wps/wcm/connect/2a165b004bb8141eaa1bbb4e20b1a252/Spaza(P).jpg?MOD=AJPERES&CACHEID=2a165b004bb8141eaa1bbb4e20b1a252'); 
+  body {
+    background: url('http://www.sabc.co.za/wps/wcm/connect/2a165b004bb8141eaa1bbb4e20b1a252/Spaza(P).jpg?MOD=AJPERES&CACHEID=2a165b004bb8141eaa1bbb4e20b1a252');
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 62.5%; 
-    line-height: 1; 
+    font-size: 62.5%;
+    line-height: 1;
     color: #535353;
     margin: 30px 0;
     background-size:cover;
   }
 
-  br { display: block; line-height: 2.2em; } 
+  br { display: block; line-height: 2.2em; }
 
   article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
   ol, ul { list-style: none; }
 
-  input, textarea { 
+  input, textarea {
     -webkit-font-smoothing: antialiased;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    outline: none; 
+    outline: none;
   }
 
   blockquote, q { quotes: none; }
   blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
-  strong { font-weight: bold; } 
+  strong { font-weight: bold; }
 
-  table { border-collapse: collapse; border-spacing: 0; }
+  table { border-collapse: collapse; border-spacing: 0; background-color: blue;}
   img { border: 0; max-width: 100%; }
 
 
-  h1 { 
+  h1 {
     font-family: 'Acme', 'Trebuchet MS', Arial, sans-serif;
     font-size: 40px;
     line-height: 1.7em;
@@ -85,7 +85,7 @@
   }
 
   #sidebar {
-    display: block; 
+    display: block;
     float: left;
     width: 150px;
     margin-right: 20px;
@@ -126,18 +126,18 @@
 
   #vertical-nav ul li { display: block; font-size: 1.2em; font-weight: bold; }
 
-  #vertical-nav ul li a { 
+  #vertical-nav ul li a {
     text-decoration: none;
     color: #4f5e70;
-    display: block; 
-    padding: 8px 5px; 
+    display: block;
+    padding: 8px 5px;
   }
   #vertical-nav ul li a:hover {
     background: #fff;
   }
 
 
-   horizontal navigation 
+   horizontal navigation
   #horizontal-nav {
     display: block;
     overflow: hidden;
@@ -145,7 +145,7 @@
     border: 1px solid #cdcdcd;
     -webkit-transition: height 0.2s linear;
     -moz-transition: height 0.2s linear;
-    transition: height: 0.2s linear; 
+    transition: height: 0.2s linear;
   }
   #horizontal-nav:hover {
     height: 65px;
@@ -154,7 +154,7 @@
   #horizontal-nav ul { list-style: none; }
   #horizontal-nav ul li { display: block; float: left; width: 110px; }
 
-  #horizontal-nav ul li a { 
+  #horizontal-nav ul li a {
     display:inline-block;
     width: 100%;
     padding-top: 2px;
@@ -171,7 +171,7 @@
     background: #f3f6f9;
   }
 
-  #horizontal-nav ul li a .navicon { display: block; width: 100%; text-align: center; margin-bottom: 4px; } 
+  #horizontal-nav ul li a .navicon { display: block; width: 100%; text-align: center; margin-bottom: 4px; }
 
   #linear-nav {
     display: block;
@@ -192,7 +192,7 @@
   }
 /*
   #footer {
-    display: block; 
+    display: block;
     float: right;
     width: 400px;
     margin-left: -20px;

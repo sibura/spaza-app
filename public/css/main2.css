@@ -202,6 +202,7 @@ td {
     font-weight: bold;
     /*width: 10px;*/
     margin-right: -80px;
+    //color: blue;
 }
 #cssSlider {
   width: 800px;
@@ -216,7 +217,7 @@ td {
     width : 4000px;
     height: 300px;
     overflow: hidden;
-    
+
     /* animation duration: 16s : 5x ~3s display image + 5x ~0.2s slide */
     animation: slide 16s infinite;
     -moz-animation: slide 16s infinite;

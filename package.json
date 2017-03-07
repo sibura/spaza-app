@@ -10,15 +10,19 @@
   "author": "",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "bluebird": "~2.10.2",
-    "body-parser": "~1.13.2",
+    "bcrypt": "^1.0.2",
+    "bluebird": "^2.10.2",
+    "body-parser": "^1.13.3",
     "connection-provider": "git://github.com/avermeulen/connection-provider",
-    "express": "^4.12.4",
-    "express-handlebars": "~2.0.1",
-    "express-myconnection": "~1.0.4",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-beta.1",
+    "express": "^4.15.0",
+    "express-handlebars": "^2.0.1",
+    "express-myconnection": "^1.0.4",
+    "express-session": "^1.15.1",
     "express-useragent": "~0.2.0",
     "lodash": "^3.10.1",
-    "mysql": "~2.8.0"
+    "mysql": "^2.8.0"
   },
   "directories": {
     "test": "test"
