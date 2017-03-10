@@ -11,6 +11,7 @@ These are the main people who are involved with Nelisa’s Cash Store. We need t
 * Nelisa: Owner of Nelisa’s Cash Store
 * Xolani: Works at Nelisa’s Cash Store
 * Nthabiseng: Customer of Nelisa’s Cash Store
+
 Nelisa and Xolani want a solution that helps to improve their purchasing, so that they can purchase products in bulk (and reduce their prices) and have the right products in stock to keep the customer happy.
 
 Now we need to create a Story Map to clarify what we as coders need to do, so that we can see what to create as a solution.
