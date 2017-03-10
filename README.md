@@ -8,9 +8,9 @@ She introduces us to her staff, and tells us about her customers.
 
 These are the main people who are involved with Nelisa’s Cash Store. We need to take into consideration all the things that are important to them, when we create a solution for them.
 
-* Nelisa: Owner of Nelisa’s Cash Store
-* Xolani: Works at Nelisa’s Cash Store
-* Nthabiseng: Customer of Nelisa’s Cash Store
+* [Nelisa](http://narrative.projectcodex.co/Profile_Nelisa.html): Owner of Nelisa’s Cash Store
+* [Xolani](http://narrative.projectcodex.co/Profile_Xolani.html): Works at Nelisa’s Cash Store
+* [Nthabiseng](http://narrative.projectcodex.co/Profile_Nthabiseng.html): Customer of Nelisa’s Cash Store
 
 Nelisa and Xolani want a solution that helps to improve their purchasing, so that they can purchase products in bulk (and reduce their prices) and have the right products in stock to keep the customer happy.
 
