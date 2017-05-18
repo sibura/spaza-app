@@ -1,4 +1,4 @@
-var bcrypt = require('bcrypt');
+//var bcrypt = require('bcrypt');
 exports.usser = function (req, res, next) {
 	req.getConnection(function(error, connection){
 		var Administrator = req.session.role === "Admin"
@@ -33,25 +33,25 @@ exports.add = function (req, res, next) {
 
 		};
 
-        bcrypt.genSalt(10, function(err, salt) {
-			bcrypt.hash(input.password, salt, function(err, hash) {
-		        // Store hash in your password DB. 
+//         bcrypt.genSalt(10, function(err, salt) {
+// 			bcrypt.hash(input.password, salt, function(err, hash) {
+// 		        // Store hash in your password DB. 
 
-		        console.log("hash details...")
-		        console.log(hash)
-		        console.log(hash.length)
+// 		        console.log("hash details...")
+// 		        console.log(hash)
+// 		        console.log(hash.length)
 
-		        data.password = hash;
-		        connection.query('insert into users set ?', data, function(err, results) {
-		        	if (err)
-		        		console.log("Error inserting : %s ", err);
+// 		        data.password = hash;
+// 		        connection.query('insert into users set ?', data, function(err, results) {
+// 		        	if (err)
+// 		        		console.log("Error inserting : %s ", err);
 
-		        	res.redirect('/user');
-		        });
-		    });
-		});
-	});
-};
+// 		        	res.redirect('/user');
+// 		        });
+// 		    });
+// 		});
+// 	});
+// };
 
 exports.get = function(req, res, next){
 	var Id = req.params.Id;
@@ -90,7 +90,7 @@ exports.delete = function(req, res, next){
 		         console.log("Error Selecting : %s ",err );
 		     }
 		     res.redirect('/user');
-		 });
+		 })
+	});
 
-	});	
-};
+}

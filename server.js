@@ -1,4 +1,4 @@
-var connectionProvider = require('connection-provider');
+//var connectionProvider = require('connection-provider');
 express = require('express'),
 exphbs  = require('express-handlebars'),
 mysql = require('mysql'),
@@ -7,7 +7,7 @@ bodyParser = require('body-parser'),
 myConnection = require('express-myconnection'),
 session = require('express-session'),
 cookieSession =require('cookie-session'),
-bcrypt = require('bcrypt'),
+//bcrypt = require('bcrypt'),
 request = require('request');
 //var ProductsDataService = require('products-data-service');
 
@@ -223,4 +223,8 @@ app.use(session({
 
   app.get('/showProdlist',checkUser, ListOfProdz.showProdsgroup);
 
-  app.listen(3000);
+  //app.listen(3000);
+  var port = process.env.PORT || 3000;
+app.listen(port, function() {
+console.log("Listening on " + port);
+});
