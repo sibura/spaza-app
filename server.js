@@ -7,36 +7,36 @@ bodyParser = require('body-parser'),
 myConnection = require('express-myconnection'),
 session = require('express-session'),
 cookieSession =require('cookie-session'),
-//bcrypt = require('bcrypt'),
-request = require('request');
+bcrypt = require('bcryptjs'),
+// request = require('request');
 //var ProductsDataService = require('products-data-service');
 
-var sqlfunctions = require('./routes/SqlFunctions');
-var sqlcategory = require('./routes/sqlcategory');
-var sqlsupp = require('./routes/suppliers');
-var sqlsales = require('./routes/sales');
-var ListOfProdz = require('./routes/groupProducts');
-var ListOfCat = require('./routes/listOfCateg');
-var mostPopul = require('./routes/mostPoP');
-var MostPoPCat = require('./routes/most_popCateg');
-var LeastPopCat = require('./routes/least_popCateg');
-var LeastPopular = require('./routes/LeastPopular');
-var earningsPerProduct = require('./routes/Earnings');
-var catEarning = require('./routes/CategEarnings');
-var profitables = require('./routes/allProfitables');
-var loggin = require('./routes/login');
-var register = require('./routes/Users');
-var usrs =require('./routes/Users');
-var searchAll = require('./routes/search');
+ sqlfunctions = require('./routes/SqlFunctions');
+ sqlcategory = require('./routes/sqlcategory');
+ sqlsupp = require('./routes/suppliers');
+ sqlsales = require('./routes/sales');
+ ListOfProdz = require('./routes/groupProducts');
+ ListOfCat = require('./routes/listOfCateg');
+ mostPopul = require('./routes/mostPoP');
+ MostPoPCat = require('./routes/most_popCateg');
+ LeastPopCat = require('./routes/least_popCateg');
+ LeastPopular = require('./routes/LeastPopular');
+ earningsPerProduct = require('./routes/Earnings');
+ catEarning = require('./routes/CategEarnings');
+ profitables = require('./routes/allProfitables');
+ loggin = require('./routes/login');
+ register = require('./routes/Users');
+ usrs =require('./routes/Users');
+ searchAll = require('./routes/search');
 
 
 
 var dbOptions = {
   host: 'localhost',
   user: 'root',
-  password: 'root',
-  port: 8889,
-  database: 'SpazaApp'
+  password: 'mysql',
+  // port: 25,
+  database: 'spaza-app'
 };
 
 // create a route
@@ -57,7 +57,7 @@ app.use(session({
   app.use(function(req, res, next){
     console.log('in my middleware!');
     //proceed to the next middleware component
-    next();
+    // next();
   });
 
   var contains = function(str, part){
@@ -104,9 +104,9 @@ app.use(session({
     res.render('home');
   });
 
-  //  app.get('/signup', function(req, res){
-  //   res.render('signup', {layout: false})
-  // });
+   app.get('/signup', function(req, res){
+    res.render('signup', {layout: false})
+  });
 
 
   app.get('/signup', function(req, res){

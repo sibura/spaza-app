@@ -61,7 +61,7 @@ exports.showSales = function(req, res, next){
 		if(error){
 			return next(error);
 		}
-		connection.query('SELECT sales.Id,products.product_name, date, sale_price, no_sold FROM sales, products WHERE products.Id=sales.product_Id order by sales.Id;', [], function(error, results) {
+		connection.query('SELECT sales.Id, products.product_name, date, sale_price, no_sold FROM sales, products WHERE products.Id=sales.product_Id order by sales.Id;', [], function(error, results) {
 			if (error) return next(error);
 			connection.query('SELECT product_name FROM products', [], function(error, results2) {
 				if (error) return next(error);

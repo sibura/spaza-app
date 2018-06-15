@@ -11,6 +11,7 @@
   "license": "BSD-2-Clause",
   "dependencies": {
     "bcrypt": "^1.0.2",
+    "bcryptjs": "^2.4.3",
     "bluebird": "^2.10.2",
     "body-parser": "^1.13.3",
     "connection-provider": "git://github.com/avermeulen/connection-provider",
